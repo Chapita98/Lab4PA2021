@@ -26,9 +26,9 @@ void menuCaso1();
 void menuCaso2();
 void menuCaso3();
 void menuCaso4();
-void menuCaso5();
+/*void menuCaso5();
 void menuCaso6();
-void menuCaso7();
+void menuCaso7();*/
 
 Puerto *obtenerIdPuerto(std::string paramId);
 Barco *obtenerIdBarco(std::string paramId);
@@ -45,4 +45,13 @@ void mostrarListaPuertos();
 void mostrarListaBarcos();
 void mostrarFecha(DtFecha fecha);
 void mostrarArribos(DtArribo dtarribos[], int cant);
+
+extern const int MAX_PUERTOS;
+extern const int MAX_BARCOS;
+extern int cantidadPuertos;
+extern DtPuerto *dtPuertos;
+extern Puerto *puertos[];
+extern Barco *barcos[];
+extern int cantidadBarcos;
+extern int dia, mes, anio;
 #endif

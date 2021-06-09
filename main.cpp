@@ -20,44 +20,29 @@ int main(int argc, char **argv)
 		{
 			switch (opcionUsuario)
 			{
-			case 0: //CASO SALIDA DE SISTEMA
+			case 5: //CASO SALIDA DE SISTEMA
 			{
 				bandera = false;
 				break;
 			}
-			case 1: //AGREGAR PUERTO
+			case 1: //Administrador
 			{
 				menuCaso1();
 				break;
 			}
-			case 2: //AGREGAR BARCO
+			case 2: //Docente
 			{
 				menuCaso2();
 				break;
 			}
-			case 3: //LISTAR PUERTOS
+			case 3: //Estudiante
 			{
 				menuCaso3();
 				break;
 			}
-			case 4: //AGREGAR ARRIBO
+			case 4: //Cargar datos de prueba
 			{
 				menuCaso4();
-				break;
-			}
-			case 5: //OBTENER INFORMACION DE ARRIBOS EN PUERTO
-			{
-				menuCaso5();
-				break;
-			}
-			case 6: //ELIMINAR ARRIBOS
-			{
-				menuCaso6();
-				break;
-			}
-			case 7: //LISTAR BARCOS
-			{
-				menuCaso7();
 				break;
 			}
 			default:

@@ -1,6 +1,6 @@
 OBJETOS = Arribo.o Barco.o BarcoPasajeros.o BarcoPesquero.o Puerto.o \
 DtArribo.o DtBarco.o DtBarcoPasajeros.o DtBarcoPesquero.o DtFecha.o DtPuerto.o \
-metodos.o main.o
+menus.o metodos.o main.o
 
 DEF = ./classes/headers/Puerto.h  ./classes/headers/Arribo.h  ./classes/headers/Barco.h  ./classes/headers/BarcoPasajeros.h  ./classes/headers/BarcoPesquero.h  ./classes/headers/TipoTamanio.h ./datatypes/headers/DtArribo.h  ./datatypes/headers/DtBarco.h  ./datatypes/headers/DtBarcoPasajeros.h  ./datatypes/headers/DtBarcoPesquero.h  ./datatypes/headers/DtFecha.h  ./datatypes/headers/DtPuerto.h
 
@@ -14,6 +14,9 @@ Lab4PA2021: $(OBJETOS)
 
 main.o: main.cpp Makefile ./metodosMain/definiciones.h $( ./datatypes/headers/)
 	$(CC) $(OPCIONES) main.cpp
+
+menus.o: ./metodosMain/definiciones.h ./metodosMain/menus.cpp
+	$(CC) $(OPCIONES) ./metodosMain/menus.cpp
 
 metodos.o: ./metodosMain/definiciones.h ./metodosMain/metodos.cpp
 	$(CC) $(OPCIONES) ./metodosMain/metodos.cpp
