@@ -7,10 +7,10 @@ DEF = ./classes/headers/Puerto.h  ./classes/headers/Arribo.h  ./classes/headers/
 CC = g++
 OPCIONES = -c -Wall
 
-all: Lab0PA
+all: Lab4PA2021
 
-Lab0PA: $(OBJETOS)
-	$(CC) $(OBJETOS) -o Lab0PA
+Lab4PA2021: $(OBJETOS)
+	$(CC) $(OBJETOS) -o Lab4PA2021
 
 main.o: main.cpp Makefile ./metodosMain/definiciones.h $( ./datatypes/headers/)
 	$(CC) $(OPCIONES) main.cpp
@@ -53,11 +53,8 @@ BarcoPesquero.o: ./classes/headers/BarcoPesquero.h ./classes/sources/BarcoPesque
 
 
 clean:
-	rm -rf *o Lab0PA
+	rm -rf *o Lab4PA2021
 
 rebuild:
 	make clean
 	make
-
-
-
