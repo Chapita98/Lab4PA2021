@@ -1,5 +1,6 @@
 #ifndef ASISTENCIAONLINE_H
 #define ASISTENCIAONLINE_H
+#include "./../../datatypes/headers/DtFecha.h"
 
 class AsistenciaOnline
 {
@@ -14,8 +15,8 @@ public:
 	DtFecha getFechaCom();
 	DtFecha getFechaFin();
 
-	void setFechaCom(DtFecha *_fecha);
-	void setFechaFin(DtFecha *_fecha);
+	void setFechaCom(DtFecha &_fecha);
+	void setFechaFin(DtFecha &_fecha);
 
  	virtual ~AsistenciaOnline();
 };

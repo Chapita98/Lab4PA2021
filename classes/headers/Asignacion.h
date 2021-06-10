@@ -1,5 +1,6 @@
 #ifndef ASIGNACION_H
 #define ASIGNACION_H
+#include "Tipo.h"
 
 class Asignacion
 {
@@ -16,5 +17,6 @@ public:
 
     virtual ~Asignacion();
 };
+
 
 #endif /* ASIGNACION_H */

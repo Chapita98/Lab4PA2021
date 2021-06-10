@@ -13,9 +13,9 @@ public:
 	Estudiante(int _ci);
 	Estudiante(int _ci, std::string _email, std::string _nombre, std::string _imagen, std::string _contrasenia);
 
-	int getCI();
+	int getCi();
 
-	void setCI(int _ci);
+	void setCi(int _ci);
 
 	virtual ~Estudiante();
 };

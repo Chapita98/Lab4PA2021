@@ -1,6 +1,7 @@
 #include "./../headers/Asignacion.h"
 Asignacion::Asignacion() {}
 
+
 Asignacion::Asignacion(Tipo _tipo)
 {
     this->tipo = _tipo;

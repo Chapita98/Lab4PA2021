@@ -1,6 +1,8 @@
 #ifndef TEORICO_H
 #define TEORICO_H
 #include "./Clase.h"
+#include "./../../datatypes/headers/DtFecha.h"
+
 class Clase;
 
 class Teorico : public Clase

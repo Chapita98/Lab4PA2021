@@ -25,12 +25,12 @@ std::string Clase::getNombre()
 	return this->nombre;
 }
 
-std::string Clase::getFechaCom()
+DtFecha Clase::getFechaCom()
 {
 	return this->fechaCom;
 }
 
-std::string Clase::getFechaFin()
+DtFecha Clase::getFechaFin()
 {
 	return this->fechaFin;
 }
@@ -50,12 +50,12 @@ void Clase::setVideo(std::string _video)
 	this->video = _video;
 }
 
-void Clase::setFechaCom(DtFecha _fecha)
+void Clase::setFechaCom(DtFecha &_fecha)
 {
 	this->fechaCom = _fecha;
 }
 
-void Clase::setFechaFin(DtFecha _fecha)
+void Clase::setFechaFin(DtFecha &_fecha)
 {
 	this->fechaFin = _fecha;
 }

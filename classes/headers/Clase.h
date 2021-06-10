@@ -1,12 +1,12 @@
 #ifndef CLASE_H
 #define CLASE_H
-
 #include <string>
+#include "./../../datatypes/headers/DtFecha.h"
 
 class Clase
 {
 private:
-	int id
+	int id;
 	std::string video;
 	std::string nombre;
 	DtFecha fechaCom;

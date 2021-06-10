@@ -1,6 +1,10 @@
 #ifndef MONITOREO_H
 #define MONITOREO_H
 #include "./Clase.h"
+#include "./Estudiante.h"
+// TODO fijarse si esto es correcto
+static const int MAX_ESTUDIANTES = 30;
+
 class Clase;
 
 class Monitoreo : public Clase
