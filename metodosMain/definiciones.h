@@ -6,45 +6,35 @@
 #include <string>
 #include <string.h>
 
-#include "./../classes/headers/Puerto.h"
-#include "./../classes/headers/Arribo.h"
-#include "./../classes/headers/Barco.h"
-#include "./../classes/headers/BarcoPesquero.h"
-#include "./../classes/headers/BarcoPasajeros.h"
-#include "./../classes/headers/TipoTamanio.h"
+#include "./../classes/headers/Usuario.h"
+#include "./../classes/headers/Asignatura.h"
+#include "./../classes/headers/Asignacion.h"
+#include "./../classes/headers/Tipo.h"
+#include "./../classes/headers/AsistenciaDiferida.h"
+#include "./../classes/headers/AsistenciaOnline.h"
+#include "./../classes/headers/Clase.h"
+#include "./../classes/headers/Docente.h"
+#include "./../classes/headers/Estudiante.h"
+#include "./../classes/headers/Mensaje.h"
+#include "./../classes/headers/Monitoreo.h"
+#include "./../classes/headers/Practico.h"
+#include "./../classes/headers/Sistema.h"
+#include "./../classes/headers/Teorico.h"
 
-#include "./../datatypes/headers/DtArribo.h"
-#include "./../datatypes/headers/DtBarco.h"
-#include "./../datatypes/headers/DtBarcoPesquero.h"
-#include "./../datatypes/headers/DtBarcoPasajeros.h"
+#include "./../datatypes/headers/DtClase.h"
 #include "./../datatypes/headers/DtFecha.h"
-#include "./../datatypes/headers/DtPuerto.h"
+#include "./../datatypes/headers/DtMonitoreo.h"
+#include "./../datatypes/headers/DtPractico.h"
+#include "./../datatypes/headers/DtTeorico.h"
 
-void imprimirTextoPrincipal();
-void colorAlTexto();
 void menuCaso1();
 void menuCaso2();
 void menuCaso3();
 void menuCaso4();
-/*void menuCaso5();
-void menuCaso6();
-void menuCaso7();*/
-
-Puerto *obtenerIdPuerto(std::string paramId);
-Barco *obtenerIdBarco(std::string paramId);
-void agregarBarco(DtBarco *barco);
-void agregarPuerto(std::string id, std::string nombre, const DtFecha &fechaCreacion);
-void agregarArribo(std::string idPuerto, std::string idBarco, float cargaDespacho);
-DtBarco **listarBarcos();
-DtPuerto *listarPuertos();
+void imprimirTextoPrincipal();
 void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
-DtArribo *obtenerInfoArribosEnPuerto(std::string idpuerto);
-void eliminarArribo(std::string id, const DtFecha &fecha);
 void fechaAutomatica();
-void mostrarListaPuertos();
-void mostrarListaBarcos();
 void mostrarFecha(DtFecha fecha);
-void mostrarArribos(DtArribo dtarribos[], int cant);
 
 extern const int MAX_PUERTOS;
 extern const int MAX_BARCOS;
@@ -54,4 +44,5 @@ extern Puerto *puertos[];
 extern Barco *barcos[];
 extern int cantidadBarcos;
 extern int dia, mes, anio;
+
 #endif

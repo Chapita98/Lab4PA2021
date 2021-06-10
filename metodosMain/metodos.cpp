@@ -222,14 +222,6 @@ void mostrarListaPuertos()
     }
 }
 
-void mostrarFecha(DtFecha fecha)
-{
-    std::cout << "\nDia: " << fecha.getDia() << std::endl;
-    std::cout << "\nAño: " << fecha.getAnio() << std::endl;
-    std::cout << "\nMes: " << fecha.getMes() << std::endl;
-}
-
-
 void mostrarArribos(DtArribo dtarribos[], int cant)
 {
     for (int i = 0; i < cant; i++)
