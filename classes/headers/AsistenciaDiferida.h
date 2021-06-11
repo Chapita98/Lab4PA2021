@@ -1,14 +1,17 @@
 #ifndef ASISTENCIADIFERIDA_H
 #define ASISTENCIADIFERIDA_H
 #include "./../../datatypes/headers/DtFecha.h"
+#include "./../../ICollection/interfaces/ICollectible.h"
+#include "./../../ICollection/interfaces/ICollection.h"
 
 //TODO Luego definir un static const para fecha, si es necesario
 
-class AsistenciaDiferida
+class AsistenciaDiferida : public ICollectible
 {
 private:
-	DtFecha *fechaCom/*[MAX_FECHAS]*/;
-	DtFecha *fechaFin/*[MAX_FECHAS]*/;
+	ICollection *fechaCom;
+	ICollection *fechaFin;
+	Clase *clase;
 
 public:
 	AsistenciaDiferida();

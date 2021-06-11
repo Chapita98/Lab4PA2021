@@ -1,12 +1,15 @@
 #ifndef ASIGNATURA_H
 #define ASIGNATURA_H
 #include <string>
+#include "./../../ICollection/interfaces/ICollectible.h"
+#include "./../../ICollection/interfaces/ICollection.h"
 
-class Asignatura
+class Asignatura : public ICollectible
 {
 private:
     int id;
     std::string nombre;
+    ICollection * clases;
 
 public:
     Asignatura();

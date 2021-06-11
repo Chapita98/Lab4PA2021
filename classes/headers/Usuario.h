@@ -2,8 +2,9 @@
 #define USUARIO_H
 
 #include <string>
+#include "./../../ICollection/interfaces/ICollectible.h"
 
-class Usuario
+class Usuario : public ICollectible
 {
 private:
 	std::string email;

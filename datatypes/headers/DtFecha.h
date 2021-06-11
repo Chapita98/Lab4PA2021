@@ -2,7 +2,7 @@
 #define DTFECHA_H
 #include <iostream>
 
-class DtFecha
+class DtFecha : public ICollectible
 {
 private:
     int dia;

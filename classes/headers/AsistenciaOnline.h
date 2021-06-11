@@ -1,12 +1,14 @@
 #ifndef ASISTENCIAONLINE_H
 #define ASISTENCIAONLINE_H
 #include "./../../datatypes/headers/DtFecha.h"
+#include "./../../ICollection/interfaces/ICollectible.h"
 
-class AsistenciaOnline
+class AsistenciaOnline : public ICollectible
 {
 private:
 	DtFecha fechaCom;
 	DtFecha fechaFin;
+	Clase *clase;
 
 public:
 	AsistenciaOnline();

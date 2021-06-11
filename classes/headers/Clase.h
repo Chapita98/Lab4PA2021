@@ -2,8 +2,11 @@
 #define CLASE_H
 #include <string>
 #include "./../../datatypes/headers/DtFecha.h"
+#include "./../../ICollection/interfaces/ICollectible.h"
+#include "./../../ICollection/interfaces/ICollection.h"
+#include "./../../ICollection/interfaces/IDictionary.h"
 
-class Clase
+class Clase : public ICollectible
 {
 private:
 	int id;
@@ -11,6 +14,8 @@ private:
 	std::string nombre;
 	DtFecha fechaCom;
 	DtFecha fechaFin;
+	ICollection * asistencias;
+	IDictionary * mensajes;
 
 public:
 	Clase();

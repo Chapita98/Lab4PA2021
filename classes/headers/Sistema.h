@@ -1,10 +1,13 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
 
+#include "./../../ICollection/interfaces/IDictionary.h"
+#include "ISistema.h"
 class Sistema : public ISistema
 {
 private:
-	
+	IDictionary * usuarios;
+	IDictionary * asignaturas;
 public:
 	Sistema();
 	

@@ -1,11 +1,13 @@
 #ifndef ASIGNACION_H
 #define ASIGNACION_H
 #include "Tipo.h"
+#include "./../../ICollection/interfaces/ICollectible.h"
 
-class Asignacion
+class Asignacion : public ICollectible
 {
 private:
     Tipo tipo;
+    int idAsignatura;
 
 public:
     Asignacion();

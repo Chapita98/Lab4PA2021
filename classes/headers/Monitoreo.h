@@ -2,6 +2,8 @@
 #define MONITOREO_H
 #include "./Clase.h"
 #include "./Estudiante.h"
+#include "./../../ICollection/interfaces/ICollection.h"
+
 // TODO fijarse si esto es correcto
 static const int MAX_ESTUDIANTES = 30;
 
@@ -10,7 +12,7 @@ class Clase;
 class Monitoreo : public Clase
 {
 private:
-	Estudiante *estudiantes[MAX_ESTUDIANTES];
+	ICollection *estudiantes;
 
 public:
 	Monitoreo();

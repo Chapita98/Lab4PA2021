@@ -2,13 +2,15 @@
 #define MENSAJE_H
 
 #include "./../../datatypes/headers/DtFecha.h"
+#include "./../../ICollection/interfaces/ICollectible.h"
 
-class Mensaje
+class Mensaje : public ICollectible
 {
 private:
 	int id;
 	DtFecha fechaEnvio;
 	std::string contenido;
+	Mensaje *respuesta;
 
 public:
 	Mensaje();
