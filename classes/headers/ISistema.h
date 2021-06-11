@@ -8,25 +8,32 @@ private:
 public:
 	ISistema();
 	
-	virtual AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	virtual AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	virtual ListarAsignaturas();
-	virtual ListarClasesVivo(std::string email),
-	virtual ListarDocentesNoAsignados();
-	virtual ListarEstudiantesInscriptos();
-	virtual ListarMensajes(std::string idClase);
-	virtual SeleccionAsignatura(int id);
-	virtual SeleccionDocente(std::string email);
-	virtual SeleccionClase(int id);
-	virtual SeleccionEstudiante(int ci);
-	virtual CreaClase(std::string nombre, DtFecha fechaComienzo);
-	virtual CreaClase(std::string nombre, DtFecha fechaComienzo, iCollection listaEstudiantes);//maybe
-	virtual CrearMensaje(std::string texto, int idRespuesta);
-	virtual CrearMensaje(std::string texto);
-	virtual MostrarDatos();
-	virtual MostrarTiempoAsistenciaClase();
-	virtual ObtenerClase();
-	virtual AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);	
+	
+	virtual void imprimirTextoPrincipal();
+	virtual void menu1();
+	virtual void menu2();
+	virtual void menu3();
+	virtual void menu4();
+		
+	virtual void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	virtual void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	virtual void ListarAsignaturas();
+	virtual void ListarClasesVivo(std::string email),
+	virtual void ListarDocentesNoAsignados();
+	virtual void ListarEstudiantesInscriptos();
+	virtual void ListarMensajes(std::string idClase);
+	virtual void SeleccionAsignatura(int id);
+	virtual void SeleccionDocente(std::string email);
+	virtual void SeleccionClase(int id);
+	virtual void SeleccionEstudiante(int ci);
+	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo);
+	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo, iCollection listaEstudiantes);//maybe
+	virtual void CrearMensaje(std::string texto, int idRespuesta);
+	virtual void CrearMensaje(std::string texto);
+	virtual void MostrarDatos();
+	virtual void MostrarTiempoAsistenciaClase();
+	virtual void ObtenerClase();
+	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);	
 	
 	virtual ~ISistema();
 };
