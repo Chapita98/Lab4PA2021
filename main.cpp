@@ -12,7 +12,6 @@ int main(int argc, char **argv)
 	fechaAutomatica();
 	while (bandera == true)
 	{
-		imprimirTextoPrincipal();
 		std::cin >> opcionUsuario;
 		std::cout << "\e[0m";
 		std::cin.clear();

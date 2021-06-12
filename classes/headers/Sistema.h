@@ -1,5 +1,10 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
+#include <iostream>
+#include <stdexcept>
+#include <ctime>
+#include <string>
+#include <string.h>
 
 #include "./../../ICollection/interfaces/IDictionary.h"
 #include "./../classes/headers/Usuario.h"
@@ -23,6 +28,7 @@
 #include "./../datatypes/headers/DtPractico.h"
 #include "./../datatypes/headers/DtTeorico.h"
 
+
 #include "ISistema.h"
 
 class Sistema : public ISistema
@@ -30,19 +36,26 @@ class Sistema : public ISistema
 private:
 	IDictionary * usuarios;
 	IDictionary * asignaturas;
+	int dia, mes, anio;
 public:
 	Sistema();
 	
 	void imprimirTextoPrincipal();
 	void menu1();
+	void menucaso1();
+	void menucaso2();
 	void menu2();
 	void menu3();
 	void menu4();
+	void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
+	void fechaAutomatica();
+	void mostrarFecha(DtFecha fecha);
+
 	
 	void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void ListarAsignaturas();
-	void ListarClasesVivo(std::string email),
+	void ListarClasesVivo(std::string email);
 	void ListarDocentesNoAsignados();
 	void ListarEstudiantesInscriptos();
 	void ListarMensajes(std::string idClase);

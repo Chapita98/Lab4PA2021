@@ -18,7 +18,7 @@ public:
 	virtual void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	virtual void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	virtual void ListarAsignaturas();
-	virtual void ListarClasesVivo(std::string email),
+	virtual void ListarClasesVivo(std::string email);
 	virtual void ListarDocentesNoAsignados();
 	virtual void ListarEstudiantesInscriptos();
 	virtual void ListarMensajes(std::string idClase);
