@@ -8,12 +8,18 @@ private:
 public:
 	ISistema();
 	
-	
+	virtual void menucaso1();
+	virtual void menucaso2();
+	virtual void menuCaso3();
+	virtual void menuCaso4();
 	virtual void imprimirTextoPrincipal();
-	virtual void menu1();
-	virtual void menu2();
-	virtual void menu3();
-	virtual void menu4();
+	virtual void imprimirMenuAdministrador();
+	virtual void imprimirMenuDocente();
+	virtual void imprimirMenuEstudiante();
+	virtual void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
+	virtual void fechaAutomatica();
+	virtual void mostrarFecha(DtFecha fecha);
+
 		
 	virtual void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	virtual void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);

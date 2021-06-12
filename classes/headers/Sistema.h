@@ -40,17 +40,17 @@ private:
 public:
 	Sistema();
 	
-	void imprimirTextoPrincipal();
-	void menu1();
 	void menucaso1();
 	void menucaso2();
-	void menu2();
-	void menu3();
-	void menu4();
+	void menuCaso3();
+	void menuCaso4();
+	void imprimirTextoPrincipal();
+	void imprimirMenuAdministrador();
+	void imprimirMenuDocente();
+	void imprimirMenuEstudiante();
 	void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
 	void fechaAutomatica();
 	void mostrarFecha(DtFecha fecha);
-
 	
 	void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);

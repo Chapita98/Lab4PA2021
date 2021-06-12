@@ -1,11 +1,16 @@
 OBJETOS = Asignacion.o Asignatura.o AsistenciaDiferida.o AsistenciaOnline.o Clase.o \
-Usuario.o Docente.o Estudiante.o Monitoreo.o Practico.o Sistema.o Teorico.o Tipo.o\
-DtClase.o DtFecha.o DtMonitoreo.o DtPractico.o DtTeorico.o \
-menus.o metodos.o main.o
+Usuario.o Docente.o Estudiante.o Monitoreo.o Practico.o Sistema.o Teorico.o Tipo.o \
+DtClase.o DtFecha.o DtMonitoreo.o DtPractico.o DtTeorico.o main.o \
+List.o ListIterator.o ListNode.o OrderedDictionary.o OrderedDictionaryEntry.o \
+ICollectible.o ICollection.o IDictionary.o IIterator.o IKey.o Integer.o String.o 
 
-DEF = ./classes/headers/Clase.h  ./classes/headers/Asignacion.h  ./classes/headers/Asignatura.h  ./classes/headers/AsistenciaDiferida.h  \
-./classes/headers/AsistenciaOnline.h  ./classes/headers/Tipo.h ./classes/headers/Usuario.h  ./classes/headers/Docente.h  \
-./classes/headers/Estudiante.h  ./classes/headers/Monitoreo.h  ./classes/headers/Practico.h  ./classes/headers/Sistema.h
+DEF = ./classes/headers/Clase.h ./classes/headers/Asignacion.h ./classes/headers/Asignatura.h ./classes/headers/AsistenciaDiferida.h \
+./classes/headers/AsistenciaOnline.h ./classes/headers/Tipo.h ./classes/headers/Usuario.h ./classes/headers/Docente.h \
+./classes/headers/Estudiante.h ./classes/headers/Monitoreo.h ./classes/headers/Practico.h ./classes/headers/Sistema.h \
+./ICollection/collections/List.h ./ICollection/collections/ListIterator.h ./ICollection/collections/ListNode.h \
+./ICollection/collections/OrderedDictionary.h ./ICollection/collections/OrderedDictionaryEntry.h \
+./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/ICollection.h ./ICollection/interfaces/IDictionary.h \
+./ICollection/interfaces/IIterator.h ./ICollection/interfaces/IKey.h ./ICollection/Integer.h ./ICollection/String.h 
 
 CC = g++
 OPCIONES = -c -Wall
@@ -17,12 +22,6 @@ Lab4PA2021: $(OBJETOS)
 
 main.o: main.cpp Makefile ./metodosMain/definiciones.h $( ./classes/headers/)
 	$(CC) $(OPCIONES) main.cpp
-
-menus.o: ./metodosMain/definiciones.h ./metodosMain/menus.cpp
-	$(CC) $(OPCIONES) ./metodosMain/menus.cpp
-
-metodos.o: ./metodosMain/definiciones.h ./metodosMain/metodos.cpp
-	$(CC) $(OPCIONES) ./metodosMain/metodos.cpp
 
 Practico.o: ./classes/headers/Practico.h ./classes/sources/Practico.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Practico.cpp
@@ -78,6 +77,41 @@ DtPractico.o: ./datatypes/headers/DtPractico.h ./datatypes/sources/DtPractico.cp
 DtTeorico.o: ./datatypes/headers/DtTeorico.h ./datatypes/sources/DtTeorico.cpp
 	$(CC) $(OPCIONES) ./datatypes/sources/DtTeorico.cpp
 
+List.o: ./ICollection/collections/List.h ./ICollection/collections/List.cpp
+	$(CC) $(OPCIONES) ./ICollection/collections/List.cpp
+
+ListIterator.o: ./ICollection/collections/ListIterator.h ./ICollection/collections/ListIterator.cpp
+	$(CC) $(OPCIONES) ./ICollection/collections/ListIterator.cpp
+
+ListNode.o: ./ICollection/collections/ListNode.h ./ICollection/collections/ListNode.cpp
+	$(CC) $(OPCIONES) ./ICollection/collections/ListNode.cpp
+
+OrderedDictionary.o: ./ICollection/collections/OrderedDictionary.h ./ICollection/collections/OrderedDictionary.cpp
+	$(CC) $(OPCIONES) ./ICollection/collections/OrderedDictionary.cpp
+
+OrderedDictionaryEntry.o: ./ICollection/collections/OrderedDictionaryEntry.h ./ICollection/collections/OrderedDictionaryEntry.cpp
+	$(CC) $(OPCIONES) ./ICollection/collections/OrderedDictionaryEntry.cpp
+
+ICollectible.o: ./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/ICollectible.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/ICollectible.cpp
+
+ICollection.o: ./ICollection/interfaces/ICollection.h ./ICollection/interfaces/ICollection.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/ICollection.cpp
+
+IDictionary.o: ./ICollection/interfaces/IDictionary.h ./ICollection/interfaces/IDictionary.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/IDictionary.cpp
+
+IIterator.o: ./ICollection/interfaces/IIterator.h ./ICollection/interfaces/IIterator.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/IIterator.cpp
+
+IKey.o: ./ICollection/interfaces/IKey.h ./ICollection/interfaces/IKey.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/IKey.cpp
+
+Integer.o: ./ICollection/Integer.h ./ICollection/Integer.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/Integer.cpp
+
+String.o: ./ICollection/String.h ./ICollection/String.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/String.cpp
 
 clean:
 	rm -rf *o Lab4PA2021
