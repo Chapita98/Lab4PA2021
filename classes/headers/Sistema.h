@@ -43,17 +43,19 @@ private:
 	int dia, mes, anio;
 public:
 	Sistema();
-    void obtenerFechaDelSistema(int &dia, int &mes, int &anio);
+	
+	void menucaso1();
+	void menucaso2();
+	void menuCaso3();
+	void menuCaso4();
 	void imprimirTextoPrincipal();
-	void menu1();
-	void menu2();
-	void menu3();
-	void menu4();
-
+	void imprimirMenuAdministrador();
+	void imprimirMenuDocente();
+	void imprimirMenuEstudiante();
+	void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
 	void fechaAutomatica();
 	void mostrarFecha(DtFecha fecha);
-
-
+	
 	void AltaDeUsuario();
 	void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
