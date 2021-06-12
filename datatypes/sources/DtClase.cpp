@@ -25,12 +25,12 @@ std::string DtClase::getNombre()
 	return this->nombre;
 }
 
-std::string DtClase::getFechaCom()
+DtFecha DtClase::getFechaCom()
 {
 	return this->fechaCom;
 }
 
-std::string DtClase::getFechaFin()
+DtFecha DtClase::getFechaFin()
 {
 	return this->fechaFin;
 }

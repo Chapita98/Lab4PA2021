@@ -1,13 +1,13 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "./metodosMain/definiciones.h"
+//#include "./metodosMain/definiciones.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
-	int opcionUsuario;
+	/*int opcionUsuario;
 	bool bandera = true;
 	fechaAutomatica();
 	while (bandera == true)
@@ -52,6 +52,6 @@ int main(int argc, char **argv)
 		{
 			std::cerr << e.what() << endl;
 		}
-	}
+	}*/
 	return 0;
 }

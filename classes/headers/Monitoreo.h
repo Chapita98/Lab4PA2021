@@ -20,7 +20,7 @@ public:
 
 	Estudiante *getEstudiante(int i);
 
-	void setEstudiante(Estudiante *_estudiante);
+	void setEstudiante(Estudiante *_estudiante, int i);
 
 	virtual ~Monitoreo();
 };

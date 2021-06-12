@@ -2,7 +2,7 @@
 
 // TODO DtFecha(_fechaCom, _fechaFin)
 
-AsistenciaDiferida::AsistenciaDiferida(DtFecha _fechaCom, DtFecha _fechaFin) : _fecha(_fecha)
+AsistenciaDiferida::AsistenciaDiferida(DtFecha _fechaCom, DtFecha _fechaFin) //: _fecha(_fecha)
 {
 	this->fechaCom = fechaCom;
 	this->fechaFin = fechaFin;
@@ -10,22 +10,22 @@ AsistenciaDiferida::AsistenciaDiferida(DtFecha _fechaCom, DtFecha _fechaFin) : _
 
 DtFecha AsistenciaDiferida::*getFechaCom(int i)
 {
-    return this->fechaCom[i];
+    //return this->fechaCom[i];
 }
 
 DtFecha AsistenciaDiferida::*getFechaFin(int i)
 {
-    return this->fechaFin[i];
+    //return this->fechaFin[i];
 }
 
 void AsistenciaDiferida::setFechaCom(DtFecha &_fecha, int i) // i tendria el ultimo lugar del array
 {
-    this->fechaCom[i]= _fecha;
+    //this->fechaCom[i]= _fecha;
 }
 
 void AsistenciaDiferida::setFechaFin(DtFecha &_fecha, int i) // i tendria el ultimo lugar del array
 {
-    this->fechaFin[i]= _fecha;
+    //this->fechaFin[i]= _fecha;
 }
 
 AsistenciaDiferida::~AsistenciaDiferida() {}

@@ -2,6 +2,7 @@
 #define ASISTENCIAONLINE_H
 #include "./../../datatypes/headers/DtFecha.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
+#include "Clase.h"
 
 class AsistenciaOnline : public ICollectible
 {

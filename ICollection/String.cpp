@@ -4,21 +4,21 @@
 #include "String.h"
 
 
-String::String(const char* str){
-    if(str == NULL)
+String::String(std::string str) : s(str){
+    /*if(str == NULL)
         throw std::invalid_argument("str es NULL");
-        
+
     int strSize = strlen(str);
-    s = strcpy(new char[strSize+1], str);
+    s = strcpy(new char[strSize+1], str);*/
 }
 
 ComparisonRes String::compare(OrderedKey* k) const
 {
     String *str = dynamic_cast<String *>(k);
-    if(str == NULL) 
+    if(str == NULL)
         throw std::invalid_argument("Invalid key k");
-    
-    int cmp = strcmp(s, str->s);
+
+    int cmp = s.compare(str->s);
     if(cmp == 0)
         return EQUAL;
     else if(cmp > 0)
@@ -27,11 +27,11 @@ ComparisonRes String::compare(OrderedKey* k) const
         return LESSER;
 }
 
-const char *String::getValue() const
+std::string String::getValue() const
 {
     return s;
 }
 
 String::~String(){
-    delete[] s;
+    //delete s;
 }

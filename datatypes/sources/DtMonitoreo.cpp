@@ -6,10 +6,10 @@ DtMonitoreo::DtMonitoreo(int _id, std::string _video, std::string _nombre, DtFec
 
 }
 
-Estudiante DtMonitoreo::getEstudiante(int i)
+/*Estudiante DtMonitoreo::getEstudiante(int i)
 {
     return this->estudiantes[i];
-}
+}*/
 
 DtMonitoreo::~DtMonitoreo() {}
 

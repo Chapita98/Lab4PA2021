@@ -1,6 +1,6 @@
 #include "./../headers/AsistenciaOnline.h"
 
-AsistenciaOnline::AsistenciaOnline(DtFecha _fechaCom, DtFecha _fechaFin) : _fecha(_fecha)
+AsistenciaOnline::AsistenciaOnline(DtFecha _fechaCom, DtFecha _fechaFin) //: _fecha(_fecha)
 {
 	this->fechaCom = fechaCom;
 	this->fechaFin = fechaFin;

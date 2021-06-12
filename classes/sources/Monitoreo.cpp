@@ -6,15 +6,15 @@ Monitoreo::Monitoreo(int _id, std::string _video, std::string _nombre, DtFecha _
 
 }
 
-Estudiante Monitoreo::getEstudiante(int i)
+Estudiante *Monitoreo::getEstudiante(int i)
 {
-    return this->estudiantes[i];
+   // return this->estudiantes[i];
 }
 
 
 void Monitoreo::setEstudiante(Estudiante *_estudiante, int i) // i tendria el ultimo lugar del arreglo
 {
-    this->estudiantes[i] = _estudiante;
+    //this->estudiantes[i] = _estudiante;
 }
 
 Monitoreo::~Monitoreo() {}

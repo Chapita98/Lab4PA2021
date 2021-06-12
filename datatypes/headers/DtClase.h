@@ -2,11 +2,12 @@
 #define DTCLASE_H
 
 #include <string>
+#include "./../../datatypes/headers/DtFecha.h"
 
 class DtClase
 {
 private:
-	int id
+	int id;
 	std::string video;
 	std::string nombre;
 	DtFecha fechaCom;
@@ -22,13 +23,13 @@ public:
 	DtFecha getFechaCom();
 	DtFecha getFechaFin();
 
-	virtual ~Clase();
-	
+	virtual ~DtClase();
+
 
 	/*friend std::ostream& operator<<(std::ostream&, DtBarco*);
  	   virtual void print(std::ostream&)=0;*/
 };
 
 #endif /* DTCLASE_H */
-  
+
 

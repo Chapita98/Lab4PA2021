@@ -1,10 +1,11 @@
-/* 
+/*
  * File:   String.h
  * Author: igui
  *
  * Created on 29 de mayo de 2011, 06:53 PM
  */
-
+#ifndef STRING_H
+#define STRING_H
 
 #include "interfaces/ICollectible.h"
 #include "interfaces/OrderedKey.h"
@@ -16,18 +17,18 @@
 class String: public ICollectible, public OrderedKey
 {
 private:
-    char *s;
+    std::string s;
 public:
     // construye el Datatype a partir de un puntero a caracter
-    String(const char *s = "");
-    
+    String(std::string str);
+
     // da el valor del string
-    const char *getValue() const;
-    
+    std::string getValue() const;
+
     ComparisonRes compare(OrderedKey *k) const;
-    
+
     virtual ~String();
-    
+
 };
 
 #endif	/* PROG4_STRING_H */

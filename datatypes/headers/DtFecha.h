@@ -1,6 +1,7 @@
 #ifndef DTFECHA_H
 #define DTFECHA_H
 #include <iostream>
+#include "./../../ICollection/interfaces/ICollectible.h"
 
 class DtFecha : public ICollectible
 {

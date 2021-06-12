@@ -3,6 +3,7 @@
 #include "./../../datatypes/headers/DtFecha.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
 #include "./../../ICollection/interfaces/ICollection.h"
+#include "Clase.h"
 
 //TODO Luego definir un static const para fecha, si es necesario
 

@@ -10,12 +10,12 @@ private:
     int asistentes;
 
 public:
-    Teorico();
-    Teorico(int _asistentes);
-    Teorico(int _asistentes, int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin);
+    DtTeorico();
+    DtTeorico(int _asistentes);
+    DtTeorico(int _asistentes, int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin);
 
     int getAsistentes();
-    
+
     virtual ~DtTeorico();
     //void print(std::ostream&);
 };
