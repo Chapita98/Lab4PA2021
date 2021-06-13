@@ -9,41 +9,55 @@ class ISistema
 private:
 
 public:
-	ISistema();
-	
-	virtual void menucaso1();
-	virtual void menucaso2();
-	virtual void menuCaso3();
-	virtual void menuCaso4();
-	virtual void imprimirTextoPrincipal();
-	virtual void imprimirMenuAdministrador();
-	virtual void imprimirMenuDocente();
-	virtual void imprimirMenuEstudiante();
-	virtual void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
-	virtual void fechaAutomatica();
-	virtual void mostrarFecha(DtFecha fecha);
 
-		
-	virtual void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	virtual void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	virtual void ListarAsignaturas();
-	virtual void ListarClasesVivo(std::string email);
-	virtual void ListarDocentesNoAsignados();
-	virtual void ListarEstudiantesInscriptos();
-	virtual void ListarMensajes(std::string idClase);
-	virtual void SeleccionAsignatura(int id);
-	virtual void SeleccionDocente(std::string email);
-	virtual void SeleccionClase(int id);
-	virtual void SeleccionEstudiante(int ci);
-	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo);
-	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo, iCollection listaEstudiantes);//maybe
-	virtual void CrearMensaje(std::string texto, int idRespuesta);
-	virtual void CrearMensaje(std::string texto);
-	virtual void MostrarDatos();
-	virtual void MostrarTiempoAsistenciaClase();
-	virtual void ObtenerClase();
-	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);	
-	
+    virtual void menuCaso1() = 0;
+	virtual void menuCaso2() = 0;
+	virtual void menuCaso3() = 0;
+	virtual void menuCaso4() = 0;
+	virtual void imprimirTextoPrincipal() = 0;
+	virtual void imprimirMenuAdministrador() = 0;
+	virtual void imprimirMenuDocente() = 0;
+	virtual void imprimirMenuEstudiante() = 0;
+	virtual void obtenerFechaDelSistema(int &dia, int &mes, int &anio) = 0;
+	virtual void fechaAutomatica() = 0;
+	virtual void mostrarFecha(DtFecha fecha) = 0;
+
+	virtual void AltaDeUsuario() = 0;
+	virtual void AltaDeAsignatura() = 0;
+	virtual void AsignacionDeDocentesAUnaAsignatura() = 0;
+	virtual void EliminacionDeAsignatura() = 0;
+	virtual void TiempoDeDictadoDeClases() = 0;
+	virtual void ConfiguracionRelojInterno() = 0;
+	virtual void InicioDeClase() = 0;
+	virtual void FinalizacionDeClase() = 0;
+	virtual void TiempoDeAsistenciaAClase() = 0;
+	virtual void ListadoDeClases() = 0;
+	virtual void EnvioDeMensaje() = 0;
+	virtual void InscripcionALasAsignaturas() = 0;
+	virtual void AsistenciaAClaseEnVivo() = 0;
+	virtual void ReproduccionEnDiferido() = 0;
+
+
+	virtual void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
+	virtual void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
+	virtual void ListarAsignaturas() = 0;
+	virtual void ListarClasesVivo(std::string email) = 0;
+	virtual void ListarDocentesNoAsignados() = 0;
+	virtual void ListarEstudiantesInscriptos() = 0;
+	virtual void ListarMensajes(std::string idClase) = 0;
+	virtual void SeleccionAsignatura(int id) = 0;
+	virtual void SeleccionDocente(std::string email) = 0;
+	virtual void SeleccionClase(int id) = 0;
+	virtual void SeleccionEstudiante(int ci) = 0;
+	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo) = 0;
+	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo, List estudiantes) = 0;
+	virtual void CrearMensaje(std::string texto, int idRespuesta) = 0;
+	virtual void CrearMensaje(std::string texto) = 0;
+	virtual void MostrarDatos() = 0;
+	virtual void MostrarTiempoAsistenciaClase() = 0;
+	virtual void ObtenerClase() = 0;
+	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin) = 0;
+
 	virtual ~ISistema();
 };
 

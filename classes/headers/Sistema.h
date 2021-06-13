@@ -43,22 +43,37 @@ private:
 	int dia, mes, anio;
 public:
 	Sistema();
-	
-	void menucaso1();
-	void menucaso2();
+
+	void menuCaso1();
+	void menuCaso2();
 	void menuCaso3();
 	void menuCaso4();
 	void imprimirTextoPrincipal();
 	void imprimirMenuAdministrador();
 	void imprimirMenuDocente();
 	void imprimirMenuEstudiante();
-	void obtenerFechaDelSitema(int &dia, int &mes, int &anio);
+	void obtenerFechaDelSistema(int &dia, int &mes, int &anio);
 	void fechaAutomatica();
 	void mostrarFecha(DtFecha fecha);
-	
+
 	void AltaDeUsuario();
-	void AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	void AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	void AltaDeAsignatura();
+	void AsignacionDeDocentesAUnaAsignatura();
+	void EliminacionDeAsignatura();
+	void TiempoDeDictadoDeClases();
+	void ConfiguracionRelojInterno();
+	void InicioDeClase();
+	void FinalizacionDeClase();
+	void TiempoDeAsistenciaAClase();
+	void ListadoDeClases();
+	void EnvioDeMensaje();
+	void InscripcionALasAsignaturas();
+	void AsistenciaAClaseEnVivo();
+	void ReproduccionEnDiferido();
+
+
+	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void ListarAsignaturas();
 	void ListarClasesVivo(std::string email);
 	void ListarDocentesNoAsignados();

@@ -1,7 +1,7 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema() {}
 
-void menuCaso1()
+void Sistema::menuCaso1()
 {
     int opcionUsuario;
     bool bandera = true;
@@ -27,12 +27,12 @@ void menuCaso1()
                 }
                 case 3: //Asignación de docentes a una asignatura
                 {
-                    AsignaciónDeDocentesAUnaAsignatura();
+                    AsignacionDeDocentesAUnaAsignatura();
                     break;
                 }
                 case 4: //Eliminación de asignatura
                 {
-                    EliminaciónDeAsignatura();
+                    EliminacionDeAsignatura();
                     break;
                 }
                 case 5: //Tiempo de dictado de clases
@@ -56,12 +56,12 @@ void menuCaso1()
         }
         catch (std::invalid_argument &e)
         {
-            std::cerr << e.what() << endl;
+            std::cerr << e.what() << std::endl;
         }
     }
 }
 
-void menuCaso2()
+void Sistema::menuCaso2()
 {
     int opcionUsuario;
     bool bandera = true;
@@ -82,7 +82,7 @@ void menuCaso2()
                 }
                 case 2: //Finalización de clase
                 {
-                    FinalizaciónDeClase();
+                    FinalizacionDeClase();
                     break;
                 }
                 case 3: //Tiempo de asistencia a clase
@@ -97,7 +97,7 @@ void menuCaso2()
                 }
                 case 5: //Tiempo de dictado de clases
                 {
-                    EnvíoDeMensaje();
+                    EnvioDeMensaje();
                     break;
                 }
                 case 6: //CASO SALIDA DE SISTEMA
@@ -111,11 +111,11 @@ void menuCaso2()
         }
         catch (std::invalid_argument &e)
         {
-            std::cerr << e.what() << endl;
+            std::cerr << e.what() << std::endl;
         }
     }
 }
-void menuCaso3()
+void Sistema::menuCaso3()
 {
     int opcionUsuario;
     bool bandera = true;
@@ -131,12 +131,12 @@ void menuCaso3()
             {
                 case 1: //Envío de mensaje
                 {
-                    EnvíoDeMensaje();
+                    EnvioDeMensaje();
                     break;
                 }
                 case 2: //Inscripción a las asignaturas
                 {
-                    InscripciónALasAsignaturas();
+                    InscripcionALasAsignaturas();
                     break;
                 }
                 case 3: //Asistencia a clase en vivo
@@ -160,11 +160,11 @@ void menuCaso3()
         }
         catch (std::invalid_argument &e)
         {
-            std::cerr << e.what() << endl;
+            std::cerr << e.what() << std::endl;
         }
     }
 }
-void menuCaso4()
+void Sistema::menuCaso4()
 {
     // INGRESO DATOS DE PRUEBA
 }
@@ -193,13 +193,13 @@ void Sistema::AltaDeUsuario(){
             {
                 std::cout << "\nIngrese cedula de identidad: ";
                 std::cin >> ci;
-                AltaUsuario(ci, nombre, email, contrasenia, url);
+                AltaEstudiante(ci, nombre, email, contrasenia, url);
                 break;
             }
             case 2:
             {
                 std::cout << "\nIngrese instituto: ";
-                AltaUsuario(instituto, nombre, email, contrasenia, url);
+                AltaDocente(instituto, nombre, email, contrasenia, url);
                 break;
             }
             default:
@@ -214,7 +214,7 @@ void Sistema::AltaDeUsuario(){
     }
 }
 
-void Sistema::AltaUsuario(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url)
+void Sistema::AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url)
 {
     Estudiante *e = new Estudiante(ci, email, nombre, url, contrasenia);
     int op;
@@ -244,7 +244,7 @@ void Sistema::AltaUsuario(int ci, std::string nombre, std::string email, std::st
 
 }
 
-void Sistema::AltaUsuario(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url)
+void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url)
 {
     Docente *d = new Docente(instituto, email, nombre, url, contrasenia);
     int op;
