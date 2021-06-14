@@ -1,6 +1,11 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema() {}
 
+Sistema *Sistema:: getSistema()
+{
+    return new Sistema();
+}
+
 void Sistema::menuCaso1()
 {
     int opcionUsuario;
@@ -278,6 +283,7 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
 void Sistema::AltaDeAsignatura()
 {
     /*std::string nombre;
+
     try
     {   std::cout << "\nIngrese nombre";
         std::cin >> nombre;

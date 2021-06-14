@@ -47,6 +47,7 @@ private:
 
 public:
 
+	virtual ISistema *getSistema() = 0;
     virtual void menuCaso1() = 0;
 	virtual void menuCaso2() = 0;
 	virtual void menuCaso3() = 0;
@@ -61,7 +62,10 @@ public:
 
 	virtual void AltaDeUsuario() = 0;
 	virtual void AltaDeAsignatura() = 0;
-	virtual void AsignacionDeDocentesAUnaAsignatura() = 0;
+	virtual void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
+	virtual void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
+	
+	/*virtual void AsignacionDeDocentesAUnaAsignatura() = 0;
 	virtual void EliminacionDeAsignatura() = 0;
 	virtual void TiempoDeDictadoDeClases() = 0;
 	virtual void ConfiguracionRelojInterno() = 0;
@@ -75,8 +79,6 @@ public:
 	virtual void ReproduccionEnDiferido() = 0;
 
 
-	virtual void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
-	virtual void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
 	virtual void ListarAsignaturas() = 0;
 	virtual void ListarClasesVivo(std::string email) = 0;
 	virtual void ListarDocentesNoAsignados() = 0;
@@ -93,7 +95,7 @@ public:
 	virtual void MostrarDatos() = 0;
 	virtual void MostrarTiempoAsistenciaClase() = 0;
 	virtual void ObtenerClase() = 0;
-	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin) = 0;
+	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin) = 0;*/
 
 	virtual ~ISistema();
 };

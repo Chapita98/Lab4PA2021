@@ -1,7 +1,8 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
-
 #include "./ISistema.h"
+
+class ISistema;
 
 class Sistema : public ISistema
 {
@@ -12,6 +13,7 @@ private:
 public:
 	Sistema();
 
+	Sistema *getSistema();
 	void menuCaso1();
 	void menuCaso2();
 	void menuCaso3();
@@ -41,7 +43,7 @@ public:
 	void InscripcionALasAsignaturas();
 	void AsistenciaAClaseEnVivo();
 	void ReproduccionEnDiferido();
-
+	void AltaAsignatura();
 	void ListarAsignaturas();
 	void ListarClasesVivo(std::string email);
 	void ListarDocentesNoAsignados();

@@ -6,7 +6,7 @@ ICollectible.o ICollection.o IDictionary.o IIterator.o IKey.o Integer.o String.o
 
 DEF = ./classes/headers/Clase.h ./classes/headers/Asignacion.h ./classes/headers/Asignatura.h ./classes/headers/AsistenciaDiferida.h \
 ./classes/headers/AsistenciaOnline.h ./classes/headers/Tipo.h ./classes/headers/Usuario.h ./classes/headers/Docente.h \
-./classes/headers/Estudiante.h ./classes/headers/Monitoreo.h ./classes/headers/Practico.h ./classes/headers/Sistema.h ./classes/headers/ISistema.h \
+./classes/headers/Estudiante.h ./classes/headers/Monitoreo.h ./classes/headers/Fabrica.h ./classes/headers/Practico.h ./classes/headers/Sistema.h ./classes/headers/ISistema.h \
 ./ICollection/collections/List.h ./ICollection/collections/ListIterator.h ./ICollection/collections/ListNode.h \
 ./ICollection/collections/OrderedDictionary.h ./ICollection/collections/OrderedDictionaryEntry.h \
 ./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/ICollection.h ./ICollection/interfaces/IDictionary.h \
@@ -20,7 +20,7 @@ all: Lab4PA2021
 Lab4PA2021: $(OBJETOS)
 	$(CC) $(OBJETOS) -o Lab4PA2021
 
-main.o: main.cpp Makefile ./classes/headers/ISistema.h $( ./classes/headers/)
+main.o: main.cpp Makefile ./classes/headers/Fabrica.h $( ./classes/headers/)
 	$(CC) $(OPCIONES) main.cpp
 
 Practico.o: ./classes/headers/Practico.h ./classes/sources/Practico.cpp

@@ -1,15 +1,17 @@
-#include "./classes/headers/ISistema.h"
+#include "./classes/headers/Fabrica.h"
 
 using namespace std;
 
 int main()
 {
-	/*int opcionUsuario;
+	Fabrica f;
+	ISistema *s = f.getSistema;
+	int opcionUsuario;
 	bool bandera = true;
-	fechaAutomatica();
+	s->fechaAutomatica();
 	while (bandera == true)
 	{
-		imprimirTextoPrincipal();
+		s->imprimirTextoPrincipal();
 		std::cin >> opcionUsuario;
 		std::cout << "\e[0m";
 		std::cin.clear();
@@ -24,22 +26,22 @@ int main()
 			}
 			case 1: //Administrador
 			{
-				menuCaso1();
+				s->menuCaso1();
 				break;
 			}
 			case 2: //Docente
 			{
-				menuCaso2();
+				s->menuCaso2();
 				break;
 			}
 			case 3: //Estudiante
 			{
-				menuCaso3();
+				s->menuCaso3();
 				break;
 			}
 			case 4: //Cargar datos de prueba
 			{
-				menuCaso4();
+				s->menuCaso4();
 				break;
 			}
 			default:
@@ -50,6 +52,6 @@ int main()
 		{
 			std::cerr << e.what() << endl;
 		}
-	}*/
+	}
 	return 0;
 }
