@@ -1,12 +1,15 @@
 #include <iostream>
 #include <stdexcept>
 #include "./classes/headers/ISistema.h"
+#include "./classes/headers/Fabrica.h"
 
 using namespace std;
 
 int main()
 {
-	int opcionUsuario;
+	Fabrica f;
+	ISistema *s = f.getSistema;
+	/*int opcionUsuario;
 	bool bandera = true;
 	fechaAutomatica();
 	while (bandera == true)
@@ -52,6 +55,6 @@ int main()
 		{
 			std::cerr << e.what() << endl;
 		}
-	}
+	}*/
 	return 0;
 }

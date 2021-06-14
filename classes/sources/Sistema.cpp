@@ -1,6 +1,11 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema() {}
 
+Sistema *Sistema:: getSistema()
+{
+    return new Sistema();
+}
+
 void Sistema::menuCaso1()
 {
     int opcionUsuario;
@@ -22,27 +27,27 @@ void Sistema::menuCaso1()
                 }
                 case 2: //Alta de asignatura
                 {
-                    AltaDeAsignatura();
+                    //AltaDeAsignatura();
                     break;
                 }
                 case 3: //Asignación de docentes a una asignatura
                 {
-                    AsignacionDeDocentesAUnaAsignatura();
+                    //AsignacionDeDocentesAUnaAsignatura();
                     break;
                 }
                 case 4: //Eliminación de asignatura
                 {
-                    EliminacionDeAsignatura();
+                    //EliminacionDeAsignatura();
                     break;
                 }
                 case 5: //Tiempo de dictado de clases
                 {
-                    TiempoDeDictadoDeClases();
+                    //TiempoDeDictadoDeClases();
                     break;
                 }
                 case 6: //Tiempo de dictado de clases
                 {
-                    ConfiguracionRelojInterno();
+                    //ConfiguracionRelojInterno();
                     break;
                 }
                 case 7: //CASO SALIDA DE SISTEMA
@@ -77,27 +82,27 @@ void Sistema::menuCaso2()
             {
                 case 1: //Inicio de clase
                 {
-                    InicioDeClase();
+                    //InicioDeClase();
                     break;
                 }
                 case 2: //Finalización de clase
                 {
-                    FinalizacionDeClase();
+                    //FinalizacionDeClase();
                     break;
                 }
                 case 3: //Tiempo de asistencia a clase
                 {
-                    TiempoDeAsistenciaAClase();
+                    //TiempoDeAsistenciaAClase();
                     break;
                 }
                 case 4: //Listado de Clases
                 {
-                    ListadoDeClases();
+                    //ListadoDeClases();
                     break;
                 }
                 case 5: //Tiempo de dictado de clases
                 {
-                    EnvioDeMensaje();
+                    //EnvioDeMensaje();
                     break;
                 }
                 case 6: //CASO SALIDA DE SISTEMA
@@ -131,22 +136,22 @@ void Sistema::menuCaso3()
             {
                 case 1: //Envío de mensaje
                 {
-                    EnvioDeMensaje();
+                    //EnvioDeMensaje();
                     break;
                 }
                 case 2: //Inscripción a las asignaturas
                 {
-                    InscripcionALasAsignaturas();
+                    //InscripcionALasAsignaturas();
                     break;
                 }
                 case 3: //Asistencia a clase en vivo
                 {
-                    AsistenciaAClaseEnVivo();
+                    //AsistenciaAClaseEnVivo();
                     break;
                 }
                 case 4: //Reproduccion en diferido
                 {
-                    ReproduccionEnDiferido();
+                    //ReproduccionEnDiferido();
                     break;
                 }
                 case 5: //CASO SALIDA DE SISTEMA
@@ -275,7 +280,7 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
 
 void Sistema::AltaDeAsignatura()
 {
-    std::string nombre;
+    /*std::string nombre;
     Docente *d = new Docente(instituto, email, nombre, url, contrasenia);
     try
     {   std::cout << "\nIngrese nombre";
@@ -286,7 +291,7 @@ void Sistema::AltaDeAsignatura()
     {
         std::cout << "\nError: " << e.what() << std::endl;
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
-    }
+    }*/
 }
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)

@@ -10,7 +10,8 @@ private:
 
 public:
 
-    virtual void menuCaso1() = 0;
+	virtual ISistema *getSistema() = 0;
+    /*virtual void menuCaso1() = 0;
 	virtual void menuCaso2() = 0;
 	virtual void menuCaso3() = 0;
 	virtual void menuCaso4() = 0;
@@ -56,7 +57,7 @@ public:
 	virtual void MostrarDatos() = 0;
 	virtual void MostrarTiempoAsistenciaClase() = 0;
 	virtual void ObtenerClase() = 0;
-	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin) = 0;
+	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin) = 0;*/
 
 	virtual ~ISistema();
 };

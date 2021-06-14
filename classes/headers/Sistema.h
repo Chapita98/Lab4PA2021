@@ -22,7 +22,6 @@
 #include "Mensaje.h"
 #include "Monitoreo.h"
 #include "Practico.h"
-#include "Sistema.h"
 #include "Teorico.h"
 
 #include "./../../datatypes/headers/DtClase.h"
@@ -35,6 +34,8 @@
 
 #include "ISistema.h"
 
+class ISistema;
+
 class Sistema : public ISistema
 {
 private:
@@ -44,6 +45,7 @@ private:
 public:
 	Sistema();
 
+	Sistema *getSistema();
 	void menuCaso1();
 	void menuCaso2();
 	void menuCaso3();
@@ -74,7 +76,7 @@ public:
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	void AltaDeAsignatura();
+	void AltaAsignatura();
 	void ListarAsignaturas();
 	void ListarClasesVivo(std::string email);
 	void ListarDocentesNoAsignados();
