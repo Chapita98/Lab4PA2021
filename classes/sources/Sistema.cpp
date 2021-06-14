@@ -253,25 +253,40 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
     std::cout << "\n2-No: ";
     std::cin >> op;
     switch (op)
+    {
+        case 1:
         {
-            case 1:
-            {
-                IKey *k = new String (email);
-                usuarios->add(k, d);
-                std::cout << "\nUsuario Agregado";
-                break;
-            }
-            case 2:
-            {
-                delete d;
-                std::cout << "\nVolviendo al menu principal";
-                break;
-            }
-            default:
-                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
-                break;
+            IKey *k = new String (email);
+            usuarios->add(k, d);
+            std::cout << "\nUsuario Agregado";
+            break;
         }
+        case 2:
+        {
+            delete d;
+            std::cout << "\nVolviendo al menu principal";
+            break;
+        }
+        default:
+            throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+            break;
+    }
+}
 
+void Sistema::AltaDeAsignatura()
+{
+    std::string nombre;
+    Docente *d = new Docente(instituto, email, nombre, url, contrasenia);
+    try
+    {   std::cout << "\nIngrese nombre";
+        std::cin >> nombre;
+        AltaEstudiante(ci, nombre, email, contrasenia, url);
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
 }
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)

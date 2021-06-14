@@ -74,6 +74,7 @@ public:
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	void AltaDeAsignatura();
 	void ListarAsignaturas();
 	void ListarClasesVivo(std::string email);
 	void ListarDocentesNoAsignados();

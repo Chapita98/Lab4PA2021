@@ -2,8 +2,7 @@
 #include <stdexcept>
 #include "Integer.h"
 
-Integer::Integer(int i):
-        val(i)
+Integer::Integer(int i):val(i)
 {
 }
 

@@ -1,11 +1,12 @@
 #include <iostream>
 #include <stdexcept>
+#include "./classes/headers/ISistema.h"
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main()
 {
-	/*int opcionUsuario;
+	int opcionUsuario;
 	bool bandera = true;
 	fechaAutomatica();
 	while (bandera == true)
@@ -51,6 +52,6 @@ int main(int argc, char **argv)
 		{
 			std::cerr << e.what() << endl;
 		}
-	}*/
+	}
 	return 0;
 }
