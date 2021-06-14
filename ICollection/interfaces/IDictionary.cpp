@@ -1,8 +1,2 @@
-
-
-#include "IDictionary.h"
-
-IDictionary::~IDictionary()
-{
-    
-}
+#include "./IDictionary.h"
+IDictionary::~IDictionary(){}

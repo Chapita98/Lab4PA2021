@@ -8,8 +8,8 @@
 #ifndef LISTNODE_H
 #define	LISTNODE_H
 
-#include "../interfaces/ICollection.h"
 #include <cstddef>
+#include "./../interfaces/ICollection.h"
 
 class ListNode {
 public:

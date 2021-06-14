@@ -8,9 +8,9 @@
 #ifndef ORDEREDDICTIONARY_H
 #define	ORDEREDDICTIONARY_H
 
-#include "OrderedDictionaryEntry.h"
-#include "ListNode.h"
-#include "../interfaces/IDictionary.h"
+#include "./OrderedDictionaryEntry.h"
+#include "./ListNode.h"
+#include "./../interfaces/IDictionary.h"
 
 /**
  * Implementa un diccionario ordenado, para implementar la ordenación es

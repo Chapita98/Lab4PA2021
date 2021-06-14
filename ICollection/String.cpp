@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdexcept>
 #include <string.h>
-#include "String.h"
+#include "./String.h"
 
 
 String::String(std::string str) : s(str){

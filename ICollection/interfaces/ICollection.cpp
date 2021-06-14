@@ -1,7 +1,2 @@
-
-#include "ICollection.h"
-
-ICollection::~ICollection()
-{
-    
-}
+#include "./ICollection.h"
+ICollection::~ICollection(){}

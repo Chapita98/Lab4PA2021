@@ -1,11 +1,3 @@
-
-#include "ICollectible.h"
-
-ICollectible::ICollectible(){
-    
-}
-
-ICollectible::~ICollectible()
-{
-    
-}
+#include "./ICollectible.h"
+ICollectible::ICollectible(){}
+ICollectible::~ICollectible(){}

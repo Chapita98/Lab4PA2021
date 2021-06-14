@@ -5,8 +5,8 @@
  * Created on 26 de mayo de 2012, 02:36 PM
  */
 
-#include "ListNode.h"
 #include <stdexcept>
+#include "./ListNode.h"
 
 ListNode::ListNode(ICollectible* elem, ListNode* next):
         next(next) {

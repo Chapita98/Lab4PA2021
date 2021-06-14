@@ -7,8 +7,8 @@
 
 #include <stdexcept>
 
-#include "OrderedDictionary.h"
-#include "ListIterator.h"
+#include "./OrderedDictionary.h"
+#include "./ListIterator.h"
 
 OrderedDictionary::OrderedDictionary(): size(0), root(NULL) {
 }

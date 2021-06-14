@@ -5,9 +5,9 @@
  * Created on 28 de mayo de 2011, 07:38 PM
  */
 
-#include "IIterator.h"
 #ifndef _ICOLLECTION_H
 #define	_ICOLLECTION_H
+#include "./IIterator.h"
 
 /**
  * Interfaz de colecciones

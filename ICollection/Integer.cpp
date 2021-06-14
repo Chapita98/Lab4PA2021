@@ -1,10 +1,8 @@
 #include <stddef.h>
 #include <stdexcept>
-#include "Integer.h"
+#include "./Integer.h"
 
-Integer::Integer(int i):val(i)
-{
-}
+Integer::Integer(int i):val(i){}
 
 int Integer::getValue() const
 {

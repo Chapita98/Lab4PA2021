@@ -8,8 +8,8 @@
 #ifndef ORDEREDDICTIONARYENTRY_H
 #define	ORDEREDDICTIONARYENTRY_H
 
-#include "../interfaces/OrderedKey.h"
-#include "../interfaces/ICollectible.h"
+#include "./../interfaces/OrderedKey.h"
+#include "./../interfaces/ICollectible.h"
 #include <cstddef>
 
 /**

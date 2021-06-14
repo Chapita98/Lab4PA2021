@@ -5,8 +5,8 @@
  * Created on 26 de mayo de 2012, 02:33 PM
  */
 
-#include "List.h"
-#include "ListIterator.h"
+#include "./List.h"
+#include "./ListIterator.h"
 
 List::List():
    head(NULL), size(0){

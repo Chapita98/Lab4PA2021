@@ -5,11 +5,10 @@
  * Created on 28 de mayo de 2011, 07:43 PM
  */
 
-#include "ICollectible.h"
-
-
 #ifndef _IITERATOR_H
 #define	_IITERATOR_H
+
+#include "./ICollectible.h"
 
 /** 
  * Interfaz de iteradores

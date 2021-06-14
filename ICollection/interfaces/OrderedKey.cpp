@@ -7,7 +7,7 @@
 
 #include <stdexcept>
 
-#include "OrderedKey.h"
+#include "./OrderedKey.h"
 
 bool OrderedKey::equals(IKey* k) const
 {
@@ -17,6 +17,4 @@ bool OrderedKey::equals(IKey* k) const
     return compare(key) == EQUAL;
 }
 
-OrderedKey::~OrderedKey() {
-}
-
+OrderedKey::~OrderedKey() {}

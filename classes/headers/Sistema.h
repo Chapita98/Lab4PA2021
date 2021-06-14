@@ -1,39 +1,7 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
-#include <iostream>
-#include <stdexcept>
-#include <ctime>
-#include <string>
-#include <string.h>
 
-#include "./../../ICollection/interfaces/IDictionary.h"
-#include "./../../ICollection/interfaces/IKey.h"
-#include "./../../ICollection/Integer.h"
-#include "./../../ICollection/String.h"
-#include "Usuario.h"
-#include "Asignatura.h"
-#include "Asignacion.h"
-#include "Tipo.h"
-#include "AsistenciaDiferida.h"
-#include "AsistenciaOnline.h"
-#include "Clase.h"
-#include "Docente.h"
-#include "Estudiante.h"
-#include "Mensaje.h"
-#include "Monitoreo.h"
-#include "Practico.h"
-#include "Sistema.h"
-#include "Teorico.h"
-
-#include "./../../datatypes/headers/DtClase.h"
-#include "./../../datatypes/headers/DtFecha.h"
-#include "./../../datatypes/headers/DtMonitoreo.h"
-#include "./../../datatypes/headers/DtPractico.h"
-#include "./../../datatypes/headers/DtTeorico.h"
-#include "./../../ICollection/collections/List.h"
-
-
-#include "ISistema.h"
+#include "./ISistema.h"
 
 class Sistema : public ISistema
 {
@@ -58,7 +26,10 @@ public:
 
 	void AltaDeUsuario();
 	void AltaDeAsignatura();
-	void AsignacionDeDocentesAUnaAsignatura();
+	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
+	
+	/*void AsignacionDeDocentesAUnaAsignatura();
 	void EliminacionDeAsignatura();
 	void TiempoDeDictadoDeClases();
 	void ConfiguracionRelojInterno();
@@ -71,10 +42,6 @@ public:
 	void AsistenciaAClaseEnVivo();
 	void ReproduccionEnDiferido();
 
-
-	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	void AltaDeAsignatura();
 	void ListarAsignaturas();
 	void ListarClasesVivo(std::string email);
 	void ListarDocentesNoAsignados();
@@ -91,7 +58,7 @@ public:
 	void MostrarDatos();
 	void MostrarTiempoAsistenciaClase();
 	void ObtenerClase();
-	void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);
+	void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);*/
 
 	virtual ~Sistema();
 };

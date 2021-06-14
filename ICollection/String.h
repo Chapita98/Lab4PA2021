@@ -7,8 +7,8 @@
 #ifndef STRING_H
 #define STRING_H
 
-#include "interfaces/ICollectible.h"
-#include "interfaces/OrderedKey.h"
+#include "./interfaces/ICollectible.h"
+#include "./interfaces/OrderedKey.h"
 
 /**
  *  Implementación simple del datatype String que hereda tanto de ICollectible

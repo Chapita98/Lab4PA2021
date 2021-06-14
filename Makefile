@@ -29,7 +29,7 @@ Practico.o: ./classes/headers/Practico.h ./classes/sources/Practico.cpp
 Teorico.o: ./classes/headers/Teorico.h ./classes/sources/Teorico.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Teorico.cpp
 
-Sistema.o: ./classes/headers/Sistema.h ./classes/sources/Sistema.cpp
+Sistema.o: ./classes/headers/Sistema.h ./classes/sources/Sistema.cpp ./classes/headers/ISistema.h
 	$(CC) $(OPCIONES) ./classes/sources/Sistema.cpp
 
 Docente.o: ./classes/headers/Docente.h ./classes/sources/Docente.cpp

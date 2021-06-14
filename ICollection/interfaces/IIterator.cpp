@@ -1,6 +1,2 @@
-
-#include "IIterator.h"
-
-IIterator::~IIterator(){
-    
-}
+#include "./IIterator.h"
+IIterator::~IIterator(){}

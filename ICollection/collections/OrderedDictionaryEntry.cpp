@@ -5,17 +5,17 @@
  * Created on 26 de mayo de 2012, 05:12 PM
  */
 
-#include "OrderedDictionaryEntry.h"
-#include "OrderedDictionary.h"
 #include <stdexcept>
+#include "./OrderedDictionaryEntry.h"
+#include "./OrderedDictionary.h"
 
 OrderedDictionaryEntry::OrderedDictionaryEntry(
-            OrderedKey *key,
-            ICollectible *val,
-            OrderedDictionaryEntry *l,
-            OrderedDictionaryEntry *g
-            )
-        : lesser(l), greater(g)
+    OrderedKey *key,
+    ICollectible *val,
+    OrderedDictionaryEntry *l,
+    OrderedDictionaryEntry *g
+    )
+: lesser(l), greater(g)
 {
     if(key == NULL)
         throw std::invalid_argument("key is NULL");
@@ -25,7 +25,7 @@ OrderedDictionaryEntry::OrderedDictionaryEntry(
         throw std::invalid_argument("val is NULL");
     this->val = val;
 }
-    
+
 OrderedKey *OrderedDictionaryEntry::getKey()
 {
     return key;

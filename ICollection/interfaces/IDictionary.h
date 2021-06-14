@@ -8,9 +8,9 @@
 #ifndef IDICTIONARY_H
 #define	IDICTIONARY_H
 
-#include "IKey.h"
-#include "ICollectible.h"
-#include "IIterator.h"
+#include "./IKey.h"
+#include "./ICollectible.h"
+#include "./IIterator.h"
 
 class IDictionary {
 public:

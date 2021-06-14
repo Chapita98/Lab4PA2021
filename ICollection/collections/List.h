@@ -8,7 +8,7 @@
 #ifndef LIST_H
 #define	LIST_H
 
-#include "ListNode.h"
+#include "./ListNode.h"
 
 /**
  *  Una lista común

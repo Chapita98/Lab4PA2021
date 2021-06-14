@@ -8,7 +8,7 @@
 #ifndef LISTITERATOR_H
 #define	LISTITERATOR_H
 
-#include "ListNode.h"
+#include "./ListNode.h"
 
 
 class ListIterator: public IIterator {

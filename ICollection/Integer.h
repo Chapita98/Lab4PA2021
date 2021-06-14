@@ -5,8 +5,8 @@
  * Created on 28 de mayo de 2011, 08:55 PM
  */
 
-#include "interfaces/ICollectible.h"
-#include "interfaces/OrderedKey.h"
+#include "./interfaces/ICollectible.h"
+#include "./interfaces/OrderedKey.h"
 
 
 #ifndef _INTEGER_H

@@ -5,8 +5,8 @@
  * Created on 26 de mayo de 2012, 04:30 PM
  */
 
-#include "ListIterator.h"
 #include <stdexcept>
+#include "./ListIterator.h"
 
 ListIterator::ListIterator(ListNode* n, bool disposeHeadOnDelete):
         head(n), current(n), disposeHeadOnDelete(disposeHeadOnDelete) {
