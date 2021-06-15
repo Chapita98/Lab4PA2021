@@ -13,7 +13,6 @@ private:
 public:
 	Sistema();
 
-	Sistema *getSistema();
 	void menuCaso1();
 	void menuCaso2();
 	void menuCaso3();
@@ -30,7 +29,7 @@ public:
 	void AltaDeAsignatura();
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
-	
+
 	/*void AsignacionDeDocentesAUnaAsignatura();
 	void EliminacionDeAsignatura();
 	void TiempoDeDictadoDeClases();

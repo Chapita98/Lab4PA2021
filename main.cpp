@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
 	Fabrica f;
-	ISistema *s = f.getSistema;
+	ISistema *s = f.getSistema();
 	int opcionUsuario;
 	bool bandera = true;
 	s->fechaAutomatica();

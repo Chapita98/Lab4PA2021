@@ -1,11 +1,6 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema() {}
 
-Sistema *Sistema:: getSistema()
-{
-    return new Sistema();
-}
-
 void Sistema::menuCaso1()
 {
     int opcionUsuario;
