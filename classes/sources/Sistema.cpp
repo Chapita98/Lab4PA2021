@@ -290,7 +290,156 @@ void Sistema::AltaDeAsignatura()
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
     }*/
 }
+void Sistema::AsignacionDeDocentesAUnaAsignatura()
+{
+    try
+    {
+        int id, asig, op;
+        std::string email;
+        Tipo tipo;
+        ListarAsignaturas();
+        std::cout << "\nIngrese id";
+        std::cin >> id;
+        IKey *k = new Integer(id);
+        if(this->asignaturas->member(k))
+        {
+            ICollection *docs = new List;
+            docs = ListarDocentesNoAsignados(k);
+            IIterator *i = docs->getIterator();
+            Docente * d;
+            while(i->hasCurrent())
+            {
+                d = (Docente *) i->getCurrent();
+                std::cout << d->getNombre() << "--------" << d->getEmail()<< std::endl;
+                i->next();
+            }
+            std::cout << "\nIngrese email";
+            std::cin >> email;
+            d = SeleccionDocente(email);
+            if(d!=NULL)
+            {
+                std::cout << "\nElija el tipo de asignacion: \n\e[0;92m1)\e[0m Teorico\n\e[0;92m2)\e[0m Practico\n\e[0;92m3)\e[0m Monitoreo\n";
+                std::cin >> asig;
+                switch (asig)
+                {
+                case TEORICO:
+                {
+                    tipo = Tipo::TEORICO;
+                    break;
+                }
+                case PRACTICO:
+                {
+                    tipo = Tipo::PRACTICO;
+                    break;
+                }
+                case MONITOREO:
+                {
+                    tipo = Tipo::MONITOREO;
+                    break;
+                }
+                default:
+                {
+                    throw std::invalid_argument("\e[0;31mAsignacion invalida\e[0m");
+                    break;
+                }
+                }
+                std::cout << "\nDesea confirmar? \n1-Si\n2-No";
+                std::cin >> op;
+                switch (op)
+                {
+                case 1:
+                {
+                    Asignacion *a = d->crearAsignacion(tipo, id);
+                    d->setAsignacion(a, k);
+                    std::cout << "\nDocente Asignado";
+                    break;
+                }
+                case 2:
+                {
+                    delete d;
+                    delete docs;
+                    std::cout << "\nVolviendo al menu principal";
+                    break;
+                }
+                default:
+                    throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                    break;
+                }
+            }
+            else
+            {
+                throw std::invalid_argument("\e[0;31mEl usuario ingresado no existe.\e[0m");
+            }
+        }
+        else
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura ingresada no existe.\e[0m");
+        }
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
+}
 
+void Sistema::ListarAsignaturas()
+{
+    IIterator *i = this->asignaturas->getIterator();
+    //ICollection *asig = new List;
+    Asignatura * a;
+    while(i->hasCurrent())
+    {
+        a = (Asignatura *) i->getCurrent();
+        std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
+        i->next();
+    }
+
+}
+
+Asignatura *Sistema::SeleccionAsignatura(int id)
+{
+    IKey *k = new Integer(id);
+    Asignatura * asig = (Asignatura *) this->asignaturas->find(k);
+    return asig;
+}
+
+Docente *Sistema::SeleccionDocente(std::string email)
+{
+    IKey *k = new String(email);
+    if(this->usuarios->member(k))
+    {
+        Docente * doc = (Docente *) this->usuarios->find(k);
+        return doc;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
+{
+    IIterator *i = this->usuarios->getIterator();
+    Usuario *u;
+    ICollection *docs = new List;
+    while(i->hasCurrent())
+    {
+        u = (Usuario *) i->getCurrent();
+        if (dynamic_cast<Docente *>(u))
+        {
+            Docente *d = new Docente;
+            d = dynamic_cast<Docente *>(d);
+            if(!d->estaAsignado(id))
+            {
+                docs->add(d);
+            }
+        }
+        i->next();
+    }
+    return docs;
+
+}
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)
 {
     std::time_t t = std::time(0);

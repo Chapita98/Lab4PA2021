@@ -2,9 +2,10 @@
 Asignacion::Asignacion() {}
 
 
-Asignacion::Asignacion(Tipo _tipo)
+Asignacion::Asignacion(Tipo _tipo, int _idAsignatura)
 {
     this->tipo = _tipo;
+    this->idAsignatura = _idAsignatura;
 }
 
 Tipo Asignacion::getTipo()

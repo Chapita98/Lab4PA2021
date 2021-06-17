@@ -11,7 +11,7 @@ private:
 
 public:
     Asignacion();
-    Asignacion(Tipo _tipo);
+    Asignacion(Tipo _tipo, int _idAsignatura);
 
     Tipo getTipo();
 

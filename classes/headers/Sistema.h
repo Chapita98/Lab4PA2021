@@ -30,8 +30,12 @@ public:
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
 
-	/*void AsignacionDeDocentesAUnaAsignatura();
-	void EliminacionDeAsignatura();
+	void AsignacionDeDocentesAUnaAsignatura();
+	void ListarAsignaturas();
+	Asignatura *SeleccionAsignatura(int id);
+	ICollection *ListarDocentesNoAsignados(IKey *id);
+	Docente *SeleccionDocente(std::string email);
+	/*void EliminacionDeAsignatura();
 	void TiempoDeDictadoDeClases();
 	void ConfiguracionRelojInterno();
 	void InicioDeClase();
@@ -43,13 +47,12 @@ public:
 	void AsistenciaAClaseEnVivo();
 	void ReproduccionEnDiferido();
 	void AltaAsignatura();
-	void ListarAsignaturas();
+
 	void ListarClasesVivo(std::string email);
-	void ListarDocentesNoAsignados();
 	void ListarEstudiantesInscriptos();
 	void ListarMensajes(std::string idClase);
-	void SeleccionAsignatura(int id);
-	void SeleccionDocente(std::string email);
+
+
 	void SeleccionClase(int id);
 	void SeleccionEstudiante(int ci);
 	void CreaClase(std::string nombre, DtFecha fechaComienzo);
