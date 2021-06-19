@@ -440,6 +440,177 @@ ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
     return docs;
 
 }
+
+void Sistema::InicioDeClase()
+{
+    int id, op;
+    std::string email, nombre, emEs;
+    std::cout << "\nIngrese email"; //depende de si usamos un inicio de sesion ig
+    std::cin >> email;
+    Docente * doc = SeleccionDocente(email);
+    try
+    {
+        if(doc==NULL)
+        {
+            throw std::invalid_argument("\n\e[0;31mEl docente ingresado no existe.\n\e[0m");
+        }
+        ICollection *asig = new List;
+        asig = ListarAsignaturasAsignadas(doc);
+        IIterator *i = asig->getIterator();
+        Asignatura *as;
+        while(i->hasCurrent())
+        {
+            as = (Asignatura *) i->getCurrent();
+            std::cout << as->getNombre() << "--------" << as->getId()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese id";
+        std::cin >> id;
+        Integer *id2 = new Integer(id);
+        if(!asig->member(id2))
+        {
+            throw std::invalid_argument("\n\e[0;31mLa asignatura ingresada no esta asignada al docente.\n\e[0m");
+        }
+        as = SeleccionAsignatura(id);
+        std::cout << "\nIngrese nombre";
+        std::cin >> nombre;
+        //std::cout << "\nIngrese Fecha y hora de comienzo (dd/mm/aa/HH/MM)";/
+        Clase *c = as->crearClase(nombre, DtFecha(this->dia, this->mes, this->anio), doc->getAsignacion(id)->getTipo());
+        if(doc->getAsignacion(id)->getTipo() == Tipo::MONITOREO)
+        {
+            bool flag= true;
+            Monitoreo *m = new Monitoreo;
+            m = dynamic_cast<Monitoreo *>(c);
+            while(flag)
+            {
+                ICollection *es = new List;
+                es = ListarEstudiantesInscriptos(id);
+                IIterator *i = es->getIterator();
+                Estudiante * e;
+                while(i->hasCurrent())
+                {
+                    e = (Estudiante *) i->getCurrent();
+                    std::cout << e->getNombre() << "--------" << e->getEmail()<< std::endl;
+                    i->next();
+                }
+                std::cout << "\nIngrese email";
+                std::cin >> emEs;
+                IKey *k = new String(emEs);
+                e = (Estudiante *)this->usuarios->find(k);
+                if(es->member(e))
+                {
+                    m->setEstudiante(e);
+                }
+                else
+                {
+                    std::cout << "\nEmail ingresado no es correcto";
+                }
+                std::cout << "\nDesea seguir ingresando estudiantes?";
+                std::cin >> op;
+                switch(op)
+                {
+                case 1:
+                {
+                    flag = true;
+                    break;
+                }
+                case 2:
+                {
+                    flag = false;
+                    break;
+                }
+                default:
+                    throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
+                }
+            }
+            //mostrar clase con outstream
+
+        }
+        if(doc->getAsignacion(id)->getTipo() == Tipo::TEORICO)
+        {
+            Teorico *t = new Teorico;
+            t = dynamic_cast<Teorico *>(c);
+            //mostrar clase con outstream
+        }
+        if(doc->getAsignacion(id)->getTipo() == Tipo::PRACTICO)
+        {
+            Practico *p = new Practico;
+            p = dynamic_cast<Practico *>(c);
+            //mostrar clase con outstream
+        }
+        std::cout << "\nDesea confirmar? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                doc->setClase(c);
+                as->setClase(c);
+                std::cout << "\nClase iniciada";
+                break;
+            }
+            case 2:
+            {
+                delete c;
+                std::cout << "\nVolviendo al menu principal";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                break;
+        }
+
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
+
+}
+
+ICollection *Sistema::ListarAsignaturasAsignadas(Docente *d)
+{
+    ICollection *as = NULL ;
+    as = d->getAsignaturas();
+    IIterator *i = as->getIterator();
+    Asignatura *a;
+    ICollection *asig = new List;
+    IKey *k = new Integer(0);
+    while(i->hasCurrent())
+    {
+        k = (Integer *)i->getCurrent();
+        a = (Asignatura *) this->asignaturas->find(k);
+        asig->add(a);
+        i->next();
+    }
+    return asig;
+}
+
+ICollection *Sistema::ListarEstudiantesInscriptos(int id)
+{
+    IIterator *i = this->usuarios->getIterator();
+    Usuario *u;
+    ICollection *es = new List;
+    while(i->hasCurrent())
+    {
+        u = (Usuario *) i->getCurrent();
+        if (dynamic_cast<Estudiante *>(u))
+        {
+            Estudiante *e = new Estudiante;
+            e = dynamic_cast<Estudiante *>(u);
+            if(e->estaInscripto(id))
+            {
+                es->add(e);
+            }
+        }
+        i->next();
+    }
+    return es;
+}
+
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)
 {
     std::time_t t = std::time(0);

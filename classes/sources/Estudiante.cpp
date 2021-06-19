@@ -22,4 +22,24 @@ void Estudiante::setCi(int _ci)
     this->ci = _ci;
 }
 
+bool Estudiante::estaInscripto(int id)
+{
+    if(!this->asignaturas->isEmpty())
+    {
+        IKey *k = new Integer(id);
+        if(this->asignaturas->find(k))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+}
 Estudiante::~Estudiante() {}

@@ -3,6 +3,7 @@
 #include "./Usuario.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
 #include "./../../ICollection/interfaces/IDictionary.h"
+#include "./../../ICollection/Integer.h"
 class Usuario;
 
 class Estudiante : public Usuario
@@ -22,6 +23,7 @@ public:
 
 	void setCi(int _ci);
 
+    bool estaInscripto(int id);
 	virtual ~Estudiante();
 };
 

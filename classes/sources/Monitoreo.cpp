@@ -1,7 +1,7 @@
 #include "./../headers/Monitoreo.h"
 Monitoreo::Monitoreo() {}
 
-Monitoreo::Monitoreo(int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin) : Clase(_id, _video, _nombre, _fechaCom, _fechaFin)
+Monitoreo::Monitoreo(int _id, std::string _nombre, DtFecha _fechaCom) : Clase(_id, _nombre, _fechaCom)
 {
 
 }
@@ -12,9 +12,9 @@ Estudiante *Monitoreo::getEstudiante(int i)
 }
 
 
-void Monitoreo::setEstudiante(Estudiante *_estudiante, int i) // i tendria el ultimo lugar del arreglo
+void Monitoreo::setEstudiante(Estudiante *_estudiante)
 {
-    //this->estudiantes[i] = _estudiante;
+    this->estudiantes->add(_estudiante);
 }
 
 Monitoreo::~Monitoreo() {}

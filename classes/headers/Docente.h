@@ -2,7 +2,9 @@
 #define DOCENTE_H
 #include "./Usuario.h"
 #include "./Asignacion.h"
+#include "./Clase.h"
 #include "./../../ICollection/interfaces/IDictionary.h"
+#include "./../../ICollection/interfaces/ICollection.h"
 
 class Usuario;
 
@@ -20,12 +22,16 @@ public:
 
 
     std::string getInstituto();
+    ICollection *getAsignaturas();
+    Asignacion *getAsignacion(int id);
 
     void setInstituto(std::string _instituto);
     void setAsignacion(Asignacion *a, IKey *k);
+    void setClase(Clase *c);
 
     bool estaAsignado(IKey *id);
     Asignacion *crearAsignacion(Tipo tipo, int idAsignatura);
+
 
     virtual ~Docente();
 };

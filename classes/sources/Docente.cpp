@@ -16,7 +16,27 @@ std::string Docente::getInstituto()
     return this->instituto;
 }
 
+ICollection *Docente::getAsignaturas()
+{
+    IIterator *i = this->asignaciones->getIterator();
+    Integer *k;
+    Asignacion *as;
+    ICollection *a = NULL;
+    while(i->hasCurrent())
+    {
+        as = (Asignacion *) i->getCurrent();
+        k = as->getAsignatura();
+        a->add(k);
+        i->next();
+    }
+    return a;
+}
 
+Asignacion *Docente::getAsignacion(int id)
+{
+    IKey *k = new Integer(id);
+    return (Asignacion *)this->asignaciones->find(k);
+}
 void Docente::setInstituto(std::string _instituto)
 {
     this->instituto = _instituto;
@@ -24,6 +44,12 @@ void Docente::setInstituto(std::string _instituto)
 void Docente::setAsignacion(Asignacion *a, IKey *id)
 {
         this->asignaciones->add(id, a);
+}
+
+void Docente::setClase(Clase *c)
+{
+    IKey *i = new Integer(c->getId());
+    this->clases->add(i, c);
 }
 
 bool Docente::estaAsignado(IKey *id)

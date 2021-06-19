@@ -35,10 +35,14 @@ public:
 	Asignatura *SeleccionAsignatura(int id);
 	ICollection *ListarDocentesNoAsignados(IKey *id);
 	Docente *SeleccionDocente(std::string email);
+	void InicioDeClase();
+	ICollection *ListarAsignaturasAsignadas(Docente *d);
+	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
+	ICollection *ListarEstudiantesInscriptos(int id);
 	/*void EliminacionDeAsignatura();
 	void TiempoDeDictadoDeClases();
 	void ConfiguracionRelojInterno();
-	void InicioDeClase();
+
 	void FinalizacionDeClase();
 	void TiempoDeAsistenciaAClase();
 	void ListadoDeClases();
@@ -55,7 +59,6 @@ public:
 
 	void SeleccionClase(int id);
 	void SeleccionEstudiante(int ci);
-	void CreaClase(std::string nombre, DtFecha fechaComienzo);
 	void CreaClase(std::string nombre, DtFecha fechaComienzo, List estudiantes);//maybe
 	void CrearMensaje(std::string texto, int idRespuesta);
 	void CrearMensaje(std::string texto);

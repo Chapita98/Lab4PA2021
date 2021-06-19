@@ -1,13 +1,11 @@
 #include "../headers/Clase.h"
 Clase::Clase() {}
 
-Clase::Clase(int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin)
+Clase::Clase(int _id, std::string _nombre, DtFecha _fechaCom)
 {
 	this->id = _id;
-	this->video = _video;
 	this->nombre = _nombre;
 	this->fechaCom = _fechaCom;
-	this->fechaFin = _fechaFin;
 }
 
 int Clase::getId()

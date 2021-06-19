@@ -13,7 +13,11 @@ Tipo Asignacion::getTipo()
     return this->tipo;
 }
 
-
+Integer *Asignacion::getAsignatura()
+{
+    Integer *i = new Integer(this->idAsignatura);
+    return i;
+}
 void Asignacion::setTipo(Tipo _tipo)
 {
     this->tipo = _tipo;

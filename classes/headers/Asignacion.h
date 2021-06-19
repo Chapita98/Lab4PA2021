@@ -2,6 +2,7 @@
 #define ASIGNACION_H
 #include "Tipo.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
+#include "./../../ICollection/Integer.h"
 
 class Asignacion : public ICollectible
 {
@@ -14,6 +15,7 @@ public:
     Asignacion(Tipo _tipo, int _idAsignatura);
 
     Tipo getTipo();
+    Integer *getAsignatura();
 
     void setTipo(Tipo _tipo);
 

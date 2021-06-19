@@ -6,7 +6,7 @@ Teorico::Teorico(int _asistentes)
     this->asistentes = _asistentes;
 }
 
-Teorico::Teorico(int _asistentes, int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin) : Clase(_id, _video, _nombre, _fechaCom, _fechaFin)
+Teorico::Teorico(int _asistentes, int _id, std::string _nombre, DtFecha _fechaCom) : Clase(_id, _nombre, _fechaCom)
 {
     this->asistentes = _asistentes;
 }

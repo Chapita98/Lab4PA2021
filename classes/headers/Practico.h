@@ -9,7 +9,7 @@ private:
 
 public:
 	Practico();
-	Practico(int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin);
+	Practico(int _id, std::string _nombre, DtFecha _fechaCom);
 
 	virtual ~Practico();
 };

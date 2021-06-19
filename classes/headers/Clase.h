@@ -19,7 +19,7 @@ private:
 
 public:
 	Clase();
-	Clase(int _id, std::string _video, std::string _nombre, DtFecha _fechaCom, DtFecha _fechaFin);
+	Clase(int _id, std::string _nombre, DtFecha _fechaCom);
 
 	int getId();
 	std::string getVideo();
