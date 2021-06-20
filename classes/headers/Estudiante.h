@@ -1,6 +1,7 @@
 #ifndef ESTUDIANTE_H
 #define ESTUDIANTE_H
 #include "./Usuario.h"
+#include "./Asignatura.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
 #include "./../../ICollection/interfaces/IDictionary.h"
 #include "./../../ICollection/Integer.h"

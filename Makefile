@@ -1,16 +1,10 @@
 OBJETOS = Asignacion.o Asignatura.o AsistenciaDiferida.o AsistenciaOnline.o Clase.o \
-Usuario.o Docente.o Estudiante.o Monitoreo.o Practico.o Sistema.o Teorico.o \
+Usuario.o Docente.o Estudiante.o Monitoreo.o Practico.o Sistema.o Teorico.o Mensaje.o ISistema.o \
 DtClase.o DtFecha.o DtMonitoreo.o DtPractico.o DtTeorico.o main.o \
-List.o ListIterator.o ListNode.o OrderedDictionary.o OrderedDictionaryEntry.o \
+List.o ListIterator.o ListNode.o OrderedDictionary.o OrderedKey.o OrderedDictionaryEntry.o \
 ICollectible.o ICollection.o IDictionary.o IIterator.o IKey.o Integer.o String.o 
 
-DEF = ./classes/headers/Clase.h ./classes/headers/Asignacion.h ./classes/headers/Asignatura.h ./classes/headers/AsistenciaDiferida.h \
-./classes/headers/AsistenciaOnline.h ./classes/headers/Tipo.h ./classes/headers/Usuario.h ./classes/headers/Docente.h \
-./classes/headers/Estudiante.h ./classes/headers/Monitoreo.h ./classes/headers/Fabrica.h ./classes/headers/Practico.h ./classes/headers/Sistema.h ./classes/headers/ISistema.h \
-./ICollection/collections/List.h ./ICollection/collections/ListIterator.h ./ICollection/collections/ListNode.h \
-./ICollection/collections/OrderedDictionary.h ./ICollection/collections/OrderedDictionaryEntry.h \
-./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/ICollection.h ./ICollection/interfaces/IDictionary.h \
-./ICollection/interfaces/IIterator.h ./ICollection/interfaces/IKey.h ./ICollection/Integer.h ./ICollection/String.h 
+DEF = ./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/IKey.h ./ICollection/interfaces/IIterator.h ./ICollection/interfaces/ICollection.h ./ICollection/interfaces/IDictionary.h ./ICollection/interfaces/OrderedKey.h ./ICollection/collections/OrderedDictionaryEntry.h ./ICollection/collections/ListNode.h ./ICollection/collections/List.h ./ICollection/collections/ListIterator.h ./ICollection/collections/OrderedDictionary.h ./ICollection/Integer.h ./ICollection/String.h ./classes/headers/Tipo.h ./datatypes/headers/DtFecha.h ./classes/headers/Usuario.h ./classes/headers/Asignacion.h ./classes/headers/AsistenciaDiferida.h ./classes/headers/AsistenciaOnline.h ./classes/headers/Mensaje.h ./classes/headers/Clase.h ./classes/headers/Docente.h ./classes/headers/Practico.h ./classes/headers/Teorico.h ./classes/headers/Monitoreo.h ./classes/headers/Asignatura.h ./classes/headers/Estudiante.h ./classes/headers/DtClase.h ./classes/headers/DtMonitoreo.h ./classes/headers/DtPractico.h ./classes/headers/DtTeorico.h ./classes/headers/ISistema.h ./classes/headers/Sistema.h ./classes/headers/Fabrica.h
 
 CC = g++
 OPCIONES = -c -Wall
@@ -29,8 +23,11 @@ Practico.o: ./classes/headers/Practico.h ./classes/sources/Practico.cpp
 Teorico.o: ./classes/headers/Teorico.h ./classes/sources/Teorico.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Teorico.cpp
 
-Sistema.o: ./classes/headers/Sistema.h ./classes/sources/Sistema.cpp ./classes/headers/ISistema.h
+Sistema.o: ./classes/headers/Sistema.h ./classes/sources/Sistema.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Sistema.cpp
+
+ISistema.o: ./classes/headers/ISistema.h ./classes/sources/ISistema.cpp
+	$(CC) $(OPCIONES) ./classes/sources/ISistema.cpp
 
 Docente.o: ./classes/headers/Docente.h ./classes/sources/Docente.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Docente.cpp
@@ -41,7 +38,7 @@ Usuario.o: ./classes/headers/Usuario.h ./classes/sources/Usuario.cpp
 Estudiante.o: ./classes/headers/Estudiante.h ./classes/sources/Estudiante.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Estudiante.cpp
 
-Monitoreo.o: ./classes/headers/Monitoreo.h ./classes/sources/Monitoreo.cpp
+Monitoreo.o: ./classes/headers/Monitoreo.h ./classes/headers/Estudiante.h ./classes/sources/Monitoreo.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Monitoreo.cpp
 
 Asignatura.o: ./classes/headers/Asignatura.h ./classes/sources/Asignatura.cpp
@@ -52,6 +49,9 @@ Asignacion.o: ./classes/headers/Asignacion.h ./classes/sources/Asignacion.cpp ./
 
 Clase.o: ./classes/headers/Clase.h ./classes/sources/Clase.cpp
 	$(CC) $(OPCIONES) ./classes/sources/Clase.cpp
+
+Mensaje.o: ./classes/headers/Mensaje.h ./classes/sources/Mensaje.cpp
+	$(CC) $(OPCIONES) ./classes/sources/Mensaje.cpp
 
 AsistenciaDiferida.o: ./classes/headers/AsistenciaDiferida.h ./classes/sources/AsistenciaDiferida.cpp
 	$(CC) $(OPCIONES) ./classes/sources/AsistenciaDiferida.cpp
@@ -88,6 +88,9 @@ OrderedDictionary.o: ./ICollection/collections/OrderedDictionary.h ./ICollection
 
 OrderedDictionaryEntry.o: ./ICollection/collections/OrderedDictionaryEntry.h ./ICollection/collections/OrderedDictionaryEntry.cpp
 	$(CC) $(OPCIONES) ./ICollection/collections/OrderedDictionaryEntry.cpp
+
+OrderedKey.o: ./ICollection/interfaces/OrderedKey.h ./ICollection/interfaces/OrderedKey.cpp
+	$(CC) $(OPCIONES) ./ICollection/interfaces/OrderedKey.cpp
 
 ICollectible.o: ./ICollection/interfaces/ICollectible.h ./ICollection/interfaces/ICollectible.cpp
 	$(CC) $(OPCIONES) ./ICollection/interfaces/ICollectible.cpp
