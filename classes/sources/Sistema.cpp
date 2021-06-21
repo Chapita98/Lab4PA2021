@@ -1,5 +1,8 @@
 #include "./../headers/Sistema.h"
-Sistema::Sistema() {}
+Sistema::Sistema() {
+    this->usuarios = (IDictionary *) new List;
+    this->asignaturas = (IDictionary * ) new List;
+}
 
 void Sistema::menuCaso1()
 {
