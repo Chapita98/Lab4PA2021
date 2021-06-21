@@ -10,6 +10,7 @@ private:
 	IDictionary * usuarios;
 	IDictionary * asignaturas;
 	int dia, mes, anio;
+	Usuario *actual;
 public:
 	Sistema();
 
@@ -24,6 +25,7 @@ public:
 	void obtenerFechaDelSistema(int &dia, int &mes, int &anio);
 	void fechaAutomatica();
 	void mostrarFecha(DtFecha fecha);
+	void InicioSesion(std::string email, std::string contrasenia, int i);
 
 	void AltaDeUsuario();
 	void AltaDeAsignatura();

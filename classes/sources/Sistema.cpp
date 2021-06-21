@@ -1,7 +1,7 @@
 #include "./../headers/Sistema.h"
 Sistema::Sistema() {
-    this->usuarios = (IDictionary *) new List;
-    this->asignaturas = (IDictionary * ) new List;
+    this->usuarios = new OrderedDictionary;
+    this->asignaturas = new OrderedDictionary;
 }
 
 void Sistema::menuCaso1()
@@ -30,7 +30,7 @@ void Sistema::menuCaso1()
                 }
                 case 3: //Asignación de docentes a una asignatura
                 {
-                    //AsignacionDeDocentesAUnaAsignatura();
+                    AsignacionDeDocentesAUnaAsignatura();
                     break;
                 }
                 case 4: //Eliminación de asignatura
@@ -67,20 +67,26 @@ void Sistema::menuCaso1()
 void Sistema::menuCaso2()
 {
     int opcionUsuario;
+    std::string email, contrasenia;
     bool bandera = true;
-    while (bandera == true)
+    std::cout << "\nIngrese email: ";
+    std::cin >> email;
+    std::cout << "\nIngrese contraseña: ";
+    std::cin >> contrasenia;
+    try
     {
-        Sistema::imprimirMenuDocente();
-        std::cin >> opcionUsuario;
-        std::cout << "\e[0m";
-        std::cin.clear();
-        try
+        InicioSesion(email, contrasenia, 2);
+        while (bandera == true)
         {
+            Sistema::imprimirMenuDocente();
+            std::cin >> opcionUsuario;
+            std::cout << "\e[0m";
+            std::cin.clear();
             switch (opcionUsuario)
             {
                 case 1: //Inicio de clase
                 {
-                    //InicioDeClase();
+                    InicioDeClase();
                     break;
                 }
                 case 2: //Finalización de clase
@@ -112,10 +118,10 @@ void Sistema::menuCaso2()
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
             }
         }
-        catch (std::invalid_argument &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cerr << e.what() << std::endl;
     }
 }
 
@@ -123,14 +129,20 @@ void Sistema::menuCaso3()
 {
     int opcionUsuario;
     bool bandera = true;
-    while (bandera == true)
+    std::string email, contrasenia;
+    std::cout << "\nIngrese email: ";
+    std::cin >> email;
+    std::cout << "\nIngrese contraseña: ";
+    std::cin >> contrasenia;
+    try
     {
-        Sistema::imprimirMenuEstudiante();
-        std::cin >> opcionUsuario;
-        std::cout << "\e[0m";
-        std::cin.clear();
-        try
+        while (bandera == true)
         {
+            InicioSesion(email, contrasenia, 1);
+            Sistema::imprimirMenuEstudiante();
+            std::cin >> opcionUsuario;
+            std::cout << "\e[0m";
+            std::cin.clear();
             switch (opcionUsuario)
             {
                 case 1: //Envío de mensaje
@@ -162,10 +174,10 @@ void Sistema::menuCaso3()
                 throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
             }
         }
-        catch (std::invalid_argument &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cerr << e.what() << std::endl;
     }
 }
 
@@ -174,6 +186,54 @@ void Sistema::menuCaso4()
     // INGRESO DATOS DE PRUEBA
 }
 
+void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
+{
+    IKey *k = new String(email);
+    if(i == 1)
+    {
+        if(!this->usuarios->member(k))
+        {
+            throw std::invalid_argument("\e[0;31mEl email ingresado no es correcto.\e[0m");
+        }
+        Usuario * u = (Usuario *)this->usuarios->find(k);
+        if (dynamic_cast<Estudiante *>(u))
+        {
+            Estudiante *e = new Estudiante;
+            e = dynamic_cast<Estudiante *>(u);
+            if(e->getContrasenia().compare(contrasenia) != 0)
+            {
+                throw std::invalid_argument("\e[0;31mLa contraseña ingresada no es correcta.\e[0m");
+            }
+            this->actual = e;
+        }
+        else
+        {
+            throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un estudiante.\e[0m");
+        }
+    }
+    if(i == 2)
+    {
+        if(!this->usuarios->member(k))
+        {
+            throw std::invalid_argument("\e[0;31mEl email ingresado no es correcto.\e[0m");
+        }
+        Usuario * u = (Usuario *)this->usuarios->find(k);
+        if (dynamic_cast<Docente *>(u))
+        {
+            Docente *d = new Docente;
+            d = dynamic_cast<Docente *>(u);
+            if(d->getContrasenia().compare(contrasenia) != 0)
+            {
+                throw std::invalid_argument("\e[0;31mLa contraseña ingresada no es correcta.\e[0m");
+            }
+            this->actual = d;
+        }
+        else
+        {
+            throw std::invalid_argument("\e[0;31mEl Usuario ingresado no es un docente.\e[0m");
+        }
+    }
+}
 
 void Sistema::AltaDeUsuario(){
     std::string instituto, nombre, email, contrasenia, url;
@@ -204,6 +264,7 @@ void Sistema::AltaDeUsuario(){
             case 2:
             {
                 std::cout << "\nIngrese instituto: ";
+                std::cin >> instituto;
                 Sistema::AltaDocente(instituto, nombre, email, contrasenia, url);
                 break;
             }
@@ -231,7 +292,7 @@ void Sistema::AltaEstudiante(int ci, std::string nombre, std::string email, std:
         {
             case 1:
             {
-                IKey *k = new Integer (ci);
+                IKey *k = new String(email);
                 usuarios->add(k, e);
                 std::cout << "\nUsuario Agregado";
                 break;
@@ -261,8 +322,8 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
     {
         case 1:
         {
-            IKey *k = new String (email);
-            usuarios->add(k, d);
+            IKey *k = new String(email);
+            this->usuarios->add(k, d);
             std::cout << "\nUsuario Agregado";
             break;
         }
@@ -432,7 +493,7 @@ ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
         if (dynamic_cast<Docente *>(u))
         {
             Docente *d = new Docente;
-            d = dynamic_cast<Docente *>(d);
+            d = dynamic_cast<Docente *>(u);
             if(!d->estaAsignado(id))
             {
                 docs->add(d);
