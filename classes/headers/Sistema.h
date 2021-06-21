@@ -29,18 +29,25 @@ public:
 
 	void AltaDeUsuario();
 	void AltaDeAsignatura();
+	void AsignacionDeDocentesAUnaAsignatura();
+    void InicioDeClase();
+    void InscripcionALasAsignaturas();
+
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
-
-	void AsignacionDeDocentesAUnaAsignatura();
 	void ListarAsignaturas();
-	Asignatura *SeleccionAsignatura(int id);
+	ICollection *ListarAsignaturasNoInscriptas();
+	ICollection *ListarAsignaturasAsignadas(Docente *d);
+	ICollection *ListarEstudiantesInscriptos(int id);
 	ICollection *ListarDocentesNoAsignados(IKey *id);
 	Docente *SeleccionDocente(std::string email);
-	void InicioDeClase();
-	ICollection *ListarAsignaturasAsignadas(Docente *d);
+	Asignatura *SeleccionAsignatura(int id);
+
+
 	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
-	ICollection *ListarEstudiantesInscriptos(int id);
+
+
+
 	/*void EliminacionDeAsignatura();
 	void TiempoDeDictadoDeClases();
 	void ConfiguracionRelojInterno();
@@ -49,7 +56,6 @@ public:
 	void TiempoDeAsistenciaAClase();
 	void ListadoDeClases();
 	void EnvioDeMensaje();
-	void InscripcionALasAsignaturas();
 	void AsistenciaAClaseEnVivo();
 	void ReproduccionEnDiferido();
 	void AltaAsignatura();
