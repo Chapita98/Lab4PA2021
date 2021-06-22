@@ -30,7 +30,7 @@ void Sistema::menuCaso1()
                 }
                 case 3: //Asignación de docentes a una asignatura
                 {
-                    AsignacionDeDocentesAUnaAsignatura();
+                    Sistema::AsignacionDeDocentesAUnaAsignatura();
                     break;
                 }
                 case 4: //Eliminación de asignatura
@@ -40,7 +40,7 @@ void Sistema::menuCaso1()
                 }
                 case 5: //Tiempo de dictado de clases
                 {
-                    //TiempoDeDictadoDeClases();
+                    Sistema::TiempoDeDictadoDeClases();
                     break;
                 }
                 case 6: //Tiempo de dictado de clases
@@ -475,7 +475,6 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
 void Sistema::ListarAsignaturas()
 {
     IIterator *i = this->asignaturas->getIterator();
-    //ICollection *asig = new List;
     Asignatura * a;
     while(i->hasCurrent())
     {
@@ -483,7 +482,6 @@ void Sistema::ListarAsignaturas()
         std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
         i->next();
     }
-
 }
 
 Asignatura *Sistema::SeleccionAsignatura(int id)
@@ -958,6 +956,21 @@ void Sistema::FinalizacionDeClase()
         std::cout << "\nError: " << e.what() << std::endl;
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
     }
+}
+
+void Sistema::TiempoDeDictadoDeClases()
+{
+    IIterator *i = this->asignaturas->getIterator();
+    IIterator *j = this->asignaturas->getIterator();
+    Asignatura * a;
+    Clase * c;
+    while(i->hasCurrent())
+    {
+        a = (Asignatura *) i->getCurrent();
+        std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
+        i->next();
+    }
+
 }
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)

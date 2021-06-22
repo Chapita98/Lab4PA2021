@@ -6,6 +6,9 @@
 class DtFecha : public ICollectible
 {
 private:
+    int segundo;
+    int minuto;
+    int hora;
     int dia;
     int mes;
     int anio;
@@ -13,7 +16,10 @@ private:
 
 public:
     DtFecha();
-    DtFecha(int dia, int mes, int anio);
+    DtFecha(int dia, int mes, int anio,int segundo,int minuto,int hora);
+    int getSegundo();
+    int getMinuto();
+    int getHora();
     int getDia();
     int getMes();
     int getAnio();

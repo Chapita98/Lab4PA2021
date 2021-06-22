@@ -51,9 +51,9 @@ public:
 
 
 
-	/*void EliminacionDeAsignatura();
+	//void EliminacionDeAsignatura();
 	void TiempoDeDictadoDeClases();
-	void ConfiguracionRelojInterno();
+	/*void ConfiguracionRelojInterno();
 
 
 	void TiempoDeAsistenciaAClase();

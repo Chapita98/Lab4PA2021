@@ -1,14 +1,30 @@
 #include "../headers/DtFecha.h"
 DtFecha::DtFecha() {}
 
-DtFecha::DtFecha(int dia, int mes, int anio)
+DtFecha::DtFecha(int dia, int mes, int anio,int segundo,int minuto,int hora)
 {
+	this->segundo = segundo;
+	this->minuto = minuto;
+	this->hora = hora;
 	this->dia = dia;
 	this->mes = mes;
 	this->anio = anio;
 }
 
 // ------- Getters ------ //
+int DtFecha::getSegundo()
+{
+	return this->segundo;
+}
+int DtFecha::getMinuto()
+{
+	return this->minuto;
+}
+int DtFecha::getHora()
+{
+	return this->hora;
+}
+
 int DtFecha::getDia()
 {
 	return this->dia;
