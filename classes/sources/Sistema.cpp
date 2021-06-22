@@ -378,6 +378,7 @@ void Sistema::AltaDeAsignatura()
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
     }
 }
+
 void Sistema::AsignacionDeDocentesAUnaAsignatura()
 {
     try
