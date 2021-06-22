@@ -1,11 +1,14 @@
 #include "./../headers/Asignatura.h"
 
-Asignatura::Asignatura() {}
+Asignatura::Asignatura() {
+    this->clases = new OrderedDictionary();
+}
 
 Asignatura::Asignatura(int _id, std::string _nombre)
 {
     this->id = _id;
     this->nombre = _nombre;
+    this->clases = new OrderedDictionary();
 }
 
 int Asignatura::getId()
@@ -18,6 +21,27 @@ std::string Asignatura::getNombre()
     return this->nombre;
 }
 
+IDictionary *Asignatura::getClases()
+{
+    return this->clases;
+}
+
+ICollection *Asignatura::getClasesDif()
+{
+    IIterator *i = this->clases->getIterator();
+    Clase *c;
+    ICollection *cl = new List;
+    while(i->hasCurrent())
+    {
+        c = (Clase *) i->getCurrent();
+        if(!c->estaEnVivo())
+        {
+            cl->add(c);
+        }
+        i->next();
+    }
+    return cl;
+}
 
 void Asignatura::setId(int _id)
 {
@@ -26,7 +50,8 @@ void Asignatura::setId(int _id)
 
 void Asignatura::setClase(Clase *c)
 {
-    this->clases->add(c);
+    IKey *k = new Integer(c->getId());
+    this->clases->add(k, c);
 }
 
 void Asignatura::setNombre(std::string _nombre)

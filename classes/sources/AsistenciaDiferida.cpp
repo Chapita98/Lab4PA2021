@@ -2,30 +2,39 @@
 
 // TODO DtFecha(_fechaCom, _fechaFin)
 
-AsistenciaDiferida::AsistenciaDiferida(DtFecha _fechaCom, DtFecha _fechaFin) //: _fecha(_fecha)
+AsistenciaDiferida::AsistenciaDiferida()
 {
-	this->fechaCom = fechaCom;
-	this->fechaFin = fechaFin;
+    this->fechaCom = new List;
+    this->fechaFin = new List;
 }
 
-DtFecha AsistenciaDiferida::*getFechaCom(int i)
+ICollection *AsistenciaDiferida::getFechaCom()
 {
-    //return this->fechaCom[i];
+    return this->fechaCom;
 }
 
-DtFecha AsistenciaDiferida::*getFechaFin(int i)
+ICollection *AsistenciaDiferida::getFechaFin()
 {
-    //return this->fechaFin[i];
+    return this->fechaFin;
 }
 
-void AsistenciaDiferida::setFechaCom(DtFecha &_fecha, int i) // i tendria el ultimo lugar del array
+int AsistenciaDiferida::getIdClase()
 {
-    //this->fechaCom[i]= _fecha;
+    return this->idClase;
 }
 
-void AsistenciaDiferida::setFechaFin(DtFecha &_fecha, int i) // i tendria el ultimo lugar del array
+void AsistenciaDiferida::setFechaCom(DtFecha *_fecha)
 {
-    //this->fechaFin[i]= _fecha;
+    this->fechaCom->add(_fecha);
+}
+
+void AsistenciaDiferida::setFechaFin(DtFecha *_fecha)
+{
+    this->fechaFin->add(_fecha);
+}
+void AsistenciaDiferida::setIdClase(int id)
+{
+    this->idClase = id;
 }
 
 AsistenciaDiferida::~AsistenciaDiferida() {}

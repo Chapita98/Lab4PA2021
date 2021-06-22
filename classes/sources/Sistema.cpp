@@ -699,6 +699,266 @@ ICollection *Sistema::ListarEstudiantesInscriptos(int id)
     return es;
 }
 
+void Sistema::InscripcionALasAsignaturas()
+{
+    try
+    {
+        bool flag = true;
+        int op, id;
+        while(flag)
+        {
+            ICollection *asig = new List;
+            asig = ListarAsignaturasNoInscriptas();
+            IIterator *i = asig->getIterator();
+            Asignatura *as;
+            while(i->hasCurrent())
+            {
+                as = (Asignatura *) i->getCurrent();
+                std::cout << as->getNombre() << "--------" << as->getId()<< std::endl;
+                i->next();
+            }
+            std::cout << "\nIngrese id";
+            std::cin >> id;
+            Integer *id2 = new Integer(id);
+            if(!asig->member(id2))
+            {
+                throw std::invalid_argument("\n\e[0;31mLa asignatura ingresada no es correcta.\n\e[0m");
+            }
+            as = SeleccionAsignatura(id);
+            std::cout << "\nDesea confirmar? ";
+            std::cout << "\n1-Si: ";
+            std::cout << "\n2-No: ";
+            std::cin >> op;
+            switch (op)
+            {
+                case 1:
+                {
+                    Estudiante *e = new Estudiante;
+                    e = dynamic_cast<Estudiante *>(this->actual);
+                    e->setAsignatura(as);
+                    break;
+                }
+                case 2:
+                {
+                    delete as;
+                    delete asig;
+                    std::cout << "\nVolviendo al menu principal";
+                    break;
+                }
+                default:
+                    throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                    break;
+            }
+
+            std::cout << "\nDesea seguir inscribiendose? ";
+            std::cout << "\n1-Si: ";
+            std::cout << "\n2-No: ";
+            std::cin >> op;
+            switch (op)
+            {
+                case 1:
+                {
+                    flag = true;
+                    break;
+                }
+                case 2:
+                {
+                    flag = false;
+                    break;
+                }
+                default:
+                    throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                    break;
+            }
+        }
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
+
+}
+
+ICollection *Sistema::ListarAsignaturasNoInscriptas()
+{
+    IIterator *i = this->asignaturas->getIterator();
+    Asignatura *a;
+    ICollection *asig = new List;
+    Estudiante *e = new Estudiante;
+    e = dynamic_cast<Estudiante *>(this->actual);
+    while(i->hasCurrent())
+    {
+        a = (Asignatura *) i->getCurrent();
+        if (!e->estaInscripto(a->getId()))
+        {
+            asig->add(a);
+        }
+        i->next();
+    }
+    return asig;
+}
+
+void Sistema::ReproduccionEnDiferido()
+{
+    try
+    {
+        int id, op;
+        ICollection *asig = new List;
+        asig = ListarAsignaturasNoInscriptas();
+        IIterator *i = asig->getIterator();
+        Asignatura *as;
+        while(i->hasCurrent())
+        {
+            as = (Asignatura *) i->getCurrent();
+            std::cout << as->getNombre() << "--------" << as->getId()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese id";
+        std::cin >> id;
+        IKey *k = new Integer(id);
+        as = (Asignatura *)asignaturas->find(k);
+        if(asig->member(as))
+        {
+            throw std::invalid_argument("\n\e[0;31mLa asignatura ingresada no es correcta.\n\e[0m");
+        }
+        as = SeleccionAsignatura(id);
+        ICollection *cl = new List;
+        cl = as->getClasesDif();
+        i = cl->getIterator();
+        Clase *c;
+        while(i->hasCurrent())
+        {
+            c = (Clase *) i->getCurrent();
+            std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese id";
+        std::cin >> id;
+        c = SeleccionClase(id, as);
+        std::cout << "Asignatura: " << as->getNombre() << "--------" << as->getId()<< std::endl;
+        std::cout << "Clase: " << c->getNombre() << "--------" << c->getId()<< std::endl;
+        std::cout << "\nDesea confirmar? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                Estudiante *e = new Estudiante;
+                e = dynamic_cast<Estudiante *>(this->actual);
+                DtFecha *f = new DtFecha(this->dia, this->mes, this->anio);
+                e->setAsisDif(id, f);
+                //mostrar mensajes de la clase
+                break;
+            }
+            case 2:
+            {
+                delete as;
+                delete asig;
+                delete cl;
+                delete c;
+                std::cout << "\nVolviendo al menu principal";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                    break;
+            }
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
+
+}
+
+Clase *Sistema::SeleccionClase(int id, Asignatura *a)
+{
+    IKey *k = new Integer(id);
+    IDictionary *cl = new OrderedDictionary;
+    cl = a->getClases();
+    Clase * c = (Clase *) cl->find(k);
+    return c;
+}
+
+ICollection *Sistema::ListarAsignaturasInscriptas()
+{
+    IIterator *i = this->asignaturas->getIterator();
+    Asignatura *a;
+    ICollection *asig = new List;
+    Estudiante *e = new Estudiante;
+    e = dynamic_cast<Estudiante *>(this->actual);
+    while(i->hasCurrent())
+    {
+        a = (Asignatura *) i->getCurrent();
+        if (e->estaInscripto(a->getId()))
+        {
+            asig->add(a);
+        }
+        i->next();
+    }
+    return asig;
+}
+
+void Sistema::FinalizacionDeClase()
+{
+    try
+    {
+        int id, op;
+        Docente *d = new Docente;
+        d = (Docente *)this->actual;
+        ICollection *cl = new List;
+        cl = d->getClasesVivo();
+        IIterator *i = cl->getIterator();
+        Clase *c;
+        while(i->hasCurrent())
+        {
+            c = (Clase *) i->getCurrent();
+            std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese id";
+        std::cin >> id;
+        if(!cl->member(d->getClase(id)))
+        {
+            throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+        }
+        //mostrar id, nombre, tipo y fecha inicio con outstream maybe
+        std::cout << "\nDesea confirmar? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                d->finalizarClase(id, DtFecha(this->dia, this->mes, this->anio));
+                break;
+            }
+            case 2:
+            {
+                delete d;
+                delete c;
+                delete cl;
+                std::cout << "\nVolviendo al menu principal";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                    break;
+            }
+
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
+}
+
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)
 {
     std::time_t t = std::time(0);

@@ -24,12 +24,15 @@ public:
     std::string getInstituto();
     ICollection *getAsignaturas();
     Asignacion *getAsignacion(int id);
+    ICollection *getClasesVivo();
+    Clase *getClase(int id);
 
     void setInstituto(std::string _instituto);
     void setAsignacion(Asignacion *a, IKey *k);
     void setClase(Clase *c);
 
     bool estaAsignado(IKey *id);
+    void finalizarClase(int id, DtFecha fecha);
     Asignacion *crearAsignacion(Tipo tipo, int idAsignatura);
 
 
