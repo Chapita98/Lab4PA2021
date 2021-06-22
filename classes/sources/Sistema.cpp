@@ -341,18 +341,42 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
 
 void Sistema::AltaDeAsignatura()
 {
-    /*std::string nombre;
-
+    std::string nombre;
+    int op, id;
     try
-    {   std::cout << "\nIngrese nombre";
+    {
+        std::cout << "\nIngrese el id de la asigtatura: ";
+        std::cin >> id;
+        std::cout << "\nIngrese nombre de la asigtatura: ";
         std::cin >> nombre;
-        AltaEstudiante(ci, nombre, email, contrasenia, url);
+        std::cout << "\nDesea confirmar? \n1-Si: \n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                Asignatura *a = new Asignatura(id, nombre);
+                IKey *k = new Integer(id);
+                this->asignaturas->add(k, a);
+                std::cout << "\nAsignatura agregada\n";
+                break;
+            }
+            case 2:
+            {
+                std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                break;
+        }
+        
     }
     catch (std::invalid_argument &e)
     {
         std::cout << "\nError: " << e.what() << std::endl;
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
-    }*/
+    }
 }
 void Sistema::AsignacionDeDocentesAUnaAsignatura()
 {
