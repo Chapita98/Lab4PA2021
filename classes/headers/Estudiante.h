@@ -2,6 +2,8 @@
 #define ESTUDIANTE_H
 #include "./Usuario.h"
 #include "./Asignatura.h"
+#include "./AsistenciaDiferida.h"
+#include "./AsistenciaOnline.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
 //#include "./../../ICollection/interfaces/IDictionary.h"
 #include "./../../ICollection/collections/OrderedDictionary.h"
@@ -22,11 +24,15 @@ public:
 
 
 	int getCi();
+	AsistenciaDiferida *getAsistenciaDif(int id);
 
 	void setCi(int _ci);
 	void setAsignatura(Asignatura *a);
+	void setAsisDif(int id, DtFecha *fecha);
 
     bool estaInscripto(int id);
+    AsistenciaDiferida crearAsisDif(int id, DtFecha *fechaCom);
+    AsistenciaOnline crearAsisOn(int id, DtFecha *fechaCom);
 	virtual ~Estudiante();
 };
 

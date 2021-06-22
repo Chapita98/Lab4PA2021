@@ -57,4 +57,17 @@ void Clase::setFechaFin(DtFecha &_fecha)
 {
 	this->fechaFin = _fecha;
 }
+
+bool Clase::estaEnVivo()
+{
+    if(this->video.empty())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 Clase::~Clase() {}

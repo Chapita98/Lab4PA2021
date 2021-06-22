@@ -22,6 +22,19 @@ int Estudiante::getCi()
     return this->ci;
 }
 
+AsistenciaDiferida * Estudiante::getAsistenciaDif(int id)
+{
+    IKey *k = new Integer(id);
+    if(this->asistenciasdif->member(k))
+    {
+        return (AsistenciaDiferida *)this->asistenciasdif->find(k);
+    }
+    else
+    {
+        return NULL;
+    }
+
+}
 
 void Estudiante::setCi(int _ci)
 {
@@ -32,6 +45,24 @@ void Estudiante::setAsignatura(Asignatura *a)
 {
     IKey *k = new Integer(a->getId());
     this->asignaturas->add(k, a);
+}
+
+void Estudiante::setAsisDif(int id, DtFecha *fecha)
+{
+    IKey *k = new Integer(id);
+    if(this->asistenciasdif->member(k))
+    {
+        AsistenciaDiferida *a = (AsistenciaDiferida *)this->asistenciasdif->find(k);
+        a->setFechaCom(fecha);
+    }
+    else
+    {
+        AsistenciaDiferida *a = new AsistenciaDiferida();
+        a->setFechaCom(fecha);
+        a->setIdClase(id);
+        this->asistenciasdif->add(k, a);
+    }
+
 }
 
 bool Estudiante::estaInscripto(int id)

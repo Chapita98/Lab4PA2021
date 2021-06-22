@@ -7,13 +7,17 @@
 #include "Tipo.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
 #include "./../../ICollection/interfaces/ICollection.h"
+#include "./../../ICollection/collections/OrderedDictionary.h"
+#include "./../../ICollection/Integer.h"
+#include "./../../ICollection/collections/List.h"
+
 
 class Asignatura : public ICollectible
 {
 private:
     int id;
     std::string nombre;
-    ICollection * clases;
+    IDictionary * clases;
 
 public:
     Asignatura();
@@ -21,6 +25,9 @@ public:
 
     int getId();
     std::string getNombre();
+    IDictionary *getClases();
+    ICollection *getClasesDif();
+    ICollection *getClasesVivo();
 
     void setId(int _id);
     void setNombre(std::string _nombre);

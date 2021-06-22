@@ -33,6 +33,8 @@ public:
 	void setFechaCom(DtFecha &_fechaCom);
 	void setFechaFin(DtFecha &_fechaFin);
 
+	bool estaEnVivo();
+
 	virtual ~Clase();
 };
 
