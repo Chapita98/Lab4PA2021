@@ -37,6 +37,30 @@ Asignacion *Docente::getAsignacion(int id)
     IKey *k = new Integer(id);
     return (Asignacion *)this->asignaciones->find(k);
 }
+
+ICollection *Docente::getClasesVivo()
+{
+    IIterator *i = this->clases->getIterator();
+    Clase *c;
+    ICollection *cl = new List;
+    while(i->hasCurrent())
+    {
+        c = (Clase *) i->getCurrent();
+        if (c->estaEnVivo())
+        {
+            cl->add(c);
+        }
+        i->next();
+    }
+    return cl;
+}
+
+Clase *Docente::getClase(int id)
+{
+    IKey *k = new Integer(id);
+    return (Clase *)this->clases->find(k);
+}
+
 void Docente::setInstituto(std::string _instituto)
 {
     this->instituto = _instituto;
@@ -62,6 +86,14 @@ bool Docente::estaAsignado(IKey *id)
     {
         return false;
     }
+}
+
+void Docente::finalizarClase(int id, DtFecha fecha)
+{
+    IKey *k = new Integer(id);
+    Clase *c;
+    c = (Clase *) this->clases->find(k);
+    c->finalizar(id+100, fecha);
 }
 
 Asignacion *Docente::crearAsignacion(Tipo tipo, int idAsignatura)

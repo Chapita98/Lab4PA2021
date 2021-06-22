@@ -3,8 +3,10 @@
 #include <string>
 #include "./../../datatypes/headers/DtFecha.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
-#include "./../../ICollection/interfaces/ICollection.h"
-#include "./../../ICollection/interfaces/IDictionary.h"
+//#include "./../../ICollection/interfaces/ICollection.h"
+//#include "./../../ICollection/interfaces/IDictionary.h"
+#include "./../../ICollection/collections/List.h"
+#include "./../../ICollection/collections/OrderedDictionary.h"
 
 class Clase : public ICollectible
 {
@@ -34,6 +36,7 @@ public:
 	void setFechaFin(DtFecha &_fechaFin);
 
 	bool estaEnVivo();
+	void finalizar(int url, DtFecha fecha);
 
 	virtual ~Clase();
 };

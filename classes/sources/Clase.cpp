@@ -1,11 +1,17 @@
 #include "../headers/Clase.h"
-Clase::Clase() {}
+Clase::Clase()
+{
+    this->asistencias = new List;
+	this->mensajes = new OrderedDictionary;
+}
 
 Clase::Clase(int _id, std::string _nombre, DtFecha _fechaCom)
 {
 	this->id = _id;
 	this->nombre = _nombre;
 	this->fechaCom = _fechaCom;
+	this->asistencias = new List;
+	this->mensajes = new OrderedDictionary;
 }
 
 int Clase::getId()
@@ -43,11 +49,6 @@ void Clase::setNombre(std::string _nombre)
 	this->nombre = _nombre;
 }
 
-void Clase::setVideo(std::string _video)
-{
-	this->video = _video;
-}
-
 void Clase::setFechaCom(DtFecha &_fecha)
 {
 	this->fechaCom = _fecha;
@@ -56,6 +57,11 @@ void Clase::setFechaCom(DtFecha &_fecha)
 void Clase::setFechaFin(DtFecha &_fecha)
 {
 	this->fechaFin = _fecha;
+}
+
+void Clase::setVideo(std::string _video)
+{
+    this->video = _video;
 }
 
 bool Clase::estaEnVivo()
@@ -68,6 +74,12 @@ bool Clase::estaEnVivo()
     {
         return false;
     }
+}
+
+void Clase::finalizar(int url, DtFecha fecha)
+{
+    this->video = url;
+    this->fechaFin = fecha;
 }
 
 Clase::~Clase() {}
