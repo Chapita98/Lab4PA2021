@@ -9,7 +9,7 @@ Monitoreo::Monitoreo(int _id, std::string _nombre, DtFecha _fechaCom) : Clase(_i
 
 Estudiante *Monitoreo::getEstudiante(int i)
 {
-   // return this->estudiantes[i];
+   //return this->estudiantes[i];
 }
 
 

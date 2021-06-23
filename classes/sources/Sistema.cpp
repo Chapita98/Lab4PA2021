@@ -40,7 +40,7 @@ void Sistema::menuCaso1()
                 }
                 case 5: //Tiempo de dictado de clases
                 {
-                    //Sistema::TiempoDeDictadoDeClases();
+                    Sistema::TiempoDeDictadoDeClases();
                     break;
                 }
                 case 6: //Tiempo de dictado de clases
@@ -1052,17 +1052,42 @@ void Sistema::EliminacionDeAsignatura()
 
 void Sistema::TiempoDeDictadoDeClases()
 {
-    IIterator *i = this->asignaturas->getIterator();
-    IIterator *j = this->asignaturas->getIterator();
-    Asignatura * a;
-    Clase * c;
-    while(i->hasCurrent())
+    int horasCom,minutosCom,segundosCom,horasFin,minutosFin,segundosFin,total;
+    try
     {
-        a = (Asignatura *) i->getCurrent();
-        std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
-        i->next();
-    }
+        Asignatura * a;
+        Clase * c;
+        IIterator *i = this->asignaturas->getIterator();
+        IIterator *j = a->getClases()->getIterator();
 
+        while(i->hasCurrent())
+        {
+            a = (Asignatura *) i->getCurrent();
+            std::cout << a->getNombre() << ":\n   ";
+            while(j->hasCurrent())
+            {
+                c = (Clase *) j->getCurrent();
+                
+                horasCom = c->getFechaCom().getHora() * 3600;
+                minutosCom = c->getFechaCom().getMinuto() * 60;
+                segundosCom = c->getFechaCom().getSegundo();
+
+                horasFin = c->getFechaFin().getHora() * 3600;
+                minutosFin = c->getFechaFin().getMinuto() * 60;
+                segundosFin = c->getFechaFin().getSegundo();
+
+                total = ((horasFin + minutosFin + segundosFin) - (horasCom + minutosCom + segundosCom));
+                std::cout << c->getNombre() << ": " << total << " minutos\n";
+                j->next();
+            }
+
+            i->next();
+        }
+    }
+    catch(std::out_of_range &e)
+    {
+        std::cerr << "No hay Asignaturas o clases: " << e.what() << std::endl;
+    }
 }
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)
