@@ -35,7 +35,7 @@ void Sistema::menuCaso1()
                 }
                 case 4: //Eliminación de asignatura
                 {
-                    //EliminacionDeAsignatura();
+                    Sistema::EliminacionDeAsignatura();
                     break;
                 }
                 case 5: //Tiempo de dictado de clases
@@ -1067,7 +1067,7 @@ void Sistema::TiempoDeDictadoDeClases()
             while(j->hasCurrent())
             {
                 c = (Clase *) j->getCurrent();
-                
+
                 horasCom = c->getFechaCom().getHora() * 3600;
                 minutosCom = c->getFechaCom().getMinuto() * 60;
                 segundosCom = c->getFechaCom().getSegundo();
@@ -1087,6 +1087,85 @@ void Sistema::TiempoDeDictadoDeClases()
     catch(std::out_of_range &e)
     {
         std::cerr << "No hay Asignaturas o clases: " << e.what() << std::endl;
+    }
+}
+
+void Sistema::AsistenciaAClaseEnVivo()
+{
+    try
+    {
+        int id, op;
+        ICollection *asig = new List;
+        asig = ListarAsignaturasInscriptas();
+        IIterator *i = asig->getIterator();
+        Asignatura *a;
+        while(i->hasCurrent())
+        {
+            a = (Asignatura *) i->getCurrent();
+            std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese id: ";
+        std::cin >> id;
+        a = SeleccionAsignatura(id);
+        if(!asig->member(a))
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+        }
+        ICollection *cl = new List;
+        cl = a->getClasesVivo();
+        i = cl->getIterator();
+        Clase *c;
+        while(i->hasCurrent())
+        {
+            c = (Clase *) i->getCurrent();
+            std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese id: ";
+        std::cin >> id;
+        c = SeleccionClase(id, a);
+        if(!cl->member(c))
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+        }
+        std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
+        std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+        std::cout << "\nDesea confirmar? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                Estudiante *e;
+                e = (Estudiante *) this->actual;
+                DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
+                AsistenciaOnline *aO = e->crearAsisOn(id, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
+                e->setAsisOn(id, aO);
+                c->setAsisOn(aO);
+                std::cout << "\nAsistencia guardada";
+                break;
+            }
+            case 2:
+            {
+                delete asig;
+                delete cl;
+                delete c;
+                delete a;
+                std::cout << "\nVolviendo al menu principal";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                break;
+        }
+
+    }
+    catch(std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
     }
 }
 

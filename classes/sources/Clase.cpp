@@ -2,7 +2,6 @@
 Clase::Clase()
 {
     this->asistenciaon = new List;
-    this->asistenciadif = new List;
 	this->mensajes = new OrderedDictionary;
 }
 
@@ -12,7 +11,6 @@ Clase::Clase(int _id, std::string _nombre, DtFecha _fechaCom)
 	this->nombre = _nombre;
 	this->fechaCom = _fechaCom;
 	this->asistenciaon = new List;
-	this->asistenciadif = new List;
 	this->mensajes = new OrderedDictionary;
 }
 
@@ -66,6 +64,11 @@ void Clase::setVideo(std::string _video)
     this->video = _video;
 }
 
+void Clase::setAsisOn(AsistenciaOnline *aO)
+{
+    this->asistenciaon->add(aO);
+}
+
 bool Clase::estaEnVivo()
 {
     if(this->video.empty())
@@ -86,16 +89,8 @@ void Clase::finalizar(int url, DtFecha fecha)
 
 void Clase::BorrarInstancias()
 {
-    IIterator *i = this->asistenciadif->getIterator();
-    AsistenciaDiferida *aD;
-    while(i->hasCurrent())
-    {
-        aD = (AsistenciaDiferida *) i->getCurrent();
-        this->asistenciadif->remove(aD);
-        delete aD;
-        i->next();
-    }
-    i = this->asistenciaon->getIterator();
+    delete this->asistenciadif;
+    IIterator *i = this->asistenciaon->getIterator();
     AsistenciaOnline *aO;
     while(i->hasCurrent())
     {

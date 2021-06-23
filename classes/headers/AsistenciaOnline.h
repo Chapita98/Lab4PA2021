@@ -12,13 +12,15 @@ private:
 
 public:
 	AsistenciaOnline();
-	AsistenciaOnline(DtFecha _fechaCom, DtFecha _fechaFin);
+	AsistenciaOnline(int idClase, DtFecha _fechaCom);
 
 	DtFecha getFechaCom();
 	DtFecha getFechaFin();
+	int getIdClase();
 
 	void setFechaCom(DtFecha &_fecha);
 	void setFechaFin(DtFecha &_fecha);
+	void setIdClase(int id);
 
  	virtual ~AsistenciaOnline();
 };

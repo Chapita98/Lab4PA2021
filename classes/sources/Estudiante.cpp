@@ -65,6 +65,13 @@ void Estudiante::setAsisDif(int id, DtFecha *fecha)
 
 }
 
+void Estudiante::setAsisOn(int id, AsistenciaOnline *a)
+{
+    IKey *k = new Integer(id);
+    this->asistenciason->add(k, a);
+
+}
+
 bool Estudiante::estaInscripto(int id)
 {
     if(!this->asignaturas->isEmpty())
@@ -84,6 +91,12 @@ bool Estudiante::estaInscripto(int id)
         return false;
     }
 
+}
+
+AsistenciaOnline *Estudiante::crearAsisOn(int id, DtFecha fechaCom)
+{
+    AsistenciaOnline *a = new AsistenciaOnline(id, fechaCom);
+    return a;
 }
 
 void Estudiante::BorrarAsignatura(int id)

@@ -20,7 +20,7 @@ private:
 	std::string nombre;
 	DtFecha fechaCom;
 	DtFecha fechaFin;
-	ICollection * asistenciadif;
+	AsistenciaDiferida *asistenciadif;
 	ICollection * asistenciaon;
 	IDictionary * mensajes;
 
@@ -39,6 +39,9 @@ public:
 	void setNombre(std::string _nombre);
 	void setFechaCom(DtFecha &_fechaCom);
 	void setFechaFin(DtFecha &_fechaFin);
+	void setAsisOn(AsistenciaOnline *aO);
+	void setAsisDif(DtFecha _fechaCom);
+	void finalizarAsistencia(DtFecha _fechafin);
 
 	bool estaEnVivo();
 	void finalizar(int url, DtFecha fecha);

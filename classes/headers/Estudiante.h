@@ -29,10 +29,11 @@ public:
 	void setCi(int _ci);
 	void setAsignatura(Asignatura *a);
 	void setAsisDif(int id, DtFecha *fecha);
+	void setAsisOn(int id, AsistenciaOnline *a);
 
     bool estaInscripto(int id);
     AsistenciaDiferida crearAsisDif(int id, DtFecha *fechaCom);
-    AsistenciaOnline crearAsisOn(int id, DtFecha *fechaCom);
+    AsistenciaOnline *crearAsisOn(int id, DtFecha fechaCom);
     void BorrarAsignatura(int id);
 	virtual ~Estudiante();
 };

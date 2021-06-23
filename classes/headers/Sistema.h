@@ -36,6 +36,7 @@ public:
     void FinalizacionDeClase();
     void EliminacionDeAsignatura();
     void TiempoDeDictadoDeClases();
+    void AsistenciaAClaseEnVivo();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
@@ -58,18 +59,12 @@ public:
 	void TiempoDeAsistenciaAClase();
 	void ListadoDeClases();
 	void EnvioDeMensaje();
-	void AsistenciaAClaseEnVivo();
 
-	void AltaAsignatura();
 
 	void ListarClasesVivo(std::string email);
-	void ListarEstudiantesInscriptos();
 	void ListarMensajes(std::string idClase);
 
-
-	void SeleccionClase(int id);
 	void SeleccionEstudiante(int ci);
-	void CreaClase(std::string nombre, DtFecha fechaComienzo, List estudiantes);//maybe
 	void CrearMensaje(std::string texto, int idRespuesta);
 	void CrearMensaje(std::string texto);
 	void MostrarDatos();
