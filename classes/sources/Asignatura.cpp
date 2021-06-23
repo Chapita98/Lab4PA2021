@@ -76,4 +76,17 @@ Clase * Asignatura::crearClase(std::string nombre, DtFecha fechaComienzo, Tipo t
     }
 }
 
+void Asignatura::BorrarInstancias()
+{
+    IIterator *i = this->clases->getIterator();
+    Clase *c;
+    while(i->hasCurrent())
+    {
+        c = (Clase *) i->getCurrent();
+        c->BorrarInstancias();
+        delete c;
+        i->next();
+    }
+}
+
 Asignatura::~Asignatura() {}

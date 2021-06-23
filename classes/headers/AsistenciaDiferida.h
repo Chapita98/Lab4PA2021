@@ -4,7 +4,6 @@
 #include "./../../ICollection/interfaces/ICollectible.h"
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../ICollection/collections/List.h"
-#include "Clase.h"
 
 //TODO Luego definir un static const para fecha, si es necesario
 

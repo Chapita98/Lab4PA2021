@@ -9,7 +9,7 @@ class Sistema : public ISistema
 private:
 	IDictionary * usuarios;
 	IDictionary * asignaturas;
-	int dia, mes, anio;
+	int dia, mes, anio, hora, minuto, seg;
 	Usuario *actual;
 public:
 	Sistema();
@@ -34,6 +34,8 @@ public:
     void InscripcionALasAsignaturas();
     void ReproduccionEnDiferido();
     void FinalizacionDeClase();
+    void EliminacionDeAsignatura();
+    void TiempoDeDictadoDeClases();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
@@ -43,16 +45,13 @@ public:
 	ICollection *ListarAsignaturasAsignadas(Docente *d);
 	ICollection *ListarEstudiantesInscriptos(int id);
 	ICollection *ListarDocentesNoAsignados(IKey *id);
+	ICollection *ListarDocentesAsignados(IKey *id);
 	Docente *SeleccionDocente(std::string email);
 	Asignatura *SeleccionAsignatura(int id);
 	Clase *SeleccionClase(int id, Asignatura *a);
 	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
 
 
-
-
-	//void EliminacionDeAsignatura();
-	void TiempoDeDictadoDeClases();
 	/*void ConfiguracionRelojInterno();
 
 

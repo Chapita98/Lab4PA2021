@@ -33,6 +33,7 @@ public:
     bool estaInscripto(int id);
     AsistenciaDiferida crearAsisDif(int id, DtFecha *fechaCom);
     AsistenciaOnline crearAsisOn(int id, DtFecha *fechaCom);
+    void BorrarAsignatura(int id);
 	virtual ~Estudiante();
 };
 

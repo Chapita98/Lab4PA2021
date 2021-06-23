@@ -1,7 +1,8 @@
 #include "../headers/Clase.h"
 Clase::Clase()
 {
-    this->asistencias = new List;
+    this->asistenciaon = new List;
+    this->asistenciadif = new List;
 	this->mensajes = new OrderedDictionary;
 }
 
@@ -10,7 +11,8 @@ Clase::Clase(int _id, std::string _nombre, DtFecha _fechaCom)
 	this->id = _id;
 	this->nombre = _nombre;
 	this->fechaCom = _fechaCom;
-	this->asistencias = new List;
+	this->asistenciaon = new List;
+	this->asistenciadif = new List;
 	this->mensajes = new OrderedDictionary;
 }
 
@@ -80,6 +82,38 @@ void Clase::finalizar(int url, DtFecha fecha)
 {
     this->video = url;
     this->fechaFin = fecha;
+}
+
+void Clase::BorrarInstancias()
+{
+    IIterator *i = this->asistenciadif->getIterator();
+    AsistenciaDiferida *aD;
+    while(i->hasCurrent())
+    {
+        aD = (AsistenciaDiferida *) i->getCurrent();
+        this->asistenciadif->remove(aD);
+        delete aD;
+        i->next();
+    }
+    i = this->asistenciaon->getIterator();
+    AsistenciaOnline *aO;
+    while(i->hasCurrent())
+    {
+        aO = (AsistenciaOnline *) i->getCurrent();
+        this->asistenciaon->remove(aO);
+        delete aO;
+        i->next();
+    }
+    i = this->mensajes->getIterator();
+    Mensaje *m;
+    while(i->hasCurrent())
+    {
+        m = (Mensaje *) i->getCurrent();
+        IKey *k = new Integer(m->getId());
+        this->mensajes->remove(k);
+        delete m;
+        i->next();
+    }
 }
 
 Clase::~Clase() {}

@@ -96,6 +96,27 @@ void Docente::finalizarClase(int id, DtFecha fecha)
     c->finalizar(id+100, fecha);
 }
 
+void Docente::BorrarAsignacion(int id, IDictionary *cl)
+{
+    IKey *k = new Integer(id);
+    IIterator *i = cl->getIterator();
+    Clase *c;
+    Asignacion *a = (Asignacion *)this->asignaciones->find(k);
+    delete a;
+    while(i->hasCurrent())
+    {
+        c = (Clase *) i->getCurrent();
+        k = new Integer(c->getId());
+        if(this->clases->member(k))
+        {
+            this->clases->remove(k);
+            //Clase *c1 = this->clases->find(k);
+            //delete c1;
+        }
+        i->next();
+    }
+}
+
 Asignacion *Docente::crearAsignacion(Tipo tipo, int idAsignatura)
 {
     Asignacion *a = new Asignacion(tipo, idAsignatura);

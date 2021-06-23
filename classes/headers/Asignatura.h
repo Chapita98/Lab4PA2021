@@ -33,6 +33,7 @@ public:
     void setNombre(std::string _nombre);
     void setClase(Clase *c);
     Clase * crearClase(std::string nombre, DtFecha fechaComienzo, Tipo tipo);
+    void BorrarInstancias();
 
     virtual ~Asignatura();
 };

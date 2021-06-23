@@ -40,7 +40,7 @@ void Sistema::menuCaso1()
                 }
                 case 5: //Tiempo de dictado de clases
                 {
-                    Sistema::TiempoDeDictadoDeClases();
+                    //Sistema::TiempoDeDictadoDeClases();
                     break;
                 }
                 case 6: //Tiempo de dictado de clases
@@ -370,7 +370,7 @@ void Sistema::AltaDeAsignatura()
                 throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                 break;
         }
-        
+
     }
     catch (std::invalid_argument &e)
     {
@@ -528,6 +528,29 @@ ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
 
 }
 
+ICollection *Sistema::ListarDocentesAsignados(IKey *id)
+{
+    IIterator *i = this->usuarios->getIterator();
+    Usuario *u;
+    ICollection *docs = new List;
+    while(i->hasCurrent())
+    {
+        u = (Usuario *) i->getCurrent();
+        if (dynamic_cast<Docente *>(u))
+        {
+            Docente *d = new Docente;
+            d = dynamic_cast<Docente *>(u);
+            if(d->estaAsignado(id))
+            {
+                docs->add(d);
+            }
+        }
+        i->next();
+    }
+    return docs;
+
+}
+
 void Sistema::InicioDeClase()
 {
     int id, op;
@@ -562,7 +585,7 @@ void Sistema::InicioDeClase()
         std::cout << "\nIngrese nombre";
         std::cin >> nombre;
         //std::cout << "\nIngrese Fecha y hora de comienzo (dd/mm/aa/HH/MM)";/
-        Clase *c = as->crearClase(nombre, DtFecha(this->dia, this->mes, this->anio), doc->getAsignacion(id)->getTipo());
+        Clase *c = as->crearClase(nombre, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora), doc->getAsignacion(id)->getTipo());
         if(doc->getAsignacion(id)->getTipo() == Tipo::MONITOREO)
         {
             bool flag= true;
@@ -847,7 +870,7 @@ void Sistema::ReproduccionEnDiferido()
             {
                 Estudiante *e = new Estudiante;
                 e = dynamic_cast<Estudiante *>(this->actual);
-                DtFecha *f = new DtFecha(this->dia, this->mes, this->anio);
+                DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
                 e->setAsisDif(id, f);
                 //mostrar mensajes de la clase
                 break;
@@ -934,7 +957,7 @@ void Sistema::FinalizacionDeClase()
         {
             case 1:
             {
-                d->finalizarClase(id, DtFecha(this->dia, this->mes, this->anio));
+                d->finalizarClase(id, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
                 break;
             }
             case 2:
@@ -956,6 +979,75 @@ void Sistema::FinalizacionDeClase()
         std::cout << "\nError: " << e.what() << std::endl;
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
     }
+}
+
+void Sistema::EliminacionDeAsignatura()
+{
+    try
+    {
+        int id, op;
+        ListarAsignaturas();
+        Asignatura *a;
+        std::cout << "\nIngrese id: ";
+        std::cin >> id;
+        IKey *k = new Integer(id);
+        if(!this->asignaturas->member(k))
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+        }
+        a = SeleccionAsignatura(id);
+        std::cout << "\nDesea confirmar? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                this->asignaturas->remove(k);
+                ICollection *est = new List;
+                est = ListarEstudiantesInscriptos(id);
+                IIterator *i = est->getIterator();
+                Estudiante *e;
+                while(i->hasCurrent())
+                {
+                    e = (Estudiante *) i->getCurrent();
+                    e->BorrarAsignatura(id);
+                    i->next();
+                }
+                ICollection *docs = new List;
+                docs = ListarDocentesAsignados(k);
+                i = docs->getIterator();
+                Docente *d;
+                IDictionary *cl = new OrderedDictionary;
+                cl = a->getClases();
+                while(i->hasCurrent())
+                {
+                    d = (Docente *) i->getCurrent();
+                    d->BorrarAsignacion(id, cl);
+                    i->next();
+                }
+                a->BorrarInstancias();
+                delete a;
+                break;
+            }
+            case 2:
+            {
+                std::cout << "\nVolviendo al menu principal";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                    break;
+            }
+
+    }
+    catch (std::invalid_argument &e)
+    {
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
+    }
+
 }
 
 void Sistema::TiempoDeDictadoDeClases()

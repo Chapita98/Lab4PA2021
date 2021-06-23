@@ -85,4 +85,26 @@ bool Estudiante::estaInscripto(int id)
     }
 
 }
+
+void Estudiante::BorrarAsignatura(int id)
+{
+    IKey *k = new Integer(id);
+    if(this->asistenciasdif->member(k))
+    {
+        //AsistenciaDiferida *a = (AsistenciaDiferida *)this->asistenciasdif->find(k);
+        this->asistenciasdif->remove(k);
+        //delete a;
+    }
+    if(this->asistenciason->member(k))
+    {
+        //AsistenciaOnline *a = (AsistenciaOnline *)this->asistenciason->find(k);
+        this->asistenciason->remove(k);
+        //delete a;
+    }
+    //Asignatura *a;
+    //a = (Asignatura *)this->asignaturas->find(k);
+    this->asignaturas->remove(k);
+    //delete a;
+}
+
 Estudiante::~Estudiante() {}
