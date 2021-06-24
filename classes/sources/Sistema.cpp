@@ -1141,10 +1141,9 @@ void Sistema::AsistenciaAClaseEnVivo()
             {
                 Estudiante *e;
                 e = (Estudiante *) this->actual;
-                DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
+                //DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
                 AsistenciaOnline *aO = e->crearAsisOn(id, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
                 e->setAsisOn(id, aO);
-                c->setAsisOn(aO);
                 std::cout << "\nAsistencia guardada";
                 break;
             }
@@ -1162,6 +1161,121 @@ void Sistema::AsistenciaAClaseEnVivo()
                 break;
         }
 
+    }
+    catch(std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void Sistema::FinalizarAsistencia()
+{
+    try
+    {
+        int op, id;
+        std::cout << "\nElija una opcion ";
+        std::cout << "\n1-En vivo: ";
+        std::cout << "\n2-En diferido: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                Estudiante *e;
+                e= (Estudiante *) this->actual;
+                IDictionary *aO = new OrderedDictionary;
+                aO = e->getAsistenciasOn();
+                IIterator *i = aO->getIterator();
+                AsistenciaOnline *a;
+                while(i->hasCurrent())
+                {
+                    a = (AsistenciaOnline *) i->getCurrent();
+                    std::cout << a->getIdClase()<< std::endl;
+                    i->next();
+                }
+                std::cout << "\nIngrese id: ";
+                std::cin >> id;
+                IKey *k = new Integer(id);
+                if(!aO->member(k))
+                {
+                     throw std::invalid_argument("\e[0;31mEl id ingresado es incorrecto.\e[0m");
+                }
+                a = (AsistenciaOnline* )aO->find(k);
+                std::cout << "\nDesea confirmar ";
+                std::cout << "\n1-Si: ";
+                std::cout << "\n2-No: ";
+                std::cin >> op;
+                switch (op)
+                {
+                    case 1:
+                    {
+                        //DtFecha *f = new ;
+                        a->setFechaFin(DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
+                        break;
+                    }
+                    case 2:
+                    {
+                        delete aO;
+                        delete a;
+                        std::cout << "\nVolviendo al menu principal";
+                        break;
+                    }
+                    default:
+                        throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                        break;
+                }
+            }
+            case 2:
+            {
+                Estudiante *e;
+                e = (Estudiante *)this->actual;
+                IDictionary *aD = new OrderedDictionary;
+                aD = e->getAsistenciasDif();
+                IIterator *i = aD->getIterator();
+                AsistenciaDiferida *a;
+                while(i->hasCurrent())
+                {
+                    a = (AsistenciaDiferida *) i->getCurrent();
+                    std::cout << a->getIdClase()<< std::endl;
+                    i->next();
+                }
+                std::cout << "\nIngrese id: ";
+                std::cin >> id;
+                IKey *k = new Integer(id);
+                if(!aD->member(k))
+                {
+                     throw std::invalid_argument("\e[0;31mEl id ingresado es incorrecto.\e[0m");
+                }
+                a = (AsistenciaDiferida*) aD->find(k);
+                std::cout << "\nDesea confirmar ";
+                std::cout << "\n1-Si: ";
+                std::cout << "\n2-No: ";
+                std::cin >> op;
+                switch (op)
+                {
+                    case 1:
+                    {
+                        DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
+                        a->setFechaFin(f);
+                        break;
+                    }
+                    case 2:
+                    {
+                        delete aD;
+                        delete a;
+                        std::cout << "\nVolviendo al menu principal";
+                        break;
+                    }
+                    default:
+                        throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                        break;
+                }
+            }
+
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                break;
+        }
     }
     catch(std::out_of_range &e)
     {

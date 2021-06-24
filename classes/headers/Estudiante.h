@@ -25,6 +25,9 @@ public:
 
 	int getCi();
 	AsistenciaDiferida *getAsistenciaDif(int id);
+	AsistenciaDiferida *getAsistenciaOn(int id);
+	IDictionary *getAsistenciasOn();
+	IDictionary *getAsistenciasDif();
 
 	void setCi(int _ci);
 	void setAsignatura(Asignatura *a);

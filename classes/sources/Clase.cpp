@@ -1,7 +1,6 @@
 #include "../headers/Clase.h"
 Clase::Clase()
 {
-    this->asistenciaon = new List;
 	this->mensajes = new OrderedDictionary;
 }
 
@@ -10,7 +9,6 @@ Clase::Clase(int _id, std::string _nombre, DtFecha _fechaCom)
 	this->id = _id;
 	this->nombre = _nombre;
 	this->fechaCom = _fechaCom;
-	this->asistenciaon = new List;
 	this->mensajes = new OrderedDictionary;
 }
 
@@ -64,11 +62,6 @@ void Clase::setVideo(std::string _video)
     this->video = _video;
 }
 
-void Clase::setAsisOn(AsistenciaOnline *aO)
-{
-    this->asistenciaon->add(aO);
-}
-
 bool Clase::estaEnVivo()
 {
     if(this->video.empty())
@@ -89,17 +82,7 @@ void Clase::finalizar(int url, DtFecha fecha)
 
 void Clase::BorrarInstancias()
 {
-    delete this->asistenciadif;
-    IIterator *i = this->asistenciaon->getIterator();
-    AsistenciaOnline *aO;
-    while(i->hasCurrent())
-    {
-        aO = (AsistenciaOnline *) i->getCurrent();
-        this->asistenciaon->remove(aO);
-        delete aO;
-        i->next();
-    }
-    i = this->mensajes->getIterator();
+    IIterator *i = this->mensajes->getIterator();
     Mensaje *m;
     while(i->hasCurrent())
     {

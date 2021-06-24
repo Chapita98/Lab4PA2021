@@ -36,6 +36,16 @@ AsistenciaDiferida * Estudiante::getAsistenciaDif(int id)
 
 }
 
+IDictionary *Estudiante::getAsistenciasOn()
+{
+    return this->asistenciason;
+}
+
+IDictionary *Estudiante::getAsistenciasDif()
+{
+    return this->asistenciasdif;
+}
+
 void Estudiante::setCi(int _ci)
 {
     this->ci = _ci;

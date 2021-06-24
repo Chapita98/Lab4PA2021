@@ -37,6 +37,7 @@ public:
     void EliminacionDeAsignatura();
     void TiempoDeDictadoDeClases();
     void AsistenciaAClaseEnVivo();
+    void FinalizarAsistencia();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);

@@ -18,8 +18,8 @@ public:
 	DtFecha getFechaFin();
 	int getIdClase();
 
-	void setFechaCom(DtFecha &_fecha);
-	void setFechaFin(DtFecha &_fecha);
+	void setFechaCom(DtFecha _fecha);
+	void setFechaFin(DtFecha _fecha);
 	void setIdClase(int id);
 
  	virtual ~AsistenciaOnline();

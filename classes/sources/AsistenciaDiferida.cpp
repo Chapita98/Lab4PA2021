@@ -1,7 +1,5 @@
 #include "./../headers/AsistenciaDiferida.h"
 
-// TODO DtFecha(_fechaCom, _fechaFin)
-
 AsistenciaDiferida::AsistenciaDiferida()
 {
     this->fechaCom = new List;
