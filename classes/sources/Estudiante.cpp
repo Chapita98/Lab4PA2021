@@ -36,6 +36,20 @@ AsistenciaDiferida * Estudiante::getAsistenciaDif(int id)
 
 }
 
+AsistenciaOnline * Estudiante::getAsistenciaOn(int id)
+{
+    IKey *k = new Integer(id);
+    if(this->asistenciason->member(k))
+    {
+        return (AsistenciaOnline *)this->asistenciason->find(k);
+    }
+    else
+    {
+        return NULL;
+    }
+
+}
+
 IDictionary *Estudiante::getAsistenciasOn()
 {
     return this->asistenciason;

@@ -38,6 +38,7 @@ public:
     void TiempoDeDictadoDeClases();
     void AsistenciaAClaseEnVivo();
     void FinalizarAsistencia();
+    void TiempoDeAsistenciaAClase();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
@@ -48,6 +49,8 @@ public:
 	ICollection *ListarEstudiantesInscriptos(int id);
 	ICollection *ListarDocentesNoAsignados(IKey *id);
 	ICollection *ListarDocentesAsignados(IKey *id);
+	ICollection *ListarClasesPorAsig(Asignatura *a);
+	int PromedioAsistenciaClase(int idC, int idA);
 	Docente *SeleccionDocente(std::string email);
 	Asignatura *SeleccionAsignatura(int id);
 	Clase *SeleccionClase(int id, Asignatura *a);
@@ -57,7 +60,6 @@ public:
 	/*void ConfiguracionRelojInterno();
 
 
-	void TiempoDeAsistenciaAClase();
 	void ListadoDeClases();
 	void EnvioDeMensaje();
 
@@ -69,7 +71,7 @@ public:
 	void CrearMensaje(std::string texto, int idRespuesta);
 	void CrearMensaje(std::string texto);
 	void MostrarDatos();
-	void MostrarTiempoAsistenciaClase();
+
 	void ObtenerClase();
 	void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);*/
 

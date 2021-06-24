@@ -61,6 +61,11 @@ Clase *Docente::getClase(int id)
     return (Clase *)this->clases->find(k);
 }
 
+IDictionary *Docente::getClases()
+{
+    return this->clases;
+}
+
 void Docente::setInstituto(std::string _instituto)
 {
     this->instituto = _instituto;

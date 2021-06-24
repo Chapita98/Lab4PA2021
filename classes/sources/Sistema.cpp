@@ -1209,8 +1209,8 @@ void Sistema::FinalizarAsistencia()
                 {
                     case 1:
                     {
-                        //DtFecha *f = new ;
-                        a->setFechaFin(DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
+                        DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
+                        a->setFechaFin(f);
                         break;
                     }
                     case 2:
@@ -1281,6 +1281,94 @@ void Sistema::FinalizarAsistencia()
     {
         std::cerr << e.what() << std::endl;
     }
+}
+
+void Sistema::TiempoDeAsistenciaAClase()
+{
+    try
+    {
+        int id, prom;
+        Docente *d;
+        d = (Docente *) this->actual;
+        ICollection *asig = new List;
+        asig = ListarAsignaturasAsignadas(d);
+        IIterator *i = asig->getIterator();
+        Asignatura *a;
+        while(i->hasCurrent())
+        {
+            a = (Asignatura *) i->getCurrent();
+            std::cout << a->getNombre() << "--------" << a->getId();
+            i->next();
+        }
+        std::cout << "\nIngrese id: ";
+        std::cin >> id;
+        a = SeleccionAsignatura(id);
+        if(!asig->member(a))
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+        }
+        ICollection *cl = new List;
+        cl = ListarClasesPorAsig(a);
+        i = cl->getIterator();
+        Clase *c;
+        while(i->hasCurrent())
+        {
+            c = (Clase *) i->getCurrent();
+            prom = PromedioAsistenciaClase(c->getId(), id);
+            std::cout << c->getId() << "--------" << prom;
+            i->next();
+        }
+    }
+    catch(std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+ICollection *Sistema::ListarClasesPorAsig(Asignatura *a)
+{
+    Docente *d;
+    d = (Docente *) this->actual;
+    IDictionary *cl = a->getClases();
+    ICollection *lista = new List;
+    IIterator *i = cl->getIterator();
+    Clase *c;
+    IKey *k;
+    while(i->hasCurrent())
+    {
+        c = (Clase *) i->getCurrent();
+        k = new Integer(c->getId());
+        if(d->getClases()->member(k))
+        {
+            lista->add(c);
+        }
+        i->next();
+    }
+    return lista;
+}
+
+int Sistema::PromedioAsistenciaClase(int idC, int idA)
+{
+    int n = 0, t = 0;
+    ICollection *est = new List;
+    est = ListarEstudiantesInscriptos(idA);
+    IIterator *i = est->getIterator();
+    Estudiante *e;
+    AsistenciaOnline *a;
+    IKey *k = new Integer(idC);
+    while(i->hasCurrent())
+    {
+        e = (Estudiante *) i->getCurrent();
+        if(e->getAsistenciasOn()->member(k))
+        {
+            a = e->getAsistenciaOn(idC);
+            t = a->TiempodeAsistencia() + t;
+            n++;
+        }
+        i->next();
+    }
+    t = t /n;
+    return t;
 }
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)

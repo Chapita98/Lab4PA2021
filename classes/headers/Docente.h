@@ -25,6 +25,7 @@ public:
     ICollection *getAsignaturas();
     Asignacion *getAsignacion(int id);
     ICollection *getClasesVivo();
+    IDictionary *getClases();
     Clase *getClase(int id);
 
     void setInstituto(std::string _instituto);

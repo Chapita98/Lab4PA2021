@@ -25,7 +25,7 @@ public:
 
 	int getCi();
 	AsistenciaDiferida *getAsistenciaDif(int id);
-	AsistenciaDiferida *getAsistenciaOn(int id);
+	AsistenciaOnline *getAsistenciaOn(int id);
 	IDictionary *getAsistenciasOn();
 	IDictionary *getAsistenciasDif();
 
