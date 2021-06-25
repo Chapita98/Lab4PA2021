@@ -38,17 +38,19 @@ Asignacion *Docente::getAsignacion(int id)
     return (Asignacion *)this->asignaciones->find(k);
 }
 
-ICollection *Docente::getClasesVivo()
+IDictionary *Docente::getClasesVivo()
 {
     IIterator *i = this->clases->getIterator();
     Clase *c;
-    ICollection *cl = new List;
+    IDictionary *cl = new OrderedDictionary;
+    IKey *k = new Integer(0);
     while(i->hasCurrent())
     {
         c = (Clase *) i->getCurrent();
         if (c->estaEnVivo())
         {
-            cl->add(c);
+            k = new Integer(c->getId());
+            cl->add(k,c);
         }
         i->next();
     }

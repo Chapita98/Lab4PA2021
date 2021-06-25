@@ -24,6 +24,10 @@ std::string Mensaje::getContenido()
     return this->contenido;
 }
 
+Mensaje *Mensaje::getRespuesta()
+{
+    return this->respuesta;
+}
 
 void Mensaje::setId(int _id)
 {
@@ -40,5 +44,9 @@ void Mensaje::setContenido(std::string _contenido)
     this->contenido = _contenido;
 }
 
+void Mensaje::setRespuesta(Mensaje *m)
+{
+    this->respuesta = m;
+}
 
 Mensaje::~Mensaje() {}

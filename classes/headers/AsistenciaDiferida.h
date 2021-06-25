@@ -14,6 +14,7 @@ private:
 
 public:
 	AsistenciaDiferida();
+	AsistenciaDiferida(int idC);
 
 	ICollection *getFechaCom();
 	ICollection *getFechaFin();

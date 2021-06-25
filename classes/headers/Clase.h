@@ -29,15 +29,19 @@ public:
 	std::string getNombre();
 	DtFecha getFechaCom();
 	DtFecha getFechaFin();
+	IDictionary *getMensajes();
 
 	void setId(int _id);
 	void setVideo(std::string _video);
 	void setNombre(std::string _nombre);
 	void setFechaCom(DtFecha &_fechaCom);
 	void setFechaFin(DtFecha &_fechaFin);
+	void setMensaje(Mensaje *m);
 
 	bool estaEnVivo();
 	void finalizar(int url, DtFecha fecha);
+	Mensaje *crearMensaje(std::string contenido, DtFecha fecha);
+	Mensaje *crearRespuesta(std::string contenido, Mensaje *m, DtFecha fecha);
 	void BorrarInstancias();
 
 	virtual ~Clase();

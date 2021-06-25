@@ -37,6 +37,10 @@ DtFecha Clase::getFechaFin()
 	return this->fechaFin;
 }
 
+IDictionary *Clase::getMensajes()
+{
+    return this->mensajes;
+}
 void Clase::setId(int _id)
 {
 	this->id = _id;
@@ -60,6 +64,27 @@ void Clase::setFechaFin(DtFecha &_fecha)
 void Clase::setVideo(std::string _video)
 {
     this->video = _video;
+}
+
+void Clase::setMensaje(Mensaje *m)
+{
+    IKey *k = new Integer(m->getId());
+    this->mensajes->add(k, m);
+}
+
+Mensaje *Clase::crearMensaje(std::string contenido, DtFecha fecha)
+{
+    int id = this->mensajes->getSize() +1;
+    Mensaje *m = new Mensaje(id, fecha, contenido);
+    return m;
+}
+
+Mensaje *Clase::crearRespuesta(std::string contenido, Mensaje *m, DtFecha fecha)
+{
+    int id = this->mensajes->getSize() +1;
+    Mensaje *msj = new Mensaje(id, fecha, contenido);
+    msj->setRespuesta(m);
+    return msj;
 }
 
 bool Clase::estaEnVivo()

@@ -17,14 +17,15 @@ public:
 	Mensaje(int _id, DtFecha _fechaEnvio, std::string _contenido);
 
 	int getId();
-	DtFecha getFechaEnvio();	
+	DtFecha getFechaEnvio();
 	std::string getContenido();
-	
+	Mensaje *getRespuesta();
+
 
 	void setId(int _id);
 	void setFechaEnvio(DtFecha &_fechaEnvio);
 	void setContenido(std::string _contenido);
-	
+	void setRespuesta(Mensaje *m);
 
 	virtual ~Mensaje();
 };

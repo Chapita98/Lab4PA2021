@@ -40,6 +40,7 @@ public:
     void FinalizarAsistencia();
     void TiempoDeAsistenciaAClase();
     void ListadoDeClases();
+    void EnvioDeMensaje();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
@@ -54,20 +55,22 @@ public:
 	int PromedioAsistenciaClase(int idC, int idA);
 	Docente *SeleccionDocente(std::string email);
 	Asignatura *SeleccionAsignatura(int id);
-	Clase *SeleccionClase(int id, Asignatura *a);
+	Clase *SeleccionClase(int idC, int idA);
 	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
 	Docente *DocenteDeClase(int idC, int idA);
+	void ListarMensajes(Clase *c);
+	Mensaje *SeleccionMensaje(Clase *c, int id);
 
 
 	/*void ConfiguracionRelojInterno();
 
 
 
-	void EnvioDeMensaje();
+
 
 
 	void ListarClasesVivo(std::string email);
-	void ListarMensajes(std::string idClase);
+
 
 	void SeleccionEstudiante(int ci);
 	void CrearMensaje(std::string texto, int idRespuesta);

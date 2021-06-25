@@ -1,8 +1,9 @@
 #include "./../headers/AsistenciaOnline.h"
 
-AsistenciaOnline::AsistenciaOnline(int id, DtFecha _fechaCom)
+AsistenciaOnline::AsistenciaOnline(int idC, int idA, DtFecha _fechaCom)
 {
-	this->idClase = id;
+	this->idClase = idC;
+	this->idAsig = idA;
 	this->fechaCom = fechaCom;
 }
 
@@ -21,6 +22,11 @@ int AsistenciaOnline::getIdClase()
     return this->idClase;
 }
 
+int AsistenciaOnline::getIdAsig()
+{
+    return this->idAsig;
+}
+
 void AsistenciaOnline::setFechaCom(DtFecha *_fecha)
 {
     this->fechaCom = _fecha;
@@ -34,6 +40,11 @@ void AsistenciaOnline::setFechaFin(DtFecha *_fecha)
 void AsistenciaOnline::setIdClase(int id)
 {
     this->idClase = id;
+}
+
+void AsistenciaOnline::setIdAsig(int id)
+{
+    this->idAsig = id;
 }
 
 int AsistenciaOnline::TiempodeAsistencia()

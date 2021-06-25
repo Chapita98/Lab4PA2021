@@ -862,7 +862,7 @@ void Sistema::ReproduccionEnDiferido()
         }
         std::cout << "\nIngrese id";
         std::cin >> id;
-        c = SeleccionClase(id, as);
+        c = SeleccionClase(id, as->getId());
         std::cout << "Asignatura: " << as->getNombre() << "--------" << as->getId()<< std::endl;
         std::cout << "Clase: " << c->getNombre() << "--------" << c->getId()<< std::endl;
         std::cout << "\nDesea confirmar? ";
@@ -902,11 +902,13 @@ void Sistema::ReproduccionEnDiferido()
 
 }
 
-Clase *Sistema::SeleccionClase(int id, Asignatura *a)
+Clase *Sistema::SeleccionClase(int idC, int idA)
 {
-    IKey *k = new Integer(id);
+    IKey *k = new Integer(idA);
     IDictionary *cl = new OrderedDictionary;
+    Asignatura *a = (Asignatura *)this->asignaturas->find(k);
     cl = a->getClases();
+    k = new Integer(idC);
     Clase * c = (Clase *) cl->find(k);
     return c;
 }
@@ -937,7 +939,7 @@ void Sistema::FinalizacionDeClase()
         int id, op;
         Docente *d = new Docente;
         d = (Docente *)this->actual;
-        ICollection *cl = new List;
+        IDictionary *cl = new OrderedDictionary;
         cl = d->getClasesVivo();
         IIterator *i = cl->getIterator();
         Clase *c;
@@ -949,7 +951,8 @@ void Sistema::FinalizacionDeClase()
         }
         std::cout << "\nIngrese id";
         std::cin >> id;
-        if(!cl->member(d->getClase(id)))
+        IKey *k = new Integer(id);
+        if(!cl->member(k))
         {
             throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
         }
@@ -1129,7 +1132,7 @@ void Sistema::AsistenciaAClaseEnVivo()
         }
         std::cout << "\nIngrese id: ";
         std::cin >> id;
-        c = SeleccionClase(id, a);
+        c = SeleccionClase(id, a->getId());
         if(!cl->member(c))
         {
             throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
@@ -1147,7 +1150,7 @@ void Sistema::AsistenciaAClaseEnVivo()
                 Estudiante *e;
                 e = (Estudiante *) this->actual;
                 //DtFecha *f = new DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
-                AsistenciaOnline *aO = e->crearAsisOn(id, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
+                AsistenciaOnline *aO = e->crearAsisOn(id, a->getId(), DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
                 e->setAsisOn(id, aO);
                 std::cout << "\nAsistencia guardada";
                 break;
@@ -1438,6 +1441,147 @@ Docente *Sistema::DocenteDeClase(int idC, int idA)
         }
     }
     return d;
+}
+
+void Sistema::EnvioDeMensaje()
+{
+    try
+    {
+        int id, op;
+        std::string msj;
+        Clase *c;
+        if (dynamic_cast<Estudiante *>(this->actual))
+        {
+            Estudiante *e;
+            e = (Estudiante *)this->actual;
+            IDictionary *as = new OrderedDictionary;
+            as = e->getAsistenciasOn();
+            IIterator *i = as->getIterator();
+            AsistenciaOnline *aO;
+            while(i->hasCurrent())
+            {
+                aO = (AsistenciaOnline *) i->getCurrent();
+                if(aO->getFechaFin()==NULL)
+                {
+                    std::cout << aO->getIdClase() << std::endl;
+                }
+                i->next();
+            }
+            std::cout << "\nIngrese id: ";
+            std::cin >> id;
+            IKey *k = new Integer(id);
+            if(!as->member(k))
+            {
+                throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+            }
+            aO=(AsistenciaOnline* ) as->find(k);
+            c = SeleccionClase(id, aO->getIdAsig());
+        }
+        else
+        {
+            Docente *d;
+            d = (Docente *)this->actual;
+            IDictionary *cl = new OrderedDictionary;
+            cl = d->getClasesVivo();
+            IIterator *i = cl->getIterator();
+            while(i->hasCurrent())
+            {
+                c = (Clase *) i->getCurrent();
+                std::cout << c->getId() << std::endl;
+                i->next();
+            }
+            std::cout << "\nIngrese id: ";
+            std::cin >> id;
+            IKey *k = new Integer(id);
+            if(!cl->member(k))
+            {
+                throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+            }
+            c = (Clase *)cl->find(k);
+        }
+        ListarMensajes(c);
+        Mensaje *m;
+        std::cout << "\nEs una respuesta? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch (op)
+        {
+            case 1:
+            {
+                std::cout << "\nIngrese id de mensaje a responder: ";
+                std::cin >> id;
+                Mensaje *m2;
+                m2 = SeleccionMensaje(c, id);
+                std::cout << "\nIngrese mensaje: ";
+                std::cin >> msj;
+                m = c->crearRespuesta(msj, m2, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
+                break;
+            }
+            case 2:
+            {
+                std::cout << "\nIngrese mensaje: ";
+                std::cin >> msj;
+                //DtFecha *f = DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora);
+                m = c->crearMensaje(msj, DtFecha(this->dia, this->mes, this->anio, this->seg, this->minuto, this->hora));
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                break;
+        }
+        std::cout << "\nDesea confirmar? ";
+        std::cout << "\n1-Si: ";
+        std::cout << "\n2-No: ";
+        std::cin >> op;
+        switch(op)
+        {
+            case 1:
+            {
+                c->setMensaje(m);
+                std::cout << "\nMensaje enviado";
+                break;
+            }
+            case 2:
+            {
+                std::cout << "\nVolviendo al menu principal";
+                break;
+            }
+            default:
+                throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+                break;
+        }
+    }
+    catch(std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void Sistema::ListarMensajes(Clase *c)
+{
+    IDictionary *msj = new OrderedDictionary;
+    msj = c->getMensajes();
+    IIterator *i = msj->getIterator();
+    Mensaje *m;
+    while(i->hasCurrent())
+    {
+        m = (Mensaje*) i->getCurrent();
+        //std::cout<< m; outstream
+        i->next();
+    }
+}
+
+Mensaje *Sistema::SeleccionMensaje(Clase *c, int id)
+{
+    IKey *k = new Integer(id);
+    if(!c->getMensajes()->member(k))
+    {
+        throw std::invalid_argument("\e[0;31mEl id ingresado es incorrecto.\e[0m");
+    }
+    Mensaje *m;
+    m = (Mensaje *) c->getMensajes()->find(k);
+    return m;
 }
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)

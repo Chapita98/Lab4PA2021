@@ -9,18 +9,21 @@ private:
 	DtFecha *fechaCom;
 	DtFecha *fechaFin;
 	int idClase;
+	int idAsig;
 
 public:
 	AsistenciaOnline();
-	AsistenciaOnline(int idClase, DtFecha _fechaCom);
+	AsistenciaOnline(int idClase, int idAsig, DtFecha _fechaCom);
 
 	DtFecha *getFechaCom();
 	DtFecha *getFechaFin();
 	int getIdClase();
+	int getIdAsig();
 
 	void setFechaCom(DtFecha *_fecha);
 	void setFechaFin(DtFecha *_fecha);
 	void setIdClase(int id);
+	void setIdAsig(int id);
 
 	int TiempodeAsistencia();
 
