@@ -1,14 +1,22 @@
 #include "./../headers/Docente.h"
-Docente::Docente() {}
+Docente::Docente()
+{
+    this->asignaciones = new OrderedDictionary;
+    this->clases = new OrderedDictionary;
+}
 
 Docente::Docente(std::string _instituto)
 {
     this->instituto = _instituto;
+    this->asignaciones = new OrderedDictionary;
+    this->clases = new OrderedDictionary;
 }
 
 Docente::Docente(std::string _instituto, std::string _email, std::string _nombre, std::string _imagen, std::string _contrasenia) : Usuario(_email, _nombre, _imagen, _contrasenia)
 {
     this->instituto = _instituto;
+    this->asignaciones = new OrderedDictionary;
+    this->clases = new OrderedDictionary;
 }
 
 std::string Docente::getInstituto()
@@ -83,9 +91,10 @@ void Docente::setClase(Clase *c)
     this->clases->add(i, c);
 }
 
-bool Docente::estaAsignado(IKey *id)
+bool Docente::estaAsignado(int id)
 {
-    if(this->asignaciones->member(id))
+    IKey *k = new Integer(id);
+    if(this->asignaciones->member(k))
     {
         return true;
     }

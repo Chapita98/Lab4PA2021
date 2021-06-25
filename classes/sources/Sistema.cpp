@@ -350,9 +350,9 @@ void Sistema::AltaDeAsignatura()
     int op, id;
     try
     {
-        std::cout << "\nIngrese el id de la asigtatura: ";
+        std::cout << "\nIngrese el id de la asignatura: ";
         std::cin >> id;
-        std::cout << "\nIngrese nombre de la asigtatura: ";
+        std::cout << "\nIngrese nombre de la asignatura: ";
         std::cin >> nombre;
         std::cout << "\nDesea confirmar? \n1-Si: \n2-No: ";
         std::cin >> op;
@@ -388,6 +388,14 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
 {
     try
     {
+        if(this->asignaturas->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mNo existen asignaturas.\e[0m");
+        }
+        if(this->usuarios->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mNo existen usuarios.\e[0m");
+        }
         int id, asig, op;
         std::string email;
         Tipo tipo;
@@ -395,79 +403,75 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
         std::cout << "\nIngrese id";
         std::cin >> id;
         IKey *k = new Integer(id);
-        if(this->asignaturas->member(k))
-        {
-            ICollection *docs = new List;
-            docs = ListarDocentesNoAsignados(k);
-            IIterator *i = docs->getIterator();
-            Docente * d;
-            while(i->hasCurrent())
-            {
-                d = (Docente *) i->getCurrent();
-                std::cout << d->getNombre() << "--------" << d->getEmail()<< std::endl;
-                i->next();
-            }
-            std::cout << "\nIngrese email";
-            std::cin >> email;
-            d = SeleccionDocente(email);
-            if(d!=NULL)
-            {
-                std::cout << "\nElija el tipo de asignacion: \n\e[0;92m1)\e[0m Teorico\n\e[0;92m2)\e[0m Practico\n\e[0;92m3)\e[0m Monitoreo\n";
-                std::cin >> asig;
-                switch (asig)
-                {
-                case TEORICO:
-                {
-                    tipo = Tipo::TEORICO;
-                    break;
-                }
-                case PRACTICO:
-                {
-                    tipo = Tipo::PRACTICO;
-                    break;
-                }
-                case MONITOREO:
-                {
-                    tipo = Tipo::MONITOREO;
-                    break;
-                }
-                default:
-                {
-                    throw std::invalid_argument("\e[0;31mAsignacion invalida\e[0m");
-                    break;
-                }
-                }
-                std::cout << "\nDesea confirmar? \n1-Si\n2-No";
-                std::cin >> op;
-                switch (op)
-                {
-                case 1:
-                {
-                    Asignacion *a = d->crearAsignacion(tipo, id);
-                    d->setAsignacion(a, k);
-                    std::cout << "\nDocente Asignado";
-                    break;
-                }
-                case 2:
-                {
-                    delete d;
-                    delete docs;
-                    std::cout << "\nVolviendo al menu principal";
-                    break;
-                }
-                default:
-                    throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
-                    break;
-                }
-            }
-            else
-            {
-                throw std::invalid_argument("\e[0;31mEl usuario ingresado no existe.\e[0m");
-            }
-        }
-        else
+        if(!this->asignaturas->member(k))
         {
             throw std::invalid_argument("\e[0;31mLa asignatura ingresada no existe.\e[0m");
+        }
+        ICollection *docs = new List;
+        docs = ListarDocentesNoAsignados(id);
+        if(docs->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mNo existen Docentes no asignados.\e[0m");
+        }
+        IIterator *i = docs->getIterator();
+        Docente * d;
+        while(i->hasCurrent())
+        {
+            d = (Docente *) i->getCurrent();
+            std::cout << d->getNombre() << "--------" << d->getEmail()<< std::endl;
+            i->next();
+        }
+        std::cout << "\nIngrese email";
+        std::cin >> email;
+        d = SeleccionDocente(email);
+        if(!docs->member(d))
+        {
+             throw std::invalid_argument("\e[0;31mEl docente ingresado no existe.\e[0m");
+        }
+        std::cout << "\nElija el tipo de asignacion: \n\e[0;92m1)\e[0m Teorico\n\e[0;92m2)\e[0m Practico\n\e[0;92m3)\e[0m Monitoreo\n";
+        std::cin >> asig;
+        switch (asig)
+        {
+        case TEORICO:
+        {
+            tipo = Tipo::TEORICO;
+            break;
+        }
+        case PRACTICO:
+        {
+            tipo = Tipo::PRACTICO;
+            break;
+        }
+        case MONITOREO:
+        {
+            tipo = Tipo::MONITOREO;
+            break;
+        }
+        default:
+            throw std::invalid_argument("\e[0;31mAsignacion invalida\e[0m");
+            break;
+        }
+        std::cout << "\nDesea confirmar? \n1-Si\n2-No";
+        std::cin >> op;
+        switch (op)
+        {
+        case 1:
+        {
+            Asignacion *a = d->crearAsignacion(tipo, id);
+            d->setAsignacion(a, k);
+            std::cout << "\nDocente Asignado";
+            break;
+        }
+        case 2:
+        {
+            delete d;
+            delete docs;
+            std::cout << "\nVolviendo al menu principal";
+            break;
+        }
+        default:
+            throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
+            break;
         }
     }
     catch (std::invalid_argument &e)
@@ -510,7 +514,7 @@ Docente *Sistema::SeleccionDocente(std::string email)
     }
 }
 
-ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
+ICollection *Sistema::ListarDocentesNoAsignados(int id)
 {
     IIterator *i = this->usuarios->getIterator();
     Usuario *u;
@@ -520,7 +524,7 @@ ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
         u = (Usuario *) i->getCurrent();
         if (dynamic_cast<Docente *>(u))
         {
-            Docente *d = new Docente;
+            Docente *d = new Docente();
             d = dynamic_cast<Docente *>(u);
             if(!d->estaAsignado(id))
             {
@@ -533,7 +537,7 @@ ICollection *Sistema::ListarDocentesNoAsignados(IKey *id)
 
 }
 
-ICollection *Sistema::ListarDocentesAsignados(IKey *id)
+ICollection *Sistema::ListarDocentesAsignados(int id)
 {
     IIterator *i = this->usuarios->getIterator();
     Usuario *u;
@@ -1024,7 +1028,7 @@ void Sistema::EliminacionDeAsignatura()
                     i->next();
                 }
                 ICollection *docs = new List;
-                docs = ListarDocentesAsignados(k);
+                docs = ListarDocentesAsignados(id);
                 i = docs->getIterator();
                 Docente *d;
                 IDictionary *cl = new OrderedDictionary;
@@ -1424,7 +1428,7 @@ void Sistema::ListadoDeClases()
 Docente *Sistema::DocenteDeClase(int idC, int idA)
 {
     IKey *k = new Integer(idA);
-    ICollection *doc = ListarDocentesAsignados(k);
+    ICollection *doc = ListarDocentesAsignados(idA);
     k = new Integer(idC);
     IIterator *i = doc->getIterator();
     Docente *d;

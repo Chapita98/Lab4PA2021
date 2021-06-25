@@ -1,5 +1,10 @@
 #include "./../headers/Estudiante.h"
-Estudiante::Estudiante() {}
+Estudiante::Estudiante()
+{
+    this->asignaturas = new OrderedDictionary;
+    this->asistenciasdif = new OrderedDictionary;
+    this->asistenciason = new OrderedDictionary;
+}
 
 Estudiante::Estudiante(int _ci)
 {

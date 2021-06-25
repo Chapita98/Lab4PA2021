@@ -49,8 +49,8 @@ public:
 	ICollection *ListarAsignaturasInscriptas();
 	ICollection *ListarAsignaturasAsignadas(Docente *d);
 	ICollection *ListarEstudiantesInscriptos(int id);
-	ICollection *ListarDocentesNoAsignados(IKey *id);
-	ICollection *ListarDocentesAsignados(IKey *id);
+	ICollection *ListarDocentesNoAsignados(int id);
+	ICollection *ListarDocentesAsignados(int id);
 	ICollection *ListarClasesPorAsig(Asignatura *a);
 	int PromedioAsistenciaClase(int idC, int idA);
 	Docente *SeleccionDocente(std::string email);

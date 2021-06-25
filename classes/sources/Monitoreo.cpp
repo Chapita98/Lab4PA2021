@@ -1,15 +1,18 @@
 #include "./../headers/Monitoreo.h"
 #include "./../headers/Estudiante.h"
-Monitoreo::Monitoreo() {}
+Monitoreo::Monitoreo()
+{
+    this->estudiantes = new List;
+}
 
 Monitoreo::Monitoreo(int _id, std::string _nombre, DtFecha _fechaCom) : Clase(_id, _nombre, _fechaCom)
 {
-
+    this->estudiantes = new List;
 }
 
-Estudiante *Monitoreo::getEstudiante(int i)
+ICollection *Monitoreo::getEstudiantes()
 {
-   //return this->estudiantes[i];
+   return this->estudiantes;
 }
 
 

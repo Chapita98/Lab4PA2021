@@ -18,7 +18,7 @@ public:
 	Monitoreo();
 	Monitoreo(int _id, std::string _nombre, DtFecha _fechaCom);
 
-	Estudiante *getEstudiante(int i);
+	ICollection *getEstudiantes();
 
 	void setEstudiante(Estudiante *_estudiante);
 
