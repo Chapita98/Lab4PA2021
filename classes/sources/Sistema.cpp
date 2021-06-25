@@ -86,22 +86,22 @@ void Sistema::menuCaso2()
             {
                 case 1: //Inicio de clase
                 {
-                    InicioDeClase();
+                    Sistema::InicioDeClase();
                     break;
                 }
                 case 2: //Finalización de clase
                 {
-                    //FinalizacionDeClase();
+                    Sistema::FinalizacionDeClase();
                     break;
                 }
                 case 3: //Tiempo de asistencia a clase
                 {
-                    //TiempoDeAsistenciaAClase();
+                    Sistema::TiempoDeAsistenciaAClase();
                     break;
                 }
                 case 4: //Listado de Clases
                 {
-                    //ListadoDeClases();
+                    Sistema::ListadoDeClases();
                     break;
                 }
                 case 5: //Tiempo de dictado de clases
@@ -152,20 +152,25 @@ void Sistema::menuCaso3()
                 }
                 case 2: //Inscripción a las asignaturas
                 {
-                    //InscripcionALasAsignaturas();
+                    Sistema::InscripcionALasAsignaturas();
                     break;
                 }
                 case 3: //Asistencia a clase en vivo
                 {
-                    //AsistenciaAClaseEnVivo();
+                    Sistema::AsistenciaAClaseEnVivo();
                     break;
                 }
                 case 4: //Reproduccion en diferido
                 {
-                    //ReproduccionEnDiferido();
+                    Sistema::ReproduccionEnDiferido();
                     break;
                 }
-                case 5: //CASO SALIDA DE SISTEMA
+                case 5: //Finalizar Asistencia
+                {
+                    Sistema::FinalizarAsistencia();
+                    break;
+                }
+                case 6: //CASO SALIDA DE SISTEMA
                 {
                     bandera = false;
                     break;
@@ -1371,6 +1376,70 @@ int Sistema::PromedioAsistenciaClase(int idC, int idA)
     return t;
 }
 
+void Sistema::ListadoDeClases()
+{
+    try
+    {
+        int id;
+        Docente *d;
+        d = (Docente *) this->actual;
+        ICollection *asig = new List;
+        asig = ListarAsignaturasAsignadas(d);
+        IIterator *i = asig->getIterator();
+        Asignatura *a;
+        while(i->hasCurrent())
+        {
+            a = (Asignatura *) i->getCurrent();
+            std::cout << a->getNombre() << "--------" << a->getId();
+        }
+        std::cout << "\nIngrese id: ";
+        std::cin >> id;
+        a = SeleccionAsignatura(id);
+        if(!asig->member(a))
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+        }
+        IDictionary *cl = a->getClases();
+        Clase *c;
+        i = cl->getIterator();
+        Docente *d2;
+        while(i->hasCurrent())
+        {
+            c = (Clase *) i->getCurrent();
+            //std::cout << c; mostrar con outstream
+            d2 = DocenteDeClase(c->getId(), id);
+            std::cout << "Docente: " << d2->getNombre();
+        }
+
+    }
+    catch(std::out_of_range &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+Docente *Sistema::DocenteDeClase(int idC, int idA)
+{
+    IKey *k = new Integer(idA);
+    ICollection *doc = ListarDocentesAsignados(k);
+    k = new Integer(idC);
+    IIterator *i = doc->getIterator();
+    Docente *d;
+    while(i->hasCurrent())
+    {
+        d = (Docente *) i->getCurrent();
+        if(d->getClases()->member(k))
+        {
+            break;
+        }
+        else
+        {
+            i->next();
+        }
+    }
+    return d;
+}
+
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)
 {
     std::time_t t = std::time(0);
@@ -1429,6 +1498,7 @@ void Sistema::imprimirMenuEstudiante()
     std::cout << "\e[0;92m2)\e[0m Inscripción a las asignaturas.\n";
     std::cout << "\e[0;92m3)\e[0m Asistencia a clase en vivo.\n";
     std::cout << "\e[0;92m4)\e[0m Reproduccion en diferido.\n";
-    std::cout << "Pulse \e[0;92m5\e[0m para salir.\n\nOpcion: \e[0;92m";
+    std::cout << "\e[0;92m5)\e[0m Finalizar asistencia.\n";
+    std::cout << "Pulse \e[0;92m6\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
 Sistema::~Sistema() {}

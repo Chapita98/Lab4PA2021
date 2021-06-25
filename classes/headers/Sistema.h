@@ -39,6 +39,7 @@ public:
     void AsistenciaAClaseEnVivo();
     void FinalizarAsistencia();
     void TiempoDeAsistenciaAClase();
+    void ListadoDeClases();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
@@ -55,12 +56,13 @@ public:
 	Asignatura *SeleccionAsignatura(int id);
 	Clase *SeleccionClase(int id, Asignatura *a);
 	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
+	Docente *DocenteDeClase(int idC, int idA);
 
 
 	/*void ConfiguracionRelojInterno();
 
 
-	void ListadoDeClases();
+
 	void EnvioDeMensaje();
 
 
