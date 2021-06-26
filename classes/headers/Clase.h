@@ -43,6 +43,7 @@ public:
 	Mensaje *crearMensaje(std::string contenido, DtFecha *fecha);
 	Mensaje *crearRespuesta(std::string contenido, Mensaje *m, DtFecha *fecha);
 	void BorrarInstancias();
+	int TiempoDictado();
 
 	virtual ~Clase();
 	friend std::ostream& operator<<(std::ostream&, Clase*);

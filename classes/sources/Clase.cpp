@@ -119,6 +119,33 @@ void Clase::BorrarInstancias()
     }
 }
 
+int Clase::TiempoDictado()
+{
+    int h, m;
+    if(this->fechaFin->getHora() == this->fechaCom->getHora())
+    {
+        m = this->fechaFin->getMinuto() - this->fechaCom->getMinuto();
+    }
+    else
+    {
+        h = this->fechaFin->getHora() - this->fechaCom->getHora();
+        if(this->fechaFin->getMinuto() > this->fechaCom->getMinuto())
+        {
+            m = this->fechaFin->getMinuto() - this->fechaCom->getMinuto();
+            h = h*60;
+            m = h + m;
+        }
+        else
+        {
+            h = h * 60;
+            m = this->fechaCom->getMinuto() - this->fechaFin->getMinuto();
+            m = h - m;
+        }
+
+    }
+    return m;
+}
+
 std::ostream& operator<<(std::ostream& out , Clase* info) {
 	info->print(out);
 	return out;

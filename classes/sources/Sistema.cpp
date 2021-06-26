@@ -109,9 +109,9 @@ void Sistema::menuCaso2()
                     Sistema::ListadoDeClases();
                     break;
                 }
-                case 5: //Tiempo de dictado de clases
+                case 5: //Envio de mensaje
                 {
-                    //EnvioDeMensaje();
+                    Sistema::EnvioDeMensaje();
                     break;
                 }
                 case 6: //CASO SALIDA DE SISTEMA
@@ -152,7 +152,7 @@ void Sistema::menuCaso3()
             {
                 case 1: //Envío de mensaje
                 {
-                    //EnvioDeMensaje();
+                    Sistema::EnvioDeMensaje();
                     break;
                 }
                 case 2: //Inscripción a las asignaturas
@@ -250,17 +250,17 @@ void Sistema::AltaDeUsuario(){
     int ci, opcion;
 
     try
-    {   std::cout << "\nIngrese email";
+    {   std::cout << "\nIngrese email: ";
         std::cin >> email;
-        std::cout << "\nIngrese nombre";
+        std::cout << "\nIngrese nombre: ";
         std::cin >> nombre;
-        std::cout << "\nIngrese contrasenia";
+        std::cout << "\nIngrese contraseña: ";
         std::cin >> contrasenia;
-        std::cout << "\nIngrese url";
+        std::cout << "\nIngrese url de imagen: ";
         std::cin >> url;
         std::cout << "\nIngrese Opcion: ";
         std::cout << "\n1-Estudiante: ";
-        std::cout << "\n2-Docente: ";
+        std::cout << "\n2-Docente: \n";
         std::cin >> opcion;
         switch (opcion)
         {
@@ -326,7 +326,7 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
     int op;
     std::cout << "\nDesea confirmar? ";
     std::cout << "\n1-Si: ";
-    std::cout << "\n2-No: ";
+    std::cout << "\n2-No: \n";
     std::cin >> op;
     switch (op)
     {
@@ -359,7 +359,7 @@ void Sistema::AltaDeAsignatura()
         std::cin >> id;
         std::cout << "\nIngrese nombre de la asignatura: ";
         std::cin >> nombre;
-        std::cout << "\nDesea confirmar? \n1-Si: \n2-No: ";
+        std::cout << "\nDesea confirmar? \n1-Si: \n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -405,7 +405,7 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
         std::string email;
         Tipo tipo;
         ListarAsignaturas();
-        std::cout << "\nIngrese id";
+        std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         IKey *k = new Integer(id);
         if(!this->asignaturas->member(k))
@@ -420,13 +420,14 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
         }
         IIterator *i = docs->getIterator();
         Docente * d;
+        std::cout << "Email docentes: "<< std::endl;
         while(i->hasCurrent())
         {
             d = (Docente *) i->getCurrent();
-            std::cout << d->getNombre() << "--------" << d->getEmail()<< std::endl;
+            std::cout << d->getEmail()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese email";
+        std::cout << "\nIngrese email de docente: ";
         std::cin >> email;
         d = SeleccionDocente(email);
         if(!docs->member(d))
@@ -456,7 +457,7 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
             throw std::invalid_argument("\e[0;31mAsignacion invalida\e[0m");
             break;
         }
-        std::cout << "\nDesea confirmar? \n1-Si\n2-No";
+        std::cout << "\nDesea confirmar? \n1-Si\n2-No\n";
         std::cin >> op;
         switch (op)
         {
@@ -490,10 +491,11 @@ void Sistema::ListarAsignaturas()
 {
     IIterator *i = this->asignaturas->getIterator();
     Asignatura * a;
+    std::cout << "Nombre            Id: "<< std::endl;
     while(i->hasCurrent())
     {
         a = (Asignatura *) i->getCurrent();
-        std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
+        std::cout <<a->getNombre()<<"           "<< a->getId()<< std::endl;
         i->next();
     }
 }
@@ -568,7 +570,7 @@ ICollection *Sistema::ListarDocentesAsignados(int id)
 
 void Sistema::InicioDeClase()
 {
-    int id, op, d, m , h;
+    int id, op;
     std::string nombre, emEs;
     try
     {
@@ -582,30 +584,23 @@ void Sistema::InicioDeClase()
         }
         IIterator *i = asig->getIterator();
         Asignatura *as;
+        std::cout << "Nombre            Id" << std::endl;
         while(i->hasCurrent())
         {
             as = (Asignatura *) i->getCurrent();
-            std::cout << as->getNombre() << "--------" << as->getId()<< std::endl;
+            std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id";
+        std::cout << "\nIngrese id asignatura";
         std::cin >> id;
         as = SeleccionAsignatura(id);
         if(!asig->member(as))
         {
             throw std::invalid_argument("\n\e[0;31mLa asignatura ingresada no esta asignada al docente.\n\e[0m");
         }
-        std::cout << "\nIngrese nombre";
+        std::cout << "\nIngrese nombre de clase: ";
         std::cin >> nombre;
-        std::cout << "\nIngrese Fecha y hora de comienzo";
-        std::cout << "\nIngrese dia: ";
-        std::cin >> d;
-        std::cout << "\nIngrese hora: ";
-        std::cin >> h;
-        std::cout << "\nIngrese minutos: ";
-        std::cin >> m;
-        DtFecha *f = new DtFecha(d, this->fecha->getMes(), this->fecha->getAnio(), 0, m, h);
-        Clase *c = as->crearClase(nombre, f, doc->getAsignacion(id)->getTipo());
+        Clase *c = as->crearClase(nombre, this->fecha, doc->getAsignacion(id)->getTipo());
         if(doc->getAsignacion(id)->getTipo() == Tipo::MONITOREO)
         {
             bool flag= true;
@@ -621,13 +616,14 @@ void Sistema::InicioDeClase()
                 }
                 IIterator *i = es->getIterator();
                 Estudiante * e;
+                std::cout << "Email estudiantes: "<< std::endl;
                 while(i->hasCurrent())
                 {
                     e = (Estudiante *) i->getCurrent();
-                    std::cout << e->getNombre() << "--------" << e->getEmail()<< std::endl;
+                    std::cout << e->getEmail()<< std::endl;
                     i->next();
                 }
-                std::cout << "\nIngrese email";
+                std::cout << "\nIngrese email: ";
                 std::cin >> emEs;
                 IKey *k = new String(emEs);
                 e = (Estudiante *)this->usuarios->find(k);
@@ -678,24 +674,11 @@ void Sistema::InicioDeClase()
                     throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 }
             }
-            //mostrar clase con outstream
-
         }
-        if(doc->getAsignacion(id)->getTipo() == Tipo::TEORICO)
-        {
-            Teorico *t = new Teorico;
-            t = dynamic_cast<Teorico *>(c);
-            //mostrar clase con outstream
-        }
-        if(doc->getAsignacion(id)->getTipo() == Tipo::PRACTICO)
-        {
-            Practico *p = new Practico;
-            p = dynamic_cast<Practico *>(c);
-            //mostrar clase con outstream
-        }
+        std::cout << c << std::endl;
         std::cout << "\nDesea confirmar? ";
         std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: ";
+        std::cout << "\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -782,13 +765,14 @@ void Sistema::InscripcionALasAsignaturas()
             }
             IIterator *i = asig->getIterator();
             Asignatura *as;
+            std::cout << "Nombre:           Id: " << std::endl;
             while(i->hasCurrent())
             {
                 as = (Asignatura *) i->getCurrent();
-                std::cout << as->getNombre() << "--------" << as->getId()<< std::endl;
+                std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
                 i->next();
             }
-            std::cout << "\nIngrese id";
+            std::cout << "\nIngrese id asignatura: ";
             std::cin >> id;
             as = SeleccionAsignatura(id);
             if(as==NULL)
@@ -801,7 +785,7 @@ void Sistema::InscripcionALasAsignaturas()
             }
             std::cout << "\nDesea confirmar? ";
             std::cout << "\n1-Si: ";
-            std::cout << "\n2-No: ";
+            std::cout << "\n2-No: \n";
             std::cin >> op;
             switch (op)
             {
@@ -826,7 +810,7 @@ void Sistema::InscripcionALasAsignaturas()
 
             std::cout << "\nDesea seguir inscribiendose? ";
             std::cout << "\n1-Si: ";
-            std::cout << "\n2-No: ";
+            std::cout << "\n2-No: \n";
             std::cin >> op;
             switch (op)
             {
@@ -882,13 +866,14 @@ void Sistema::ReproduccionEnDiferido()
         asig = ListarAsignaturasNoInscriptas();
         IIterator *i = asig->getIterator();
         Asignatura *as;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             as = (Asignatura *) i->getCurrent();
-            std::cout << as->getNombre() << "--------" << as->getId()<< std::endl;
+            std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id";
+        std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         IKey *k = new Integer(id);
         as = (Asignatura *)asignaturas->find(k);
@@ -901,20 +886,21 @@ void Sistema::ReproduccionEnDiferido()
         cl = as->getClasesDif();
         i = cl->getIterator();
         Clase *c;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id";
+        std::cout << "\nIngrese id clase: ";
         std::cin >> id;
         c = SeleccionClase(id, as->getId());
-        std::cout << "Asignatura: " << as->getNombre() << "--------" << as->getId()<< std::endl;
-        std::cout << "Clase: " << c->getNombre() << "--------" << c->getId()<< std::endl;
+        std::cout << "Asignatura: " << as->getNombre() << "         " << as->getId()<< std::endl;
+        std::cout << "Clase: " << c->getNombre() << "           " << c->getId()<< std::endl;
         std::cout << "\nDesea confirmar? ";
         std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: ";
+        std::cout << "\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -923,7 +909,7 @@ void Sistema::ReproduccionEnDiferido()
                 Estudiante *e = new Estudiante;
                 e = dynamic_cast<Estudiante *>(this->actual);
                 e->setAsisDif(id, fecha);
-                //mostrar mensajes de la clase
+                ListarMensajes(c);
                 break;
             }
             case 2:
@@ -993,29 +979,49 @@ void Sistema::FinalizacionDeClase()
         }
         IIterator *i = cl->getIterator();
         Clase *c;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id";
+        std::cout << "\nIngrese id clase: ";
         std::cin >> id;
         IKey *k = new Integer(id);
         if(!cl->member(k))
         {
             throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
         }
-        //mostrar id, nombre, tipo y fecha inicio con outstream maybe
+        std::cout << c << std::endl;
         std::cout << "\nDesea confirmar? ";
         std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: ";
+        std::cout << "\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
             case 1:
             {
                 d->finalizarClase(id, this->fecha);
+                ICollection *asistentes = new List;
+                asistentes = ListarAsistentes(id);
+                if(!asistentes->isEmpty())
+                {
+                    IIterator *i = asistentes->getIterator();
+                    Estudiante *e;
+                    while(i->hasCurrent())
+                    {
+                        e = (Estudiante*) i->getCurrent();
+                        e->getAsistenciaOn(id)->setFechaFin(this->fecha);
+                        i->next();
+                    }
+                }
+                if(dynamic_cast<Teorico *>(c))
+                {
+                    Teorico *t;
+                    t = (Teorico *) c;
+                    t->setAsistentes(asistentes->getSize());
+                }
                 std::cout << "\nClase finalizada ";
                 break;
             }
@@ -1047,7 +1053,7 @@ void Sistema::EliminacionDeAsignatura()
         int id, op;
         ListarAsignaturas();
         Asignatura *a;
-        std::cout << "\nIngrese id: ";
+        std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         IKey *k = new Integer(id);
         if(!this->asignaturas->member(k))
@@ -1057,7 +1063,7 @@ void Sistema::EliminacionDeAsignatura()
         a = SeleccionAsignatura(id);
         std::cout << "\nDesea confirmar? ";
         std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: ";
+        std::cout << "\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -1111,41 +1117,46 @@ void Sistema::EliminacionDeAsignatura()
 
 void Sistema::TiempoDeDictadoDeClases()
 {
-    int horasCom,minutosCom,segundosCom,horasFin,minutosFin,segundosFin,total;
+    int t, h = 0 ,m =0;
     try
     {
+        if(this->asignaturas->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mNo hay asignaturas.\e[0m");
+        }
         Asignatura * a;
         Clase * c;
         IIterator *i = this->asignaturas->getIterator();
-        IIterator *j = a->getClases()->getIterator();
-
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
             std::cout << a->getNombre() << ":\n   ";
-            while(j->hasCurrent())
+            if(a->getClasesDif()->isEmpty())
             {
-                c = (Clase *) j->getCurrent();
-
-                horasCom = c->getFechaCom()->getHora() * 3600;
-                minutosCom = c->getFechaCom()->getMinuto() * 60;
-                segundosCom = c->getFechaCom()->getSegundo();
-
-                horasFin = c->getFechaFin()->getHora() * 3600;
-                minutosFin = c->getFechaFin()->getMinuto() * 60;
-                segundosFin = c->getFechaFin()->getSegundo();
-
-                total = ((horasFin + minutosFin + segundosFin) - (horasCom + minutosCom + segundosCom));
-                std::cout << c->getNombre() << ": " << total << " minutos\n";
-                j->next();
+                std::cout << "No tiene clases.\n   ";
             }
-
+            else
+            {
+                IIterator *j = a->getClasesDif()->getIterator();
+                while(j->hasCurrent())
+                {
+                    c = (Clase *) j->getCurrent();
+                    t = c->TiempoDictado();
+                    if(t + m > 59)
+                    {
+                        h ++;
+                        m = (t + m) % 60;
+                    }
+                    j->next();
+                }
+                std::cout << "Tiempo Dictado:   " << h << ":" << m << std::endl;
+            }
             i->next();
         }
     }
     catch(std::out_of_range &e)
     {
-        std::cerr << "No hay Asignaturas o clases: " << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 }
 
@@ -1158,13 +1169,14 @@ void Sistema::AsistenciaAClaseEnVivo()
         asig = ListarAsignaturasInscriptas();
         IIterator *i = asig->getIterator();
         Asignatura *a;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
+            std::cout << a->getNombre() << "            " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id: ";
+        std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1175,24 +1187,25 @@ void Sistema::AsistenciaAClaseEnVivo()
         cl = a->getClasesVivo();
         i = cl->getIterator();
         Clase *c;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id: ";
+        std::cout << "\nIngrese id clase: ";
         std::cin >> id;
         c = SeleccionClase(id, a->getId());
         if(!cl->member(c))
         {
             throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
         }
-        std::cout << a->getNombre() << "--------" << a->getId()<< std::endl;
-        std::cout << c->getNombre() << "--------" << c->getId()<< std::endl;
+        std::cout << "Asignatura: " << a->getNombre() << "        " << a->getId()<< std::endl;
+        std::cout << "Clase: " << c->getNombre() << "        " << c->getId()<< std::endl;
         std::cout << "\nDesea confirmar? ";
         std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: ";
+        std::cout << "\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -1233,7 +1246,7 @@ void Sistema::FinalizarAsistencia()
         int op, id;
         std::cout << "\nElija una opcion ";
         std::cout << "\n1-En vivo: ";
-        std::cout << "\n2-En diferido: ";
+        std::cout << "\n2-En diferido: \n";
         std::cin >> op;
         switch (op)
         {
@@ -1245,13 +1258,14 @@ void Sistema::FinalizarAsistencia()
                 aO = e->getAsistenciasOn();
                 IIterator *i = aO->getIterator();
                 AsistenciaOnline *a;
+                std::cout <<  "Id clases asistiendo en vivo:" << std::endl;
                 while(i->hasCurrent())
                 {
                     a = (AsistenciaOnline *) i->getCurrent();
                     std::cout << a->getIdClase()<< std::endl;
                     i->next();
                 }
-                std::cout << "\nIngrese id: ";
+                std::cout << "\nIngrese id clase: ";
                 std::cin >> id;
                 IKey *k = new Integer(id);
                 if(!aO->member(k))
@@ -1261,7 +1275,7 @@ void Sistema::FinalizarAsistencia()
                 a = (AsistenciaOnline* )aO->find(k);
                 std::cout << "\nDesea confirmar ";
                 std::cout << "\n1-Si: ";
-                std::cout << "\n2-No: ";
+                std::cout << "\n2-No: \n";
                 std::cin >> op;
                 switch (op)
                 {
@@ -1290,13 +1304,14 @@ void Sistema::FinalizarAsistencia()
                 aD = e->getAsistenciasDif();
                 IIterator *i = aD->getIterator();
                 AsistenciaDiferida *a;
+                std::cout <<  "Id clases asistiendo en diferido" << std::endl;
                 while(i->hasCurrent())
                 {
                     a = (AsistenciaDiferida *) i->getCurrent();
                     std::cout << a->getIdClase()<< std::endl;
                     i->next();
                 }
-                std::cout << "\nIngrese id: ";
+                std::cout << "\nIngrese id clase: ";
                 std::cin >> id;
                 IKey *k = new Integer(id);
                 if(!aD->member(k))
@@ -1306,7 +1321,7 @@ void Sistema::FinalizarAsistencia()
                 a = (AsistenciaDiferida*) aD->find(k);
                 std::cout << "\nDesea confirmar ";
                 std::cout << "\n1-Si: ";
-                std::cout << "\n2-No: ";
+                std::cout << "\n2-No: \n";
                 std::cin >> op;
                 switch (op)
                 {
@@ -1350,13 +1365,14 @@ void Sistema::TiempoDeAsistenciaAClase()
         asig = ListarAsignaturasAsignadas(d);
         IIterator *i = asig->getIterator();
         Asignatura *a;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "--------" << a->getId();
+            std::cout << a->getNombre() << "            " << a->getId();
             i->next();
         }
-        std::cout << "\nIngrese id: ";
+        std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1367,17 +1383,19 @@ void Sistema::TiempoDeAsistenciaAClase()
         cl = ListarClasesPorAsig(a);
         i = cl->getIterator();
         Clase *c;
+        std::cout <<  "Id        Promedio de asistencia" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
             prom = PromedioAsistenciaClase(c->getId(), id);
-            std::cout << c->getId() << "--------" << prom;
+            std::cout << c->getId() << "            " << prom;
             i->next();
         }
     }
     catch(std::out_of_range &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
     }
 }
 
@@ -1442,13 +1460,14 @@ void Sistema::ListadoDeClases()
         }
         IIterator *i = asig->getIterator();
         Asignatura *a;
+        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "--------" << a->getId();
+            std::cout << a->getNombre() << "            " << a->getId();
             i->next();
         }
-        std::cout << "\nIngrese id: ";
+        std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1458,17 +1477,21 @@ void Sistema::ListadoDeClases()
         IDictionary *cl = a->getClases();
         if(cl->isEmpty())
         {
-            throw std::invalid_argument("\n\e[0;31mLa asignatura no tiene clases en vivo.\n\e[0m");
+            throw std::invalid_argument("\n\e[0;31mLa asignatura no tiene clases.\n\e[0m");
         }
         Clase *c;
         i = cl->getIterator();
         Docente *d2;
         while(i->hasCurrent())
         {
-            c = (Clase *) i->getCurrent();
-            //std::cout << c; mostrar con outstream
-            d2 = DocenteDeClase(c->getId(), id);
-            std::cout << "Docente: " << d2->getNombre();
+            if(!c->estaEnVivo())
+            {
+                c = (Clase *) i->getCurrent();
+                std::cout <<  c << std::endl;
+                d2 = DocenteDeClase(c->getId(), id);
+                std::cout << "Docente: " << d2->getNombre();
+                std::cout <<  "\n" << std::endl;
+            }
             i->next();
         }
     }
@@ -1519,6 +1542,7 @@ void Sistema::EnvioDeMensaje()
                 throw std::invalid_argument("\e[0;31mNo esta asistiendo a ninguna clase.\e[0m");
             }
             AsistenciaOnline *aO;
+            std::cout << "Id Clases" << std::endl;
             while(i->hasCurrent())
             {
                 aO = (AsistenciaOnline *) i->getCurrent();
@@ -1528,12 +1552,12 @@ void Sistema::EnvioDeMensaje()
                 }
                 i->next();
             }
-            std::cout << "\nIngrese id: ";
+            std::cout << "\nIngrese id clase: ";
             std::cin >> id;
             IKey *k = new Integer(id);
             if(!as->member(k))
             {
-                throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
+                throw std::invalid_argument("\e[0;31mLa clase ingresada no es correcta.\e[0m");
             }
             aO=(AsistenciaOnline* ) as->find(k);
             c = SeleccionClase(id, aO->getIdAsig());
@@ -1549,13 +1573,14 @@ void Sistema::EnvioDeMensaje()
                 throw std::invalid_argument("\e[0;31mNo esta dictando ninguna clase.\e[0m");
             }
             IIterator *i = cl->getIterator();
+            std::cout << "Id Clases" << std::endl;
             while(i->hasCurrent())
             {
                 c = (Clase *) i->getCurrent();
                 std::cout << c->getId() << std::endl;
                 i->next();
             }
-            std::cout << "\nIngrese id: ";
+            std::cout << "\nIngrese id clase: ";
             std::cin >> id;
             IKey *k = new Integer(id);
             if(!cl->member(k))
@@ -1575,7 +1600,7 @@ void Sistema::EnvioDeMensaje()
             ListarMensajes(c);
             std::cout << "\nEs una respuesta? ";
             std::cout << "\n1-Si: ";
-            std::cout << "\n2-No: ";
+            std::cout << "\n2-No: \n";
             std::cin >> op;
         }
         switch (op)
@@ -1604,7 +1629,7 @@ void Sistema::EnvioDeMensaje()
         }
         std::cout << "\nDesea confirmar? ";
         std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: ";
+        std::cout << "\n2-No: \n";
         std::cin >> op;
         switch(op)
         {
@@ -1616,6 +1641,7 @@ void Sistema::EnvioDeMensaje()
             }
             case 2:
             {
+                delete m;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -1639,7 +1665,13 @@ void Sistema::ListarMensajes(Clase *c)
     while(i->hasCurrent())
     {
         m = (Mensaje*) i->getCurrent();
-        //std::cout<< m; outstream
+        std::cout << m->getContenido() << std::endl;
+
+        if(m->getRespuesta()!= NULL)
+        {
+            std::cout << "Respuesta a: " << m->getRespuesta()->getContenido() << std::endl;
+        }
+        std::cout << "\n";
         i->next();
     }
 }
@@ -1655,6 +1687,30 @@ Mensaje *Sistema::SeleccionMensaje(Clase *c, int id)
     m = (Mensaje *) c->getMensajes()->find(k);
     return m;
 }
+
+ICollection *Sistema::ListarAsistentes(int idC)
+{
+    ICollection *asis = new List;
+    Estudiante *e;
+    Usuario *u;
+    IIterator *i = this->usuarios->getIterator();
+    while(i->hasCurrent())
+    {
+        u = (Usuario *) i->getCurrent();
+        if(dynamic_cast<Estudiante *>(u))
+        {
+            e = (Estudiante *) u;
+            if(e->getAsistenciaOn(idC)!=NULL)
+            {
+                asis->add(e);
+            }
+        }
+        i->next();
+    }
+    return asis;
+}
+
+
 
 void Sistema::ModificarFechaSistema()
 {
@@ -1701,7 +1757,8 @@ void Sistema::ModificarFechaSistema()
     }
     catch(std::out_of_range &e)
     {
-        std::cerr << e.what() << std::endl;
+        std::cout << "\nError: " << e.what() << std::endl;
+        std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
     }
 }
 

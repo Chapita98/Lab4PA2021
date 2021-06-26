@@ -71,7 +71,7 @@ int AsistenciaOnline::TiempodeAsistencia()
         }
 
     }
-    return m /100;
+    return m;
 }
 
 AsistenciaOnline::~AsistenciaOnline() {}

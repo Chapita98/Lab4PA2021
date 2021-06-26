@@ -59,6 +59,7 @@ public:
 	Docente *DocenteDeClase(int idC, int idA);
 	void ListarMensajes(Clase *c);
 	Mensaje *SeleccionMensaje(Clase *c, int id);
+	ICollection *ListarAsistentes(int idC);
 
 	virtual ~Sistema();
 };

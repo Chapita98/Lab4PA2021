@@ -45,12 +45,16 @@ void Monitoreo::print(std::ostream&){
 	std::cout << "Fecha de Comienzo: " << std::endl;
 	std::cout << this->getFechaCom()->getAnio() << "/" << this->getFechaCom()->getMes() << "/" << this->getFechaCom()->getDia() << std::endl;
 	std::cout << this->getFechaCom()->getHora() << ":" << this->getFechaCom()->getMinuto() << ":" << this->getFechaCom()->getSegundo() << std::endl;
-	std::cout << "Fecha de finalizacion: " << std::endl;
-	std::cout << this->getFechaFin()->getAnio() << "/" << this->getFechaFin()->getMes() << "/" << this->getFechaFin()->getDia() << std::endl;
-	std::cout << this->getFechaFin()->getHora() << ":" << this->getFechaFin()->getMinuto() << ":" << this->getFechaFin()->getSegundo() << std::endl;
-    std::cout << "Estudiantes: " << std::endl;
+	if(this->getFechaFin()!= NULL)
+    {
+        std::cout << "Fecha de finalizacion: " << std::endl;
+        std::cout << this->getFechaFin()->getAnio() << "/" << this->getFechaFin()->getMes() << "/" << this->getFechaFin()->getDia() << std::endl;
+        std::cout << this->getFechaFin()->getHora() << ":" << this->getFechaFin()->getMinuto() << ":" << this->getFechaFin()->getSegundo() << std::endl;
+    }
+
     IIterator *i = this->estudiantes->getIterator();
     Estudiante *e;
+    std::cout << "Estudiantes: " << std::endl;
     while(i->hasCurrent())
     {
         e = (Estudiante*) i->getCurrent();
