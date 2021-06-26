@@ -26,15 +26,16 @@ public:
     std::string getNombre();
     ICollection *getAsignaturas();
     Asignacion *getAsignacion(int id);
-    ICollection *getClasesVivo();
+    IDictionary *getClasesVivo();
+    IDictionary *getClases();
     Clase *getClase(int id);
 
     void setInstituto(std::string _instituto);
     void setAsignacion(Asignacion *a, IKey *k);
     void setClase(Clase *c);
 
-    bool estaAsignado(IKey *id);
-    void finalizarClase(int id, DtFecha fecha);
+    bool estaAsignado(int id);
+    void finalizarClase(int id, DtFecha *fecha);
     void BorrarAsignacion(int id, IDictionary *cl);
     Asignacion *crearAsignacion(Tipo tipo, int idAsignatura);
 

@@ -9,7 +9,7 @@ class Sistema : public ISistema
 private:
 	IDictionary * usuarios;
 	IDictionary * asignaturas;
-	int dia, mes, anio, hora, minuto, seg;
+	DtFecha *fecha;
 	Usuario *actual;
 public:
 	Sistema();
@@ -22,9 +22,6 @@ public:
 	void imprimirMenuAdministrador();
 	void imprimirMenuDocente();
 	void imprimirMenuEstudiante();
-	void obtenerFechaDelSistema(int &dia, int &mes, int &anio);
-	void fechaAutomatica();
-	void mostrarFecha(DtFecha fecha);
 	void InicioSesion(std::string email, std::string contrasenia, int i);
 
 	void AltaDeUsuario();
@@ -36,6 +33,13 @@ public:
     void FinalizacionDeClase();
     void EliminacionDeAsignatura();
     void TiempoDeDictadoDeClases();
+    void AsistenciaAClaseEnVivo();
+    void FinalizarAsistencia();
+    void TiempoDeAsistenciaAClase();
+    void ListadoDeClases();
+    void EnvioDeMensaje();
+    void ModificarFechaSistema();
+    void ConsultarFechaSistema();
 
 	void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url);
 	void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url);
@@ -44,38 +48,18 @@ public:
 	ICollection *ListarAsignaturasInscriptas();
 	ICollection *ListarAsignaturasAsignadas(Docente *d);
 	ICollection *ListarEstudiantesInscriptos(int id);
-	ICollection *ListarDocentesNoAsignados(IKey *id);
-	ICollection *ListarDocentesAsignados(IKey *id);
+	ICollection *ListarDocentesNoAsignados(int id);
+	ICollection *ListarDocentesAsignados(int id);
+	ICollection *ListarClasesPorAsig(Asignatura *a);
+	int PromedioAsistenciaClase(int idC, int idA);
 	Docente *SeleccionDocente(std::string email);
 	Asignatura *SeleccionAsignatura(int id);
-	Clase *SeleccionClase(int id, Asignatura *a);
+	Clase *SeleccionClase(int idC, int idA);
 	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
-
-
-	/*void ConfiguracionRelojInterno();
-
-
-	void TiempoDeAsistenciaAClase();
-	void ListadoDeClases();
-	void EnvioDeMensaje();
-	void AsistenciaAClaseEnVivo();
-
-	void AltaAsignatura();
-
-	void ListarClasesVivo(std::string email);
-	void ListarEstudiantesInscriptos();
-	void ListarMensajes(std::string idClase);
-
-
-	void SeleccionClase(int id);
-	void SeleccionEstudiante(int ci);
-	void CreaClase(std::string nombre, DtFecha fechaComienzo, List estudiantes);//maybe
-	void CrearMensaje(std::string texto, int idRespuesta);
-	void CrearMensaje(std::string texto);
-	void MostrarDatos();
-	void MostrarTiempoAsistenciaClase();
-	void ObtenerClase();
-	void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin);*/
+	Docente *DocenteDeClase(int idC, int idA);
+	void ListarMensajes(Clase *c);
+	Mensaje *SeleccionMensaje(Clase *c, int id);
+	ICollection *ListarAsistentes(int idC);
 
 	virtual ~Sistema();
 };

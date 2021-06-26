@@ -1,5 +1,10 @@
 #include "./../headers/Estudiante.h"
-Estudiante::Estudiante() {}
+Estudiante::Estudiante()
+{
+    this->asignaturas = new OrderedDictionary;
+    this->asistenciasdif = new OrderedDictionary;
+    this->asistenciason = new OrderedDictionary;
+}
 
 Estudiante::Estudiante(int _ci)
 {
@@ -36,6 +41,30 @@ AsistenciaDiferida * Estudiante::getAsistenciaDif(int id)
 
 }
 
+AsistenciaOnline * Estudiante::getAsistenciaOn(int id)
+{
+    IKey *k = new Integer(id);
+    if(this->asistenciason->member(k))
+    {
+        return (AsistenciaOnline *)this->asistenciason->find(k);
+    }
+    else
+    {
+        return NULL;
+    }
+
+}
+
+IDictionary *Estudiante::getAsistenciasOn()
+{
+    return this->asistenciason;
+}
+
+IDictionary *Estudiante::getAsistenciasDif()
+{
+    return this->asistenciasdif;
+}
+
 void Estudiante::setCi(int _ci)
 {
     this->ci = _ci;
@@ -65,6 +94,13 @@ void Estudiante::setAsisDif(int id, DtFecha *fecha)
 
 }
 
+void Estudiante::setAsisOn(int id, AsistenciaOnline *a)
+{
+    IKey *k = new Integer(id);
+    this->asistenciason->add(k, a);
+
+}
+
 bool Estudiante::estaInscripto(int id)
 {
     if(!this->asignaturas->isEmpty())
@@ -84,6 +120,12 @@ bool Estudiante::estaInscripto(int id)
         return false;
     }
 
+}
+
+AsistenciaOnline *Estudiante::crearAsisOn(int idC, int idA, DtFecha *fechaCom)
+{
+    AsistenciaOnline *a = new AsistenciaOnline(idC, idA, fechaCom);
+    return a;
 }
 
 void Estudiante::BorrarAsignatura(int id)

@@ -43,6 +43,23 @@ ICollection *Asignatura::getClasesDif()
     return cl;
 }
 
+ICollection *Asignatura::getClasesVivo()
+{
+    IIterator *i = this->clases->getIterator();
+    Clase *c;
+    ICollection *cl = new List;
+    while(i->hasCurrent())
+    {
+        c = (Clase *) i->getCurrent();
+        if(c->estaEnVivo())
+        {
+            cl->add(c);
+        }
+        i->next();
+    }
+    return cl;
+}
+
 void Asignatura::setId(int _id)
 {
     this->id = _id;
@@ -59,7 +76,7 @@ void Asignatura::setNombre(std::string _nombre)
     this->nombre = _nombre;
 }
 
-Clase * Asignatura::crearClase(std::string nombre, DtFecha fechaComienzo, Tipo tipo)
+Clase * Asignatura::crearClase(std::string nombre, DtFecha *fechaComienzo, Tipo tipo)
 {
     int id = this->clases->getSize() + 1;
     if(tipo == Tipo::MONITOREO)

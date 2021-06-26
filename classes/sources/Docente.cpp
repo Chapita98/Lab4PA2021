@@ -1,18 +1,22 @@
 #include "./../headers/Docente.h"
-Docente::Docente() {}
+Docente::Docente()
+{
+    this->asignaciones = new OrderedDictionary;
+    this->clases = new OrderedDictionary;
+}
 
 Docente::Docente(std::string _instituto)
 {
     this->instituto = _instituto;
+    this->asignaciones = new OrderedDictionary;
+    this->clases = new OrderedDictionary;
 }
 
 Docente::Docente(std::string _instituto, std::string _email, std::string _nombre, std::string _imagen, std::string _contrasenia) : Usuario(_email, _nombre, _imagen, _contrasenia)
 {
     this->instituto = _instituto;
-    /*this->email = _email;
-    this->nombre = _nombre;
-    this->imagen = _imagen;
-    this->contrasenia = _contrasenia;*/
+    this->asignaciones = new OrderedDictionary;
+    this->clases = new OrderedDictionary;
 }
 
 std::string Docente::getInstituto()
@@ -33,14 +37,14 @@ std::string Docente::getNombre()
 ICollection *Docente::getAsignaturas()
 {
     IIterator *i = this->asignaciones->getIterator();
-    Integer *k;
+    Integer *id;
     Asignacion *as;
-    ICollection *a = NULL;
+    ICollection *a = new List;
     while(i->hasCurrent())
     {
         as = (Asignacion *) i->getCurrent();
-        k = as->getAsignatura();
-        a->add(k);
+        id = new Integer(as->getIdAsignatura());
+        a->add(id);
         i->next();
     }
     return a;
@@ -52,17 +56,19 @@ Asignacion *Docente::getAsignacion(int id)
     return (Asignacion *)this->asignaciones->find(k);
 }
 
-ICollection *Docente::getClasesVivo()
+IDictionary *Docente::getClasesVivo()
 {
     IIterator *i = this->clases->getIterator();
     Clase *c;
-    ICollection *cl = new List;
+    IDictionary *cl = new OrderedDictionary;
+    IKey *k = new Integer(0);
     while(i->hasCurrent())
     {
         c = (Clase *) i->getCurrent();
         if (c->estaEnVivo())
         {
-            cl->add(c);
+            k = new Integer(c->getId());
+            cl->add(k,c);
         }
         i->next();
     }
@@ -73,6 +79,11 @@ Clase *Docente::getClase(int id)
 {
     IKey *k = new Integer(id);
     return (Clase *)this->clases->find(k);
+}
+
+IDictionary *Docente::getClases()
+{
+    return this->clases;
 }
 
 void Docente::setInstituto(std::string _instituto)
@@ -90,9 +101,10 @@ void Docente::setClase(Clase *c)
     this->clases->add(i, c);
 }
 
-bool Docente::estaAsignado(IKey *id)
+bool Docente::estaAsignado(int id)
 {
-    if(this->asignaciones->member(id))
+    IKey *k = new Integer(id);
+    if(this->asignaciones->member(k))
     {
         return true;
     }
@@ -102,7 +114,7 @@ bool Docente::estaAsignado(IKey *id)
     }
 }
 
-void Docente::finalizarClase(int id, DtFecha fecha)
+void Docente::finalizarClase(int id, DtFecha *fecha)
 {
     IKey *k = new Integer(id);
     Clase *c;

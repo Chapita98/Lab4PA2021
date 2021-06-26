@@ -16,11 +16,15 @@ private:
 
 public:
 	Monitoreo();
-	Monitoreo(int _id, std::string _nombre, DtFecha _fechaCom);
+	Monitoreo(int _id, std::string _nombre, DtFecha *_fechaCom);
 
-	Estudiante *getEstudiante(int i);
+	ICollection *getEstudiantes();
+	int getCantidadEstudiantes();
 
 	void setEstudiante(Estudiante *_estudiante);
+
+	bool estaHabilitado(Estudiante *e);
+	void print(std::ostream&);
 
 	virtual ~Monitoreo();
 };

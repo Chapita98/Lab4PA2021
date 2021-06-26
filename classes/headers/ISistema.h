@@ -55,9 +55,6 @@ public:
 	virtual void imprimirMenuAdministrador() = 0;
 	virtual void imprimirMenuDocente() = 0;
 	virtual void imprimirMenuEstudiante() = 0;
-	virtual void obtenerFechaDelSistema(int &dia, int &mes, int &anio) = 0;
-	virtual void fechaAutomatica() = 0;
-	virtual void mostrarFecha(DtFecha fecha) = 0;
 
 	virtual void AltaDeUsuario() = 0;
 	virtual void AltaDeAsignatura() = 0;

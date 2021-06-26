@@ -32,7 +32,7 @@ public:
     void setId(int _id);
     void setNombre(std::string _nombre);
     void setClase(Clase *c);
-    Clase * crearClase(std::string nombre, DtFecha fechaComienzo, Tipo tipo);
+    Clase * crearClase(std::string nombre, DtFecha *fechaComienzo, Tipo tipo);
     void BorrarInstancias();
 
     virtual ~Asignatura();

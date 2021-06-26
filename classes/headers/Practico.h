@@ -9,8 +9,9 @@ private:
 
 public:
 	Practico();
-	Practico(int _id, std::string _nombre, DtFecha _fechaCom);
+	Practico(int _id, std::string _nombre, DtFecha *_fechaCom);
 
+	void print(std::ostream&);
 	virtual ~Practico();
 };
 

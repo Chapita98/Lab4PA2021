@@ -25,14 +25,18 @@ public:
 
 	int getCi();
 	AsistenciaDiferida *getAsistenciaDif(int id);
+	AsistenciaOnline *getAsistenciaOn(int id);
+	IDictionary *getAsistenciasOn();
+	IDictionary *getAsistenciasDif();
 
 	void setCi(int _ci);
 	void setAsignatura(Asignatura *a);
 	void setAsisDif(int id, DtFecha *fecha);
+	void setAsisOn(int id, AsistenciaOnline *a);
 
     bool estaInscripto(int id);
     AsistenciaDiferida crearAsisDif(int id, DtFecha *fechaCom);
-    AsistenciaOnline crearAsisOn(int id, DtFecha *fechaCom);
+    AsistenciaOnline *crearAsisOn(int idC, int idA, DtFecha *fechaCom);
     void BorrarAsignatura(int id);
 	virtual ~Estudiante();
 };

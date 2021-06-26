@@ -5,8 +5,6 @@
 #include "./../../ICollection/interfaces/ICollection.h"
 #include "./../../ICollection/collections/List.h"
 
-//TODO Luego definir un static const para fecha, si es necesario
-
 class AsistenciaDiferida : public ICollectible
 {
 private:
@@ -16,6 +14,7 @@ private:
 
 public:
 	AsistenciaDiferida();
+	AsistenciaDiferida(int idC);
 
 	ICollection *getFechaCom();
 	ICollection *getFechaFin();
