@@ -13,11 +13,12 @@ private:
 public:
     Teorico();
     Teorico(int _asistentes);
-    Teorico(int _asistentes, int _id, std::string _nombre, DtFecha _fechaCom);
+    Teorico(int _asistentes, int _id, std::string _nombre, DtFecha *_fechaCom);
 
     int getAsistentes();
 
     void setAsistentes(int _asistentes);
+    void print(std::ostream&);
 
     virtual ~Teorico();
 };

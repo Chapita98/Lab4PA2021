@@ -33,7 +33,7 @@ public:
     void setClase(Clase *c);
 
     bool estaAsignado(int id);
-    void finalizarClase(int id, DtFecha fecha);
+    void finalizarClase(int id, DtFecha *fecha);
     void BorrarAsignacion(int id, IDictionary *cl);
     Asignacion *crearAsignacion(Tipo tipo, int idAsignatura);
 

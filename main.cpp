@@ -8,7 +8,6 @@ int main()
 	ISistema *s = f.getSistema();
 	int opcionUsuario;
 	bool bandera = true;
-	s->fechaAutomatica();
 	while (bandera == true)
 	{
 		s->imprimirTextoPrincipal();

@@ -8,22 +8,22 @@ class Mensaje : public ICollectible
 {
 private:
 	int id;
-	DtFecha fechaEnvio;
+	DtFecha *fechaEnvio;
 	std::string contenido;
 	Mensaje *respuesta;
 
 public:
 	Mensaje();
-	Mensaje(int _id, DtFecha _fechaEnvio, std::string _contenido);
+	Mensaje(int _id, DtFecha *_fechaEnvio, std::string _contenido);
 
 	int getId();
-	DtFecha getFechaEnvio();
+	DtFecha *getFechaEnvio();
 	std::string getContenido();
 	Mensaje *getRespuesta();
 
 
 	void setId(int _id);
-	void setFechaEnvio(DtFecha &_fechaEnvio);
+	void setFechaEnvio(DtFecha *_fechaEnvio);
 	void setContenido(std::string _contenido);
 	void setRespuesta(Mensaje *m);
 

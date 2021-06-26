@@ -13,7 +13,7 @@ private:
 
 public:
 	AsistenciaOnline();
-	AsistenciaOnline(int idClase, int idAsig, DtFecha _fechaCom);
+	AsistenciaOnline(int idClase, int idAsig, DtFecha *_fechaCom);
 
 	DtFecha *getFechaCom();
 	DtFecha *getFechaFin();

@@ -4,7 +4,7 @@ Clase::Clase()
 	this->mensajes = new OrderedDictionary;
 }
 
-Clase::Clase(int _id, std::string _nombre, DtFecha _fechaCom)
+Clase::Clase(int _id, std::string _nombre, DtFecha *_fechaCom)
 {
 	this->id = _id;
 	this->nombre = _nombre;
@@ -27,12 +27,12 @@ std::string Clase::getNombre()
 	return this->nombre;
 }
 
-DtFecha Clase::getFechaCom()
+DtFecha *Clase::getFechaCom()
 {
 	return this->fechaCom;
 }
 
-DtFecha Clase::getFechaFin()
+DtFecha *Clase::getFechaFin()
 {
 	return this->fechaFin;
 }
@@ -51,12 +51,12 @@ void Clase::setNombre(std::string _nombre)
 	this->nombre = _nombre;
 }
 
-void Clase::setFechaCom(DtFecha &_fecha)
+void Clase::setFechaCom(DtFecha *_fecha)
 {
 	this->fechaCom = _fecha;
 }
 
-void Clase::setFechaFin(DtFecha &_fecha)
+void Clase::setFechaFin(DtFecha *_fecha)
 {
 	this->fechaFin = _fecha;
 }
@@ -72,14 +72,14 @@ void Clase::setMensaje(Mensaje *m)
     this->mensajes->add(k, m);
 }
 
-Mensaje *Clase::crearMensaje(std::string contenido, DtFecha fecha)
+Mensaje *Clase::crearMensaje(std::string contenido, DtFecha *fecha)
 {
     int id = this->mensajes->getSize() +1;
     Mensaje *m = new Mensaje(id, fecha, contenido);
     return m;
 }
 
-Mensaje *Clase::crearRespuesta(std::string contenido, Mensaje *m, DtFecha fecha)
+Mensaje *Clase::crearRespuesta(std::string contenido, Mensaje *m, DtFecha *fecha)
 {
     int id = this->mensajes->getSize() +1;
     Mensaje *msj = new Mensaje(id, fecha, contenido);
@@ -99,7 +99,7 @@ bool Clase::estaEnVivo()
     }
 }
 
-void Clase::finalizar(int url, DtFecha fecha)
+void Clase::finalizar(int url, DtFecha *fecha)
 {
     this->video = url;
     this->fechaFin = fecha;
@@ -117,6 +117,11 @@ void Clase::BorrarInstancias()
         delete m;
         i->next();
     }
+}
+
+std::ostream& operator<<(std::ostream& out , Clase* info) {
+	info->print(out);
+	return out;
 }
 
 Clase::~Clase() {}

@@ -2,7 +2,7 @@
 
 Mensaje::Mensaje() {}
 
-Mensaje::Mensaje(int _id, DtFecha _fechaEnvio, std::string _contenido)
+Mensaje::Mensaje(int _id, DtFecha *_fechaEnvio, std::string _contenido)
 {
     this->id = _id;
     this->fechaEnvio = _fechaEnvio;
@@ -14,7 +14,7 @@ int Mensaje::getId()
     return this->id;
 }
 
-DtFecha Mensaje::getFechaEnvio()
+DtFecha *Mensaje::getFechaEnvio()
 {
     return this->fechaEnvio;
 }
@@ -34,7 +34,7 @@ void Mensaje::setId(int _id)
     this->id = _id;
 }
 
-void Mensaje::setFechaEnvio(DtFecha &_fechaEnvio)
+void Mensaje::setFechaEnvio(DtFecha *_fechaEnvio)
 {
     this->fechaEnvio = _fechaEnvio;
 }

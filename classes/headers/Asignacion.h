@@ -15,7 +15,7 @@ public:
     Asignacion(Tipo _tipo, int _idAsignatura);
 
     Tipo getTipo();
-    Integer *getAsignatura();
+    int getIdAsignatura();
 
     void setTipo(Tipo _tipo);
 

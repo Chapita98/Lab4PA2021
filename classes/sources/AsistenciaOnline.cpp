@@ -1,6 +1,6 @@
 #include "./../headers/AsistenciaOnline.h"
 
-AsistenciaOnline::AsistenciaOnline(int idC, int idA, DtFecha _fechaCom)
+AsistenciaOnline::AsistenciaOnline(int idC, int idA, DtFecha *_fechaCom)
 {
 	this->idClase = idC;
 	this->idAsig = idA;

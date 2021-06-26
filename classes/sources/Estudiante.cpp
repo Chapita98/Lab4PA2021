@@ -122,7 +122,7 @@ bool Estudiante::estaInscripto(int id)
 
 }
 
-AsistenciaOnline *Estudiante::crearAsisOn(int idC, int idA, DtFecha fechaCom)
+AsistenciaOnline *Estudiante::crearAsisOn(int idC, int idA, DtFecha *fechaCom)
 {
     AsistenciaOnline *a = new AsistenciaOnline(idC, idA, fechaCom);
     return a;

@@ -27,14 +27,14 @@ std::string Docente::getInstituto()
 ICollection *Docente::getAsignaturas()
 {
     IIterator *i = this->asignaciones->getIterator();
-    Integer *k;
+    Integer *id;
     Asignacion *as;
-    ICollection *a = NULL;
+    ICollection *a = new List;
     while(i->hasCurrent())
     {
         as = (Asignacion *) i->getCurrent();
-        k = as->getAsignatura();
-        a->add(k);
+        id = new Integer(as->getIdAsignatura());
+        a->add(id);
         i->next();
     }
     return a;
@@ -104,7 +104,7 @@ bool Docente::estaAsignado(int id)
     }
 }
 
-void Docente::finalizarClase(int id, DtFecha fecha)
+void Docente::finalizarClase(int id, DtFecha *fecha)
 {
     IKey *k = new Integer(id);
     Clase *c;
