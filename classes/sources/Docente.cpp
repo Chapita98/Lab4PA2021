@@ -9,11 +9,25 @@ Docente::Docente(std::string _instituto)
 Docente::Docente(std::string _instituto, std::string _email, std::string _nombre, std::string _imagen, std::string _contrasenia) : Usuario(_email, _nombre, _imagen, _contrasenia)
 {
     this->instituto = _instituto;
+    /*this->email = _email;
+    this->nombre = _nombre;
+    this->imagen = _imagen;
+    this->contrasenia = _contrasenia;*/
 }
 
 std::string Docente::getInstituto()
 {
     return this->instituto;
+}
+
+std::string Docente::getEmail()
+{
+    return this->email;
+}
+
+std::string Docente::getNombre()
+{
+    return this->nombre;
 }
 
 ICollection *Docente::getAsignaturas()

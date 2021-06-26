@@ -6,7 +6,7 @@
 
 class Usuario : public ICollectible
 {
-private:
+protected:
 	std::string email;
 	std::string nombre;
 	std::string imagen;

@@ -22,6 +22,8 @@ public:
 
 
     std::string getInstituto();
+    std::string getEmail();
+    std::string getNombre();
     ICollection *getAsignaturas();
     Asignacion *getAsignacion(int id);
     ICollection *getClasesVivo();

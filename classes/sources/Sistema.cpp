@@ -183,7 +183,33 @@ void Sistema::menuCaso3()
 
 void Sistema::menuCaso4()
 {
-    // INGRESO DATOS DE PRUEBA
+    Asignatura a1 = Asignatura(1, "Programacion 1");//Teórico, Práctico, Monitoreo
+    Asignatura a2 = Asignatura(2, "Programacion 2");//Teórico, Práctico, Monitoreo
+    Asignatura a3 = Asignatura(3, "Programacion 3");//Teórico, Práctico
+
+    // url, contrasenia quedan en como string
+    Docente d1 = Docente("INCO", "juan@mail.com", "Juan Perez", "1", "1");
+    Docente d2 = Docente("INCO", "maria@mail.com", "Maria Pires", "1", "1");
+    Docente d3 = Docente("INCO", "jorge@mail.com", "Jorge Chacho", "1", "1");
+    d1.crearAsignacion(TEORICO, 1);
+    d2.crearAsignacion(PRACTICO, 1);
+    d3.crearAsignacion(MONITOREO, 1);
+
+    Estudiante e1 = Estudiante(12345678, "roberto@mail.com", "Roberto Parra", "1", "1");
+    Estudiante e2 = Estudiante(23456789, "ana@mail.com", "Ana Rodriguez", "1", "1");
+    Estudiante e3 = Estudiante(34567890, "ramon@mail.com", "Ramon Valdez", "1", "1");
+    e1.setAsignatura(a1);
+    e2.setAsignatura(a1); // lleva tambien A2
+    e3.setAsignatura(a1);
+
+    /*C1 A1 Intro Teórico 01/05/20 - 9am 01/05/20 - 10am D1
+    C2 A1 Tema 1 Teórico 03/05/20 - 9am 03/05/20 - 10am D1
+    C3 A1 Tema 2 Teórico 08/05/20 - 9am 08/05/20 - 10am D1
+    C4 A1 Pra 1 Práctico 02/05/20 - 4pm 02/05/20 - 5pm D2
+    C5 A1 Pra 2 Práctico 03/05/20 - 4pm 03/05/20 - 5pm D2
+    C6 A1 01/06/20 Monitoreo 04/05/20 - 4pm 04/05/20 - 5pm D3*/
+
+
 }
 
 void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
@@ -342,7 +368,7 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
 void Sistema::AltaDeAsignatura()
 {
     std::string nombre;
-    int op, id;
+    int op,id;
     try
     {
         std::cout << "\nIngrese el id de la asigtatura: ";
@@ -1076,7 +1102,7 @@ void Sistema::TiempoDeDictadoDeClases()
                 minutosFin = c->getFechaFin().getMinuto() * 60;
                 segundosFin = c->getFechaFin().getSegundo();
 
-                total = ((horasFin + minutosFin + segundosFin) - (horasCom + minutosCom + segundosCom));
+                total = ((horasFin + minutosFin + segundosFin) - (horasCom + minutosCom + segundosCom)) / 60;
                 std::cout << c->getNombre() << ": " << total << " minutos\n";
                 j->next();
             }
@@ -1089,6 +1115,8 @@ void Sistema::TiempoDeDictadoDeClases()
         std::cerr << "No hay Asignaturas o clases: " << e.what() << std::endl;
     }
 }
+
+
 
 void Sistema::obtenerFechaDelSistema(int &dia, int &mes, int &anio)
 {
