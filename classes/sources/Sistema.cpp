@@ -279,9 +279,9 @@ void Sistema::menuCaso4()
 
     f = new DtFecha(01, 05, 2020, 0, 01, 9);
     AsistenciaOnline *aO1 = e1->crearAsisOn(c1->getId(), a1->getId(), f);
+    aO1->finalizarAsistencia(f);
     e1->setAsisOn(c1->getId(), aO1);
     f = new DtFecha(01, 05, 2020, 0, 21, 9);
-    aO1->finalizarAsistencia(f);
     f = new DtFecha(01, 05, 2020, 0, 02, 9);
     AsistenciaOnline *aO2 = e2->crearAsisOn(c1->getId(), a1->getId(), f);
     f = new DtFecha(01, 05, 2020, 0, 32, 9);
@@ -1067,7 +1067,7 @@ void Sistema::ReproduccionEnDiferido()
             {
                 Estudiante *e = new Estudiante;
                 e = dynamic_cast<Estudiante *>(this->actual);
-                e->setAsisDif(id, fecha);
+                e->setAsisDif(c->getId(), this->fecha);
                 if(c->getMensajes()->isEmpty())
                 {
                     std::cout << "\nNo tiene mensajes";
@@ -1439,7 +1439,10 @@ void Sistema::FinalizarAsistencia()
                 while(i->hasCurrent())
                 {
                     a = (AsistenciaOnline *) i->getCurrent();
-                    std::cout << a->getIdClase()<< std::endl;
+                    if(a->estaEnVivo())
+                    {
+                        std::cout << a->getIdClase()<< std::endl;
+                    }
                     i->next();
                 }
                 std::cout << "\nIngrese id clase: ";
@@ -1471,6 +1474,7 @@ void Sistema::FinalizarAsistencia()
                         throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                         break;
                 }
+                break;
             }
             case 2:
             {
@@ -1484,7 +1488,10 @@ void Sistema::FinalizarAsistencia()
                 while(i->hasCurrent())
                 {
                     a = (AsistenciaDiferida *) i->getCurrent();
-                    std::cout << a->getIdClase()<< std::endl;
+                    if(a->estaEnVivo())
+                    {
+                        std::cout << a->getIdClase() << std::endl;
+                    }
                     i->next();
                 }
                 std::cout << "\nIngrese id clase: ";
@@ -1516,6 +1523,7 @@ void Sistema::FinalizarAsistencia()
                         throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                         break;
                 }
+                break;
             }
             default:
                 throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
