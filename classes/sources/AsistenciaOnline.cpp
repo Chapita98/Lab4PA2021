@@ -17,6 +17,18 @@ DtFecha *AsistenciaOnline::getFechaFin()
     return this->fechaFin;
 }
 
+bool AsistenciaOnline::estaEnVivo()
+{
+    if(this->fechaFin == NULL)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 int AsistenciaOnline::getIdClase()
 {
     return this->idClase;

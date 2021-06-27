@@ -35,4 +35,16 @@ void AsistenciaDiferida::setIdClase(int id)
     this->idClase = id;
 }
 
+bool AsistenciaDiferida::estaEnVivo()
+{
+    if(this->fechaCom->getSize()!=this->fechaFin->getSize())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 AsistenciaDiferida::~AsistenciaDiferida() {}
