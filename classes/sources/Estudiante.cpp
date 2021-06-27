@@ -41,12 +41,28 @@ AsistenciaDiferida * Estudiante::getAsistenciaDif(int id)
 
 }
 
+bool Estudiante::Asistio(int id)
+{
+    IKey *k = new Integer(id);
+    if(this->asistenciason->member(k))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
 AsistenciaOnline * Estudiante::getAsistenciaOn(int id)
 {
     IKey *k = new Integer(id);
     if(this->asistenciason->member(k))
     {
-        return (AsistenciaOnline *)this->asistenciason->find(k);
+        AsistenciaOnline *a;
+        a = (AsistenciaOnline *)this->asistenciason->find(k);
+        return a;
     }
     else
     {
@@ -86,9 +102,8 @@ void Estudiante::setAsisDif(int id, DtFecha *fecha)
     }
     else
     {
-        AsistenciaDiferida *a = new AsistenciaDiferida();
+        AsistenciaDiferida *a = new AsistenciaDiferida;
         a->setFechaCom(fecha);
-        a->setIdClase(id);
         this->asistenciasdif->add(k, a);
     }
 
@@ -99,6 +114,22 @@ void Estudiante::setAsisOn(int id, AsistenciaOnline *a)
     IKey *k = new Integer(id);
     this->asistenciason->add(k, a);
 
+}
+
+void Estudiante::finalizarAsisOn(int idC, DtFecha *f)
+{
+    AsistenciaOnline *aO;
+    IKey *k = new Integer(idC);
+    aO = (AsistenciaOnline* )this->asistenciason->find(k);
+    aO->finalizarAsistencia(f);
+}
+
+void Estudiante::finalizarAsisDif(int idC, DtFecha *f)
+{
+    AsistenciaDiferida *aD;
+    IKey *k = new Integer(idC);
+    aD = (AsistenciaDiferida* )this->asistenciasdif->find(k);
+    aD->setFechaFin(f);
 }
 
 bool Estudiante::estaInscripto(int id)
@@ -124,29 +155,30 @@ bool Estudiante::estaInscripto(int id)
 
 AsistenciaOnline *Estudiante::crearAsisOn(int idC, int idA, DtFecha *fechaCom)
 {
-    AsistenciaOnline *a = new AsistenciaOnline(idC, idA, fechaCom);
-    return a;
+    return new AsistenciaOnline(idC, idA, fechaCom);
 }
 
-void Estudiante::BorrarAsignatura(int id)
+void Estudiante::BorrarAsignatura(int idA)
 {
-    IKey *k = new Integer(id);
+    IKey *k = new Integer(idA);
+    this->asignaturas->remove(k);
+}
+
+void Estudiante::BorrarAsistencias(int idC)
+{
+    IKey *k = new Integer(idC);
     if(this->asistenciasdif->member(k))
     {
-        //AsistenciaDiferida *a = (AsistenciaDiferida *)this->asistenciasdif->find(k);
+        AsistenciaDiferida *a = (AsistenciaDiferida *)this->asistenciasdif->find(k);
         this->asistenciasdif->remove(k);
-        //delete a;
+        delete a;
     }
     if(this->asistenciason->member(k))
     {
-        //AsistenciaOnline *a = (AsistenciaOnline *)this->asistenciason->find(k);
+        AsistenciaOnline *a = (AsistenciaOnline *)this->asistenciason->find(k);
         this->asistenciason->remove(k);
-        //delete a;
+        delete a;
     }
-    //Asignatura *a;
-    //a = (Asignatura *)this->asignaturas->find(k);
-    this->asignaturas->remove(k);
-    //delete a;
 }
 
 Estudiante::~Estudiante() {}

@@ -118,6 +118,7 @@ void Docente::BorrarAsignacion(int id, IDictionary *cl)
     IIterator *i = cl->getIterator();
     Clase *c;
     Asignacion *a = (Asignacion *)this->asignaciones->find(k);
+    this->asignaciones->remove(k);
     delete a;
     while(i->hasCurrent())
     {
@@ -126,8 +127,6 @@ void Docente::BorrarAsignacion(int id, IDictionary *cl)
         if(this->clases->member(k))
         {
             this->clases->remove(k);
-            //Clase *c1 = this->clases->find(k);
-            //delete c1;
         }
         i->next();
     }

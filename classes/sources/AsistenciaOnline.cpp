@@ -4,7 +4,7 @@ AsistenciaOnline::AsistenciaOnline(int idC, int idA, DtFecha *_fechaCom)
 {
 	this->idClase = idC;
 	this->idAsig = idA;
-	this->fechaCom = fechaCom;
+	this->fechaCom = _fechaCom;
 }
 
 DtFecha *AsistenciaOnline::getFechaCom()
@@ -14,7 +14,7 @@ DtFecha *AsistenciaOnline::getFechaCom()
 
 DtFecha *AsistenciaOnline::getFechaFin()
 {
-    return this->fechaCom;
+    return this->fechaFin;
 }
 
 int AsistenciaOnline::getIdClase()
@@ -47,9 +47,14 @@ void AsistenciaOnline::setIdAsig(int id)
     this->idAsig = id;
 }
 
+void AsistenciaOnline::finalizarAsistencia(DtFecha *fechaF)
+{
+    this->fechaFin = fechaF;
+}
+
 int AsistenciaOnline::TiempodeAsistencia()
 {
-    int h, m;
+    int h = 0,  m = 0;
     if(this->fechaFin->getHora() == this->fechaCom->getHora())
     {
         m = this->fechaFin->getMinuto() - this->fechaCom->getMinuto();
@@ -69,7 +74,6 @@ int AsistenciaOnline::TiempodeAsistencia()
             m = this->fechaCom->getMinuto() - this->fechaFin->getMinuto();
             m = h - m;
         }
-
     }
     return m;
 }

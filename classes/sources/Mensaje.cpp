@@ -7,6 +7,7 @@ Mensaje::Mensaje(int _id, DtFecha *_fechaEnvio, std::string _contenido)
     this->id = _id;
     this->fechaEnvio = _fechaEnvio;
     this->contenido = _contenido;
+    this->respuesta = nullptr;
 }
 
 int Mensaje::getId()
@@ -47,6 +48,18 @@ void Mensaje::setContenido(std::string _contenido)
 void Mensaje::setRespuesta(Mensaje *m)
 {
     this->respuesta = m;
+}
+
+bool Mensaje::esRespuesta()
+{
+   if(this->respuesta==nullptr)
+   {
+	return false;
+   }
+   else
+   {
+	return true;   
+   }
 }
 
 Mensaje::~Mensaje() {}
