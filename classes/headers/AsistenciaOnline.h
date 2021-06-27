@@ -25,6 +25,8 @@ public:
 	void setIdClase(int id);
 	void setIdAsig(int id);
 
+	void finalizarAsistencia(DtFecha *fechaF);
+	bool estaEnVivo();
 	int TiempodeAsistencia();
 
  	virtual ~AsistenciaOnline();

@@ -35,9 +35,12 @@ public:
 	void setAsisOn(int id, AsistenciaOnline *a);
 
     bool estaInscripto(int id);
-    AsistenciaDiferida crearAsisDif(int id, DtFecha *fechaCom);
+    bool Asistio(int id);
     AsistenciaOnline *crearAsisOn(int idC, int idA, DtFecha *fechaCom);
-    void BorrarAsignatura(int id);
+    void finalizarAsisOn(int idC, DtFecha *f);
+    void finalizarAsisDif(int idC, DtFecha *f);
+    void BorrarAsignatura(int idA);
+    void BorrarAsistencias(int idC);
 	virtual ~Estudiante();
 };
 

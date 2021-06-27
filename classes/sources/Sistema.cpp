@@ -194,7 +194,151 @@ void Sistema::menuCaso3()
 
 void Sistema::menuCaso4()
 {
-    // INGRESO DATOS DE PRUEBA
+    Asignatura *a1 = new Asignatura(1, "Programacion 1");//Teórico, Práctico, Monitoreo
+    Asignatura *a2 = new Asignatura(2, "Programacion 2");//Teórico, Práctico, Monitoreo
+    Asignatura *a3 = new Asignatura(3, "Programacion 3");//Teórico, Práctico
+    IKey *k = new Integer(1);
+    this->asignaturas->add(k, a1);
+    k = new Integer(2);
+    this->asignaturas->add(k, a2);
+    k = new Integer(3);
+    this->asignaturas->add(k, a3);
+
+    // url, contrasenia quedan en como string
+    Docente *d1 = new Docente("INCO", "juan@mail.com", "Juan Perez", "1", "1");
+    Docente *d2 = new Docente("INCO", "maria@mail.com", "Maria Pires", "1", "1");
+    Docente *d3 = new Docente("INCO", "jorge@mail.com", "Jorge Chacho", "1", "1");
+    k = new String("juan@mail.com");
+    this->usuarios->add(k, d1);
+    k = new String("maria@mail.com");
+    this->usuarios->add(k, d2);
+    k = new String("jorge@mail.com");
+    this->usuarios->add(k, d3);
+    Asignacion *as1 = d1->crearAsignacion(Tipo::TEORICO, 1);
+    k = new Integer(1);
+    Asignacion *as2 = d2->crearAsignacion(Tipo::PRACTICO, 1);
+    Asignacion *as3 = d3->crearAsignacion(Tipo::MONITOREO, 1);
+    d1->setAsignacion(as1, k);
+    d2->setAsignacion(as2, k);
+    d3->setAsignacion(as3, k);
+
+    Estudiante *e1 = new Estudiante(12345678, "roberto@mail.com", "Roberto Parra", "1", "1");
+    Estudiante *e2 = new Estudiante(23456789, "ana@mail.com", "Ana Rodriguez", "1", "1");
+    Estudiante *e3 = new Estudiante(34567890, "ramon@mail.com", "Ramon Valdez", "1", "1");
+    k = new String("roberto@mail.com");
+    this->usuarios->add(k, e1);
+    k = new String("ana@mail.com");
+     this->usuarios->add(k, e2);
+    k = new String("ramon@mail.com");
+     this->usuarios->add(k, e3);
+    e1->setAsignatura(a1);
+    e2->setAsignatura(a1);
+    e2->setAsignatura(a2);
+    e3->setAsignatura(a1);
+
+    DtFecha *f = new DtFecha(01, 05, 2020, 0, 00, 9);
+    Clase *c1 = a1->crearClase("Intro", f, Tipo::TEORICO);
+    f = new DtFecha(01, 05, 2020, 0, 00, 10);
+    c1->finalizar(1, f);
+    a1->setClase(c1);
+    d1->setClase(c1);
+    f = new DtFecha(03, 05, 2020, 0, 00, 9);
+    Clase *c2 = a1->crearClase("Tema 1", f, Tipo::TEORICO);
+    f = new DtFecha(03, 05, 2020, 0, 00, 10);
+    c2->finalizar(2, f);
+    a1->setClase(c2);
+    d1->setClase(c2);
+    f = new DtFecha(8, 05, 2020, 0, 00, 9);
+    Clase *c3 = a1->crearClase("Tema 2", f, Tipo::TEORICO);
+    f = new DtFecha(8, 05, 2020, 0, 00, 10);
+    c3->finalizar(3, f);
+    a1->setClase(c3);
+    d1->setClase(c3);
+    f = new DtFecha(02, 05, 2020, 0, 00, 16);
+    Clase *c4 = a1->crearClase("Pra 1", f, Tipo::PRACTICO);
+    f = new DtFecha(02, 05, 2020, 0, 00, 17);
+    c4->finalizar(4, f);
+    a1->setClase(c4);
+    d2->setClase(c4);
+    f = new DtFecha(03, 05, 2020, 0, 00, 16);
+    Clase *c5 = a1->crearClase("Pra 2", f, Tipo::PRACTICO);
+    f = new DtFecha(03, 05, 2020, 0, 00, 17);
+    a1->setClase(c5);
+    c5->finalizar(5, f);
+    d2->setClase(c5);
+
+    f = new DtFecha(04, 05, 2020, 0, 00, 16);
+    Clase *c6 = a1->crearClase("01/06/20", f, Tipo::MONITOREO);
+    Monitoreo *m = (Monitoreo *) c6;
+    f = new DtFecha(04, 05, 2020, 0, 00, 17);
+    m->setEstudiante(e2);
+    m->setEstudiante(e3);
+    c6->finalizar(6, f);
+    a1->setClase(m);
+    d3->setClase(m);
+
+    f = new DtFecha(01, 05, 2020, 0, 01, 9);
+    AsistenciaOnline *aO1 = e1->crearAsisOn(c1->getId(), a1->getId(), f);
+    aO1->finalizarAsistencia(f);
+    e1->setAsisOn(c1->getId(), aO1);
+    f = new DtFecha(01, 05, 2020, 0, 21, 9);
+    f = new DtFecha(01, 05, 2020, 0, 02, 9);
+    AsistenciaOnline *aO2 = e2->crearAsisOn(c1->getId(), a1->getId(), f);
+    f = new DtFecha(01, 05, 2020, 0, 32, 9);
+    aO2->finalizarAsistencia(f);
+    e2->setAsisOn(c1->getId(), aO2);
+    f = new DtFecha(01, 05, 2020, 0, 03, 9);
+    AsistenciaOnline *aO3 = e3->crearAsisOn(c1->getId(), a1->getId(), f);
+    f = new DtFecha(01, 05, 2020, 0, 43, 9);
+    aO3->finalizarAsistencia(f);
+    e3->setAsisOn(c1->getId(), aO3);
+    f = new DtFecha(04, 05, 2020, 0, 00, 16);
+    AsistenciaOnline *aO4 = e3->crearAsisOn(c6->getId(), a1->getId(), f);
+    f = new DtFecha(04, 05, 2020, 0, 00, 17);
+    aO4->finalizarAsistencia(f);
+    e3->setAsisOn(c6->getId(), aO4);
+
+
+    f = new DtFecha(12, 05, 2020, 0, 01, 9);
+    e1->setAsisDif(c1->getId(), f);
+    f = new DtFecha(01, 05, 2020, 0, 31, 9);
+    e1->finalizarAsisDif(c1->getId(), f);
+
+    f = new DtFecha(12, 05, 2020, 0, 01, 9);
+    e2->setAsisDif(c2->getId(), f);
+    f = new DtFecha(12, 05, 2020, 0, 41, 9);
+    e2->finalizarAsisDif(c2->getId(), f);
+    f = new DtFecha(13, 05, 2020, 0, 01, 10);
+    e2->setAsisDif(c2->getId(), f);
+    f = new DtFecha(13, 05, 2020, 0, 41, 11);
+    e2->finalizarAsisDif(c2->getId(), f);
+    f = new DtFecha(14, 05, 2020, 0, 01, 9);
+    e2->setAsisDif(c2->getId(), f);
+    f = new DtFecha(14, 05, 2020, 0, 41, 9);
+    e2->finalizarAsisDif(c2->getId(), f);
+
+    f = new DtFecha(1, 05, 2020, 0, 01, 9);
+    Mensaje *m1 = c1->crearMensaje("Bienvenidos!", f);
+    c1->setMensaje(m1);
+    f = new DtFecha(1, 05, 2020, 0, 02, 9);
+    Mensaje *m2 = c1->crearMensaje("Confirmen materiales por favor.", f);
+    c1->setMensaje(m2);
+    f = new DtFecha(4, 05, 2020, 0, 01, 16);
+    Mensaje *m3 = c6->crearMensaje("Comparto pantalla.", f);
+    c6->setMensaje(m3);
+    f = new DtFecha(1, 05, 2020, 0, 05, 9);
+    Mensaje *m4 = c1->crearRespuesta("Listo para aprender", m1, f);
+    c1->setMensaje(m4);
+    f = new DtFecha(1, 05, 2020, 0, 06, 9);
+    Mensaje *m5 = c1->crearRespuesta("Me alegro", m4, f);
+    c1->setMensaje(m5);
+    f = new DtFecha(1, 05, 2020, 0, 05, 9);
+    Mensaje *m6 = c1->crearRespuesta("Todo listo", m2, f);
+    c1->setMensaje(m6);
+    f = new DtFecha(1, 05, 2020, 0, 16, 05);
+    Mensaje *m7 = c6->crearRespuesta("Ya la vemos", m3, f);
+    c6->setMensaje(m7);
+    std::cout << "\nDatos de prueba cargados" << std::endl;
 }
 
 void Sistema::InicioSesion(std::string email, std::string contrasenia, int i)
@@ -358,7 +502,7 @@ void Sistema::AltaDocente(std::string instituto, std::string nombre, std::string
 void Sistema::AltaDeAsignatura()
 {
     std::string nombre;
-    int op, id;
+    int op,id;
     try
     {
         std::cout << "\nIngrese el id de la asignatura: ";
@@ -477,13 +621,10 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
             Asignacion *a = d->crearAsignacion(tipo, id);
             d->setAsignacion(a, k);
             std::cout << "\nDocente Asignado";
-            delete docs;
             break;
         }
         case 2:
         {
-            delete d;
-            delete docs;
             std::cout << "\nVolviendo al menu principal";
             break;
         }
@@ -503,11 +644,10 @@ void Sistema::ListarAsignaturas()
 {
     IIterator *i = this->asignaturas->getIterator();
     Asignatura * a;
-    std::cout << "Nombre            Id: "<< std::endl;
     while(i->hasCurrent())
     {
         a = (Asignatura *) i->getCurrent();
-        std::cout <<a->getNombre()<<"           "<< a->getId()<< std::endl;
+        std::cout << "\n\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl<<"\e[0m";
         i->next();
     }
 }
@@ -595,14 +735,13 @@ void Sistema::InicioDeClase()
         }
         IIterator *i = asig->getIterator();
         Asignatura *as;
-        std::cout << "Nombre            Id" << std::endl;
         while(i->hasCurrent())
         {
             as = (Asignatura *) i->getCurrent();
-            std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura";
+        std::cout << "\n\e[0mIngrese id de la asignatura: ";
         std::cin >> id;
         as = SeleccionAsignatura(id);
         if(!asig->member(as))
@@ -685,7 +824,6 @@ void Sistema::InicioDeClase()
                     throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 }
             }
-            delete es;
         }
         std::cout << c << std::endl;
         std::cout << "\nDesea confirmar? ";
@@ -699,13 +837,11 @@ void Sistema::InicioDeClase()
                 doc->setClase(c);
                 as->setClase(c);
                 std::cout << "\nClase iniciada";
-                delete asig;
                 break;
             }
             case 2:
             {
                 delete c;
-                delete asig;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -738,7 +874,6 @@ ICollection *Sistema::ListarAsignaturasAsignadas(Docente *d)
         asig->add(a);
         i->next();
     }
-    delete as;
     return asig;
 }
 
@@ -780,14 +915,13 @@ void Sistema::InscripcionALasAsignaturas()
             }
             IIterator *i = asig->getIterator();
             Asignatura *as;
-            std::cout << "Nombre:           Id: " << std::endl;
             while(i->hasCurrent())
             {
                 as = (Asignatura *) i->getCurrent();
-                std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
+                std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
                 i->next();
             }
-            std::cout << "\nIngrese id asignatura: ";
+            std::cout << "\n\e[0mIngrese id asignatura: ";
             std::cin >> id;
             as = SeleccionAsignatura(id);
             if(as==NULL)
@@ -810,13 +944,10 @@ void Sistema::InscripcionALasAsignaturas()
                     e = dynamic_cast<Estudiante *>(this->actual);
                     e->setAsignatura(as);
                     std::cout << "\nInscripcion registrada";
-                    delete asig;
                     break;
                 }
                 case 2:
                 {
-                    delete as;
-                    delete asig;
                     std::cout << "\nVolviendo al menu principal";
                     break;
                 }
@@ -887,14 +1018,13 @@ void Sistema::ReproduccionEnDiferido()
         {
             throw std::invalid_argument("\e[0;31mNo esta inscripto a ninguna asignatura.\e[0m");
         }
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             as = (Asignatura *) i->getCurrent();
-            std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         IKey *k = new Integer(id);
         as = (Asignatura *)this->asignaturas->find(k);
@@ -911,21 +1041,19 @@ void Sistema::ReproduccionEnDiferido()
         }
         i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
+            std::cout << "\n\e[0;34mClases disponibles:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id clase: ";
+        std::cout << "\n\e[0mIngrese id clase: ";
         std::cin >> id;
         c = SeleccionClase(id, as->getId());
-        std::cout << "Asignatura: " << as->getNombre() << "         " << as->getId()<< std::endl;
-        std::cout << "Clase: " << c->getNombre() << "           " << c->getId()<< std::endl;
-        std::cout << "\nDesea confirmar? ";
-        std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: \n";
+        
+        std::cout << "\nAsignatura:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
+        std::cout << "\nClase:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
+        std::cout << "\nDesea confirmar? \n1-Si: \n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -933,17 +1061,19 @@ void Sistema::ReproduccionEnDiferido()
             {
                 Estudiante *e = new Estudiante;
                 e = dynamic_cast<Estudiante *>(this->actual);
-                e->setAsisDif(id, fecha);
-                ListarMensajes(c);
-                delete asig;
-                delete cl;
+                e->setAsisDif(c->getId(), this->fecha);
+                if(c->getMensajes()->isEmpty())
+                {
+                    std::cout << "\nNo tiene mensajes";
+                }
+                else
+                {
+                     ListarMensajes(c);
+                }
                 break;
             }
             case 2:
             {
-                delete as;
-                delete asig;
-                delete cl;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -982,7 +1112,6 @@ Clase *Sistema::SeleccionClase(int idC, int idA)
     }
     Clase * c;
     c = (Clase *) cl->find(j);
-    //delete cl;
     return c;
 }
 
@@ -1020,11 +1149,10 @@ void Sistema::FinalizacionDeClase()
         }
         IIterator *i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
+            std::cout << "Clases: \nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
             i->next();
         }
         std::cout << "\nIngrese id clase: ";
@@ -1053,7 +1181,7 @@ void Sistema::FinalizacionDeClase()
                     while(i->hasCurrent())
                     {
                         e = (Estudiante*) i->getCurrent();
-                        e->getAsistenciaOn(id)->setFechaFin(this->fecha);
+                        e->finalizarAsisOn(id, this->fecha);
                         i->next();
                     }
                 }
@@ -1063,14 +1191,11 @@ void Sistema::FinalizacionDeClase()
                     t = (Teorico *) c;
                     t->setAsistentes(asistentes->getSize());
                 }
-                delete cl;
-                delete asistentes;
                 std::cout << "\nClase finalizada ";
                 break;
             }
             case 2:
             {
-                delete cl;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -1118,25 +1243,31 @@ void Sistema::EliminacionDeAsignatura()
                 while(i->hasCurrent())
                 {
                     e = (Estudiante *) i->getCurrent();
-                    e->BorrarAsignatura(id);
+                    e->BorrarAsignatura(a->getId());
                     i->next();
+                }
+                IDictionary *cl = new OrderedDictionary;
+                cl = a->getClases();
+                IIterator *n = cl->getIterator();
+                Clase *c;
+                while(n->hasCurrent())
+                {
+                    c = (Clase *) n->getCurrent();
+                    e->BorrarAsistencias(c->getId());
+                    n->next();
                 }
                 ICollection *docs = new List;
                 docs = ListarDocentesAsignados(id);
-                i = docs->getIterator();
+                IIterator *j = docs->getIterator();
                 Docente *d;
-                IDictionary *cl = new OrderedDictionary;
-                cl = a->getClases();
-                while(i->hasCurrent())
+                while(j->hasCurrent())
                 {
-                    d = (Docente *) i->getCurrent();
-                    d->BorrarAsignacion(id, cl);
-                    i->next();
+                    d = (Docente *) j->getCurrent();
+                    d->BorrarAsignacion(a->getId(), cl);
+                    std::cout << d->getAsignaturas()->getSize() << std::endl;
+                    j->next();
                 }
                 a->BorrarInstancias();
-                delete est;
-                delete cl;
-                delete docs;
                 delete a;
                 break;
             }
@@ -1161,7 +1292,7 @@ void Sistema::EliminacionDeAsignatura()
 
 void Sistema::TiempoDeDictadoDeClases()
 {
-    int t, h = 0 ,m =0;
+    int t = 0, h = 0 ,m =0;
     try
     {
         if(this->asignaturas->isEmpty())
@@ -1185,15 +1316,12 @@ void Sistema::TiempoDeDictadoDeClases()
                 while(j->hasCurrent())
                 {
                     c = (Clase *) j->getCurrent();
-                    t = c->TiempoDictado();
-                    if(t + m > 59)
-                    {
-                        h ++;
-                        m = (t + m) % 60;
-                    }
+                    t = c->TiempoDictado() + t;
                     j->next();
                 }
-                std::cout << "Tiempo Dictado:   " << h << ":" << m << std::endl;
+                m = t % 60;
+                h = (t - m) / 60;
+                std::cout << "Tiempo Dictado:   " << h << ":" << m << " hs" << std::endl;
             }
             i->next();
         }
@@ -1213,14 +1341,13 @@ void Sistema::AsistenciaAClaseEnVivo()
         asig = ListarAsignaturasInscriptas();
         IIterator *i = asig->getIterator();
         Asignatura *a;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "            " << a->getId()<< std::endl;
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1231,14 +1358,13 @@ void Sistema::AsistenciaAClaseEnVivo()
         cl = a->getClasesVivo();
         i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
+            std::cout << "\n\e[0;34mClases disponibles:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id clase: ";
+        std::cout << "\n\e[0mIngrese id clase: ";
         std::cin >> id;
         c = SeleccionClase(id, a->getId());
         if(!cl->member(c))
@@ -1246,11 +1372,9 @@ void Sistema::AsistenciaAClaseEnVivo()
             throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
         }
         std::cout << "\n" << std::endl;
-        std::cout << "Asignatura: " << a->getNombre() << "        " << a->getId()<< std::endl;
-        std::cout << "Clase: " << c->getNombre() << "        " << c->getId()<< std::endl;
-        std::cout << "\nDesea confirmar? ";
-        std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: \n";
+        std::cout << "Asignatura:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
+        std::cout << "Clase:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
+        std::cout << "\nDesea confirmar?\n1-Si:\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -1258,19 +1382,14 @@ void Sistema::AsistenciaAClaseEnVivo()
             {
                 Estudiante *e;
                 e = (Estudiante *) this->actual;
-                AsistenciaOnline *aO = e->crearAsisOn(id, a->getId(), this->fecha);
+                AsistenciaOnline *aO;
+                aO = e->crearAsisOn(id, a->getId(), this->fecha);
                 e->setAsisOn(id, aO);
                 std::cout << "\nAsistencia guardada";
-                //delete asig;
-                //delete cl;
                 break;
             }
             case 2:
             {
-                delete asig;
-                delete cl;
-                delete c;
-                delete a;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -1290,12 +1409,12 @@ void Sistema::FinalizarAsistencia()
 {
     try
     {
-        int op, id;
+        int op1, op2, id;
         std::cout << "\nElija una opcion ";
         std::cout << "\n1-En vivo: ";
         std::cout << "\n2-En diferido: \n";
-        std::cin >> op;
-        switch (op)
+        std::cin >> op1;
+        switch (op1)
         {
             case 1:
             {
@@ -1309,7 +1428,10 @@ void Sistema::FinalizarAsistencia()
                 while(i->hasCurrent())
                 {
                     a = (AsistenciaOnline *) i->getCurrent();
-                    std::cout << a->getIdClase()<< std::endl;
+                    if(a->estaEnVivo())
+                    {
+                        std::cout << a->getIdClase()<< std::endl;
+                    }
                     i->next();
                 }
                 std::cout << "\nIngrese id clase: ";
@@ -1323,20 +1445,17 @@ void Sistema::FinalizarAsistencia()
                 std::cout << "\nDesea confirmar ";
                 std::cout << "\n1-Si: ";
                 std::cout << "\n2-No: \n";
-                std::cin >> op;
-                switch (op)
+                std::cin >> op2;
+                switch (op2)
                 {
                     case 1:
                     {
                         a->setFechaFin(this->fecha);
                         std::cout << "\nAsistencia Finalizada";
-                        delete aO;
                         break;
                     }
                     case 2:
                     {
-                        delete aO;
-                        delete a;
                         std::cout << "\nVolviendo al menu principal";
                         break;
                     }
@@ -1344,6 +1463,7 @@ void Sistema::FinalizarAsistencia()
                         throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                         break;
                 }
+                break;
             }
             case 2:
             {
@@ -1357,7 +1477,10 @@ void Sistema::FinalizarAsistencia()
                 while(i->hasCurrent())
                 {
                     a = (AsistenciaDiferida *) i->getCurrent();
-                    std::cout << a->getIdClase()<< std::endl;
+                    if(a->estaEnVivo())
+                    {
+                        std::cout << a->getIdClase() << std::endl;
+                    }
                     i->next();
                 }
                 std::cout << "\nIngrese id clase: ";
@@ -1371,20 +1494,17 @@ void Sistema::FinalizarAsistencia()
                 std::cout << "\nDesea confirmar ";
                 std::cout << "\n1-Si: ";
                 std::cout << "\n2-No: \n";
-                std::cin >> op;
-                switch (op)
+                std::cin >> op2;
+                switch (op2)
                 {
                     case 1:
                     {
                         a->setFechaFin(this->fecha);
                         std::cout << "\nAsistencia finalizada";
-                        delete aD;
                         break;
                     }
                     case 2:
                     {
-                        delete aD;
-                        delete a;
                         std::cout << "\nVolviendo al menu principal";
                         break;
                     }
@@ -1392,8 +1512,8 @@ void Sistema::FinalizarAsistencia()
                         throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                         break;
                 }
+                break;
             }
-
             default:
                 throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                 break;
@@ -1414,20 +1534,20 @@ void Sistema::TiempoDeAsistenciaAClase()
         d = (Docente *) this->actual;
         ICollection *asig = new List;
         asig = ListarAsignaturasAsignadas(d);
+        std::cout <<  asig->getSize() << std::endl;
         if(asig->isEmpty())
         {
             throw std::invalid_argument("\e[0;31mNo tiene asignaturas asignadas.\e[0m");
         }
         IIterator *i = asig->getIterator();
         Asignatura *a;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "            " << a->getId();
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1442,16 +1562,14 @@ void Sistema::TiempoDeAsistenciaAClase()
         }
         i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Id        Promedio de asistencia" << std::endl;
+        std::cout <<  "Id        Tiempo promedio de asistencia" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
             prom = PromedioAsistenciaClase(c->getId(), id);
-            std::cout << c->getId() << "            " << prom;
+            std::cout << c->getId() << "            " << prom <<" minutos" << std::endl;
             i->next();
         }
-        //delete asig;
-        //delete cl;
     }
     catch(std::out_of_range &e)
     {
@@ -1487,27 +1605,22 @@ int Sistema::PromedioAsistenciaClase(int idC, int idA)
     int n = 0, t = 0;
     ICollection *est = new List;
     est = ListarAsistentes(idC);
-    if(est->isEmpty())
+    IIterator *i = est->getIterator();
+    Estudiante *e;
+    AsistenciaOnline *a;
+    while(i->hasCurrent())
     {
-        return t;
+        e = (Estudiante *) i->getCurrent();
+        a = e->getAsistenciaOn(idC);
+        t = a->TiempodeAsistencia() + t;
+        i->next();
     }
-    else
+    n = est->getSize();
+    if(n!= 0)
     {
-        IIterator *i = est->getIterator();
-        Estudiante *e;
-        AsistenciaOnline *a;
-        while(i->hasCurrent())
-        {
-            e = (Estudiante *) i->getCurrent();
-            a = e->getAsistenciaOn(idC);
-            t = a->TiempodeAsistencia() + t;
-            n++;
-            i->next();
-        }
-        t = t /n;
-        return t;
+        t = t / n;
     }
-
+    return t;
 }
 
 void Sistema::ListadoDeClases()
@@ -1525,14 +1638,13 @@ void Sistema::ListadoDeClases()
         }
         IIterator *i = asig->getIterator();
         Asignatura *a;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "            " << a->getId();
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1559,8 +1671,6 @@ void Sistema::ListadoDeClases()
             }
             i->next();
         }
-        delete asig;
-        delete cl;
     }
     catch(std::out_of_range &e)
     {
@@ -1587,7 +1697,6 @@ Docente *Sistema::DocenteDeClase(int idC, int idA)
             i->next();
         }
     }
-    delete doc;
     return d;
 }
 
@@ -1629,7 +1738,6 @@ void Sistema::EnvioDeMensaje()
             }
             aO=(AsistenciaOnline* ) as->find(k);
             c = SeleccionClase(id, aO->getIdAsig());
-            //delete as;*/
         }
         else
         {
@@ -1718,7 +1826,6 @@ void Sistema::EnvioDeMensaje()
                 throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                 break;
         }
-        std::cout << "miau";
     }
     catch(std::out_of_range &e)
     {
@@ -1737,7 +1844,7 @@ void Sistema::ListarMensajes(Clase *c)
     {
         m = (Mensaje*) i->getCurrent();
         std::cout << m->getContenido() <<"          " << m->getId() << std::endl;
-        if(m->getRespuesta()!= NULL)
+        if(m->esRespuesta())
         {
             std::cout << "Respuesta a: " << m->getRespuesta()->getContenido() << std::endl;
         }
@@ -1761,7 +1868,7 @@ Mensaje *Sistema::SeleccionMensaje(Clase *c, int id)
 ICollection *Sistema::ListarAsistentes(int idC)
 {
     ICollection *asis = new List;
-    Estudiante *e;
+    //Estudiante *e;
     Usuario *u;
     IIterator *i = this->usuarios->getIterator();
     while(i->hasCurrent())
@@ -1769,8 +1876,9 @@ ICollection *Sistema::ListarAsistentes(int idC)
         u = (Usuario *) i->getCurrent();
         if(dynamic_cast<Estudiante *>(u))
         {
-            e = (Estudiante *) u;
-            if(e->getAsistenciaOn(idC)!=NULL)
+            Estudiante *e = new Estudiante;
+            e = dynamic_cast<Estudiante *>(u);
+            if(e->Asistio(idC))
             {
                 asis->add(e);
             }
@@ -1791,7 +1899,7 @@ void Sistema::ModificarFechaSistema()
         std::cin >> a;
         if(a<2000 || a>2100)
         {
-            throw std::invalid_argument("\e[0;31mEl año ingresado es incorrecto.\e[0m");
+            throw std::runtime_error("\e[0;31mEl año ingresado es incorrecto.\e[0m");
         }
         std::cout << "\nIngrese mes: ";
         std::cin >> m;
@@ -1805,27 +1913,27 @@ void Sistema::ModificarFechaSistema()
         {
             throw std::invalid_argument("\e[0;31mEl dia ingresado es incorrecto.\e[0m");
         }
-        std::cout << "\nIngrese hora(Formato 24hs): ";
+        std::cout << "\nIngrese primero la hora en formato de 0 a 24: ";
         std::cin >> h;
-        if(h>24 || h<1)
+        if(h>24 || h<=0)
         {
             throw std::invalid_argument("\e[0;31mLa hora ingresada es incorrecta.\e[0m");
         }
         std::cout << "\nIngrese minutos: ";
         std::cin >> mi;
-        if(mi>59 || mi<0)
+        if(mi>59 || mi<=0)
         {
             throw std::invalid_argument("\e[0;31mLos minutos ingresados son incorrectos.\e[0m");
         }
         std::cout << "\nIngrese segundos: ";
         std::cin >> s;
-        if(s>59 || s<0)
+        if(s>59 || s<=0)
         {
             throw std::invalid_argument("\e[0;31mLos segundos ingresados son incorrectos.\e[0m");
         }
          this->fecha = new DtFecha(d, m, a, s, mi, h);
     }
-    catch(std::out_of_range &e)
+    catch(std::runtime_error& e)
     {
         std::cout << "\nError: " << e.what() << std::endl;
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
@@ -1879,4 +1987,5 @@ void Sistema::imprimirMenuEstudiante()
     std::cout << "\e[0;92m5)\e[0m Finalizar asistencia.\n";
     std::cout << "Pulse \e[0;92m6\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
+
 Sistema::~Sistema() {}

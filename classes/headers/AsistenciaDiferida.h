@@ -24,6 +24,7 @@ public:
 	void setFechaFin(DtFecha *_fecha);
 	void setIdClase(int id);
 
+    bool estaEnVivo();
  	virtual ~AsistenciaDiferida();
 };
 

@@ -20,6 +20,7 @@ public:
 	DtFecha *getFechaEnvio();
 	std::string getContenido();
 	Mensaje *getRespuesta();
+	bool esRespuesta();
 
 
 	void setId(int _id);

@@ -78,7 +78,9 @@ void Asignatura::setNombre(std::string _nombre)
 
 Clase * Asignatura::crearClase(std::string nombre, DtFecha *fechaComienzo, Tipo tipo)
 {
-    int id = this->clases->getSize() + 1;
+
+    int id = this->id * 100;
+    id = this->clases->getSize() + id;
     if(tipo == Tipo::MONITOREO)
     {
         return new Monitoreo(id, nombre, fechaComienzo);
