@@ -32,4 +32,3 @@ public:
 };
 
 #endif	/* PROG4_STRING_H */
-
