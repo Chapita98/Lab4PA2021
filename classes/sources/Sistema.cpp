@@ -644,11 +644,10 @@ void Sistema::ListarAsignaturas()
 {
     IIterator *i = this->asignaturas->getIterator();
     Asignatura * a;
-    std::cout << "Nombre            Id: "<< std::endl;
     while(i->hasCurrent())
     {
         a = (Asignatura *) i->getCurrent();
-        std::cout <<a->getNombre()<<"           "<< a->getId()<< std::endl;
+        std::cout << "\n\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl<<"\e[0m";
         i->next();
     }
 }
@@ -736,14 +735,13 @@ void Sistema::InicioDeClase()
         }
         IIterator *i = asig->getIterator();
         Asignatura *as;
-        std::cout << "Nombre            Id" << std::endl;
         while(i->hasCurrent())
         {
             as = (Asignatura *) i->getCurrent();
-            std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura";
+        std::cout << "\n\e[0mIngrese id de la asignatura: ";
         std::cin >> id;
         as = SeleccionAsignatura(id);
         if(!asig->member(as))
@@ -917,14 +915,13 @@ void Sistema::InscripcionALasAsignaturas()
             }
             IIterator *i = asig->getIterator();
             Asignatura *as;
-            std::cout << "Nombre:           Id: " << std::endl;
             while(i->hasCurrent())
             {
                 as = (Asignatura *) i->getCurrent();
-                std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
+                std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
                 i->next();
             }
-            std::cout << "\nIngrese id asignatura: ";
+            std::cout << "\n\e[0mIngrese id asignatura: ";
             std::cin >> id;
             as = SeleccionAsignatura(id);
             if(as==NULL)
@@ -1021,14 +1018,13 @@ void Sistema::ReproduccionEnDiferido()
         {
             throw std::invalid_argument("\e[0;31mNo esta inscripto a ninguna asignatura.\e[0m");
         }
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             as = (Asignatura *) i->getCurrent();
-            std::cout << as->getNombre() << "           " << as->getId()<< std::endl;
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         IKey *k = new Integer(id);
         as = (Asignatura *)this->asignaturas->find(k);
@@ -1045,21 +1041,19 @@ void Sistema::ReproduccionEnDiferido()
         }
         i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
+            std::cout << "\n\e[0;34mClases disponibles:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id clase: ";
+        std::cout << "\n\e[0mIngrese id clase: ";
         std::cin >> id;
         c = SeleccionClase(id, as->getId());
-        std::cout << "Asignatura: " << as->getNombre() << "         " << as->getId()<< std::endl;
-        std::cout << "Clase: " << c->getNombre() << "           " << c->getId()<< std::endl;
-        std::cout << "\nDesea confirmar? ";
-        std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: \n";
+        
+        std::cout << "\nAsignatura:\nNombre: "<< as->getNombre() << std::endl << "Id: " << as->getId()<< std::endl;
+        std::cout << "\nClase:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
+        std::cout << "\nDesea confirmar? \n1-Si: \n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -1155,11 +1149,10 @@ void Sistema::FinalizacionDeClase()
         }
         IIterator *i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
+            std::cout << "Clases: \nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
             i->next();
         }
         std::cout << "\nIngrese id clase: ";
@@ -1348,14 +1341,13 @@ void Sistema::AsistenciaAClaseEnVivo()
         asig = ListarAsignaturasInscriptas();
         IIterator *i = asig->getIterator();
         Asignatura *a;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "            " << a->getId()<< std::endl;
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1366,14 +1358,13 @@ void Sistema::AsistenciaAClaseEnVivo()
         cl = a->getClasesVivo();
         i = cl->getIterator();
         Clase *c;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             c = (Clase *) i->getCurrent();
-            std::cout << c->getNombre() << "            " << c->getId()<< std::endl;
+            std::cout << "\n\e[0;34mClases disponibles:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id clase: ";
+        std::cout << "\n\e[0mIngrese id clase: ";
         std::cin >> id;
         c = SeleccionClase(id, a->getId());
         if(!cl->member(c))
@@ -1381,11 +1372,9 @@ void Sistema::AsistenciaAClaseEnVivo()
             throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
         }
         std::cout << "\n" << std::endl;
-        std::cout << "Asignatura: " << a->getNombre() << "        " << a->getId()<< std::endl;
-        std::cout << "Clase: " << c->getNombre() << "        " << c->getId()<< std::endl;
-        std::cout << "\nDesea confirmar? ";
-        std::cout << "\n1-Si: ";
-        std::cout << "\n2-No: \n";
+        std::cout << "Asignatura:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
+        std::cout << "Clase:\nNombre: "<< c->getNombre() << std::endl << "Id: " << c->getId()<< std::endl;
+        std::cout << "\nDesea confirmar?\n1-Si:\n2-No: \n";
         std::cin >> op;
         switch (op)
         {
@@ -1544,14 +1533,13 @@ void Sistema::TiempoDeAsistenciaAClase()
         }
         IIterator *i = asig->getIterator();
         Asignatura *a;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "            " << a->getId();
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1642,14 +1630,13 @@ void Sistema::ListadoDeClases()
         }
         IIterator *i = asig->getIterator();
         Asignatura *a;
-        std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
             a = (Asignatura *) i->getCurrent();
-            std::cout << a->getNombre() << "            " << a->getId();
+            std::cout << "\e[0;34mAsignaturas disponibles:\nNombre: "<< a->getNombre() << std::endl << "Id: " << a->getId()<< std::endl;
             i->next();
         }
-        std::cout << "\nIngrese id asignatura: ";
+        std::cout << "\n\e[0mIngrese id asignatura: ";
         std::cin >> id;
         a = SeleccionAsignatura(id);
         if(!asig->member(a))
@@ -1673,7 +1660,6 @@ void Sistema::ListadoDeClases()
                 d2 = DocenteDeClase(c->getId(), id);
                 std::cout << "Docente: " << d2->getNombre();
                 std::cout <<  "\n" << std::endl;
-//>>>>>>> 04bb59cd53392a0ddf63cdca548b584ec2f89bfc
             }
             i->next();
         }
@@ -1905,7 +1891,7 @@ void Sistema::ModificarFechaSistema()
         std::cin >> a;
         if(a<2000 || a>2100)
         {
-            throw std::invalid_argument("\e[0;31mEl año ingresado es incorrecto.\e[0m");
+            throw std::runtime_error("\e[0;31mEl año ingresado es incorrecto.\e[0m");
         }
         std::cout << "\nIngrese mes: ";
         std::cin >> m;
@@ -1919,27 +1905,27 @@ void Sistema::ModificarFechaSistema()
         {
             throw std::invalid_argument("\e[0;31mEl dia ingresado es incorrecto.\e[0m");
         }
-        std::cout << "\nIngrese hora(Formato 24hs): ";
+        std::cout << "\nIngrese primero la hora en formato de 0 a 24: ";
         std::cin >> h;
-        if(h>24 || h<1)
+        if(h>24 || h<=0)
         {
             throw std::invalid_argument("\e[0;31mLa hora ingresada es incorrecta.\e[0m");
         }
         std::cout << "\nIngrese minutos: ";
         std::cin >> mi;
-        if(mi>59 || mi<0)
+        if(mi>59 || mi<=0)
         {
             throw std::invalid_argument("\e[0;31mLos minutos ingresados son incorrectos.\e[0m");
         }
         std::cout << "\nIngrese segundos: ";
         std::cin >> s;
-        if(s>59 || s<0)
+        if(s>59 || s<=0)
         {
             throw std::invalid_argument("\e[0;31mLos segundos ingresados son incorrectos.\e[0m");
         }
          this->fecha = new DtFecha(d, m, a, s, mi, h);
     }
-    catch(std::out_of_range &e)
+    catch(std::runtime_error& e)
     {
         std::cout << "\nError: " << e.what() << std::endl;
         std::cout << "\n\e[0;33mVolviendo al menu principal\e[0m\n\n";
@@ -1993,4 +1979,5 @@ void Sistema::imprimirMenuEstudiante()
     std::cout << "\e[0;92m5)\e[0m Finalizar asistencia.\n";
     std::cout << "Pulse \e[0;92m6\e[0m para salir.\n\nOpcion: \e[0;92m";
 }
+
 Sistema::~Sistema() {}
