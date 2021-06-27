@@ -2,6 +2,7 @@
 Sistema::Sistema() {
     this->usuarios = new OrderedDictionary;
     this->asignaturas = new OrderedDictionary;
+    this->fecha = new DtFecha(01, 01, 2020, 00, 00, 00);
 }
 
 void Sistema::menuCaso1()
@@ -252,8 +253,13 @@ void Sistema::AltaDeUsuario(){
     try
     {   std::cout << "\nIngrese email: ";
         std::cin >> email;
+        IKey *k = new String(email);
+        if(this->usuarios->find(k))
+        {
+            throw std::invalid_argument("\e[0;31mEl email ingresado ya existe.\e[0m");
+        }
         std::cout << "\nIngrese nombre: ";
-        std::cin >> nombre;
+        std::getline(std::cin >> std::ws, nombre);
         std::cout << "\nIngrese contraseña: ";
         std::cin >> contrasenia;
         std::cout << "\nIngrese url de imagen: ";
@@ -357,8 +363,13 @@ void Sistema::AltaDeAsignatura()
     {
         std::cout << "\nIngrese el id de la asignatura: ";
         std::cin >> id;
+        IKey *k = new Integer(id);
+        if(this->asignaturas->find(k))
+        {
+            throw std::invalid_argument("\e[0;31mEl id ingresado ya existe.\e[0m");
+        }
         std::cout << "\nIngrese nombre de la asignatura: ";
-        std::cin >> nombre;
+        std::getline(std::cin >> std::ws, nombre);
         std::cout << "\nDesea confirmar? \n1-Si: \n2-No: \n";
         std::cin >> op;
         switch (op)
@@ -466,6 +477,7 @@ void Sistema::AsignacionDeDocentesAUnaAsignatura()
             Asignacion *a = d->crearAsignacion(tipo, id);
             d->setAsignacion(a, k);
             std::cout << "\nDocente Asignado";
+            delete docs;
             break;
         }
         case 2:
@@ -542,7 +554,6 @@ ICollection *Sistema::ListarDocentesNoAsignados(int id)
         i->next();
     }
     return docs;
-
 }
 
 ICollection *Sistema::ListarDocentesAsignados(int id)
@@ -599,16 +610,16 @@ void Sistema::InicioDeClase()
             throw std::invalid_argument("\n\e[0;31mLa asignatura ingresada no esta asignada al docente.\n\e[0m");
         }
         std::cout << "\nIngrese nombre de clase: ";
-        std::cin >> nombre;
+        std::getline(std::cin >> std::ws, nombre);
         Clase *c = as->crearClase(nombre, this->fecha, doc->getAsignacion(id)->getTipo());
         if(doc->getAsignacion(id)->getTipo() == Tipo::MONITOREO)
         {
             bool flag= true;
             Monitoreo *m = new Monitoreo;
             m = dynamic_cast<Monitoreo *>(c);
+            ICollection *es = new List;
             while(flag)
             {
-                ICollection *es = new List;
                 es = ListarEstudiantesInscriptos(id);
                 if(es->isEmpty())
                 {
@@ -674,6 +685,7 @@ void Sistema::InicioDeClase()
                     throw std::invalid_argument("\n\e[0;31mLa opcion ingresada no es correcta.\n\e[0m");
                 }
             }
+            delete es;
         }
         std::cout << c << std::endl;
         std::cout << "\nDesea confirmar? ";
@@ -687,11 +699,13 @@ void Sistema::InicioDeClase()
                 doc->setClase(c);
                 as->setClase(c);
                 std::cout << "\nClase iniciada";
+                delete asig;
                 break;
             }
             case 2:
             {
                 delete c;
+                delete asig;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -724,6 +738,7 @@ ICollection *Sistema::ListarAsignaturasAsignadas(Docente *d)
         asig->add(a);
         i->next();
     }
+    delete as;
     return asig;
 }
 
@@ -794,6 +809,8 @@ void Sistema::InscripcionALasAsignaturas()
                     Estudiante *e = new Estudiante;
                     e = dynamic_cast<Estudiante *>(this->actual);
                     e->setAsignatura(as);
+                    std::cout << "\nInscripcion registrada";
+                    delete asig;
                     break;
                 }
                 case 2:
@@ -863,9 +880,13 @@ void Sistema::ReproduccionEnDiferido()
     {
         int id, op;
         ICollection *asig = new List;
-        asig = ListarAsignaturasNoInscriptas();
+        asig = ListarAsignaturasInscriptas();
         IIterator *i = asig->getIterator();
         Asignatura *as;
+        if(asig->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mNo esta inscripto a ninguna asignatura.\e[0m");
+        }
         std::cout <<  "Nombre       Id" << std::endl;
         while(i->hasCurrent())
         {
@@ -876,14 +897,18 @@ void Sistema::ReproduccionEnDiferido()
         std::cout << "\nIngrese id asignatura: ";
         std::cin >> id;
         IKey *k = new Integer(id);
-        as = (Asignatura *)asignaturas->find(k);
-        if(asig->member(as))
+        as = (Asignatura *)this->asignaturas->find(k);
+        if(!asig->member(as))
         {
             throw std::invalid_argument("\n\e[0;31mLa asignatura ingresada no es correcta.\n\e[0m");
         }
         as = SeleccionAsignatura(id);
         ICollection *cl = new List;
         cl = as->getClasesDif();
+        if(cl->isEmpty())
+        {
+            throw std::invalid_argument("\n\e[0;31mNo hay clases para reproducir.\n\e[0m");
+        }
         i = cl->getIterator();
         Clase *c;
         std::cout <<  "Nombre       Id" << std::endl;
@@ -910,6 +935,8 @@ void Sistema::ReproduccionEnDiferido()
                 e = dynamic_cast<Estudiante *>(this->actual);
                 e->setAsisDif(id, fecha);
                 ListarMensajes(c);
+                delete asig;
+                delete cl;
                 break;
             }
             case 2:
@@ -917,7 +944,6 @@ void Sistema::ReproduccionEnDiferido()
                 delete as;
                 delete asig;
                 delete cl;
-                delete c;
                 std::cout << "\nVolviendo al menu principal";
                 break;
             }
@@ -938,10 +964,25 @@ Clase *Sistema::SeleccionClase(int idC, int idA)
 {
     IKey *k = new Integer(idA);
     IDictionary *cl = new OrderedDictionary;
-    Asignatura *a = (Asignatura *)this->asignaturas->find(k);
+    if(!this->asignaturas->member(k))
+    {
+        throw std::invalid_argument("\e[0;31mLa asignatura ingresada no existe.\e[0m");
+    }
+    Asignatura *a;
+    a = (Asignatura *)this->asignaturas->find(k);
     cl = a->getClases();
-    k = new Integer(idC);
-    Clase * c = (Clase *) cl->find(k);
+    if(cl->isEmpty())
+    {
+        throw std::invalid_argument("\e[0;31mLa asignatura no tiene clases.\e[0m");
+    }
+    IKey *j = new Integer(idC);
+    if(!cl->member(j))
+    {
+        throw std::invalid_argument("\e[0;31mLa clase ingresada no es correcta.\e[0m");
+    }
+    Clase * c;
+    c = (Clase *) cl->find(j);
+    //delete cl;
     return c;
 }
 
@@ -1018,17 +1059,17 @@ void Sistema::FinalizacionDeClase()
                 }
                 if(dynamic_cast<Teorico *>(c))
                 {
-                    Teorico *t;
+                    Teorico *t = new Teorico;
                     t = (Teorico *) c;
                     t->setAsistentes(asistentes->getSize());
                 }
+                delete cl;
+                delete asistentes;
                 std::cout << "\nClase finalizada ";
                 break;
             }
             case 2:
             {
-                delete d;
-                delete c;
                 delete cl;
                 std::cout << "\nVolviendo al menu principal";
                 break;
@@ -1093,6 +1134,9 @@ void Sistema::EliminacionDeAsignatura()
                     i->next();
                 }
                 a->BorrarInstancias();
+                delete est;
+                delete cl;
+                delete docs;
                 delete a;
                 break;
             }
@@ -1201,6 +1245,7 @@ void Sistema::AsistenciaAClaseEnVivo()
         {
             throw std::invalid_argument("\e[0;31mLa asignatura ingresada no es correcta.\e[0m");
         }
+        std::cout << "\n" << std::endl;
         std::cout << "Asignatura: " << a->getNombre() << "        " << a->getId()<< std::endl;
         std::cout << "Clase: " << c->getNombre() << "        " << c->getId()<< std::endl;
         std::cout << "\nDesea confirmar? ";
@@ -1213,9 +1258,11 @@ void Sistema::AsistenciaAClaseEnVivo()
             {
                 Estudiante *e;
                 e = (Estudiante *) this->actual;
-                AsistenciaOnline *aO = e->crearAsisOn(id, a->getId(), fecha);
+                AsistenciaOnline *aO = e->crearAsisOn(id, a->getId(), this->fecha);
                 e->setAsisOn(id, aO);
                 std::cout << "\nAsistencia guardada";
+                //delete asig;
+                //delete cl;
                 break;
             }
             case 2:
@@ -1282,6 +1329,8 @@ void Sistema::FinalizarAsistencia()
                     case 1:
                     {
                         a->setFechaFin(this->fecha);
+                        std::cout << "\nAsistencia Finalizada";
+                        delete aO;
                         break;
                     }
                     case 2:
@@ -1328,6 +1377,8 @@ void Sistema::FinalizarAsistencia()
                     case 1:
                     {
                         a->setFechaFin(this->fecha);
+                        std::cout << "\nAsistencia finalizada";
+                        delete aD;
                         break;
                     }
                     case 2:
@@ -1363,6 +1414,10 @@ void Sistema::TiempoDeAsistenciaAClase()
         d = (Docente *) this->actual;
         ICollection *asig = new List;
         asig = ListarAsignaturasAsignadas(d);
+        if(asig->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mNo tiene asignaturas asignadas.\e[0m");
+        }
         IIterator *i = asig->getIterator();
         Asignatura *a;
         std::cout <<  "Nombre       Id" << std::endl;
@@ -1381,6 +1436,10 @@ void Sistema::TiempoDeAsistenciaAClase()
         }
         ICollection *cl = new List;
         cl = ListarClasesPorAsig(a);
+        if(cl->isEmpty())
+        {
+            throw std::invalid_argument("\e[0;31mLa asignatura no tiene clases.\e[0m");
+        }
         i = cl->getIterator();
         Clase *c;
         std::cout <<  "Id        Promedio de asistencia" << std::endl;
@@ -1391,6 +1450,8 @@ void Sistema::TiempoDeAsistenciaAClase()
             std::cout << c->getId() << "            " << prom;
             i->next();
         }
+        //delete asig;
+        //delete cl;
     }
     catch(std::out_of_range &e)
     {
@@ -1407,7 +1468,7 @@ ICollection *Sistema::ListarClasesPorAsig(Asignatura *a)
     ICollection *lista = new List;
     IIterator *i = cl->getIterator();
     Clase *c;
-    IKey *k;
+    IKey *k = new Integer(0);
     while(i->hasCurrent())
     {
         c = (Clase *) i->getCurrent();
@@ -1425,24 +1486,28 @@ int Sistema::PromedioAsistenciaClase(int idC, int idA)
 {
     int n = 0, t = 0;
     ICollection *est = new List;
-    est = ListarEstudiantesInscriptos(idA);
-    IIterator *i = est->getIterator();
-    Estudiante *e;
-    AsistenciaOnline *a;
-    IKey *k = new Integer(idC);
-    while(i->hasCurrent())
+    est = ListarAsistentes(idC);
+    if(est->isEmpty())
     {
-        e = (Estudiante *) i->getCurrent();
-        if(e->getAsistenciasOn()->member(k))
+        return t;
+    }
+    else
+    {
+        IIterator *i = est->getIterator();
+        Estudiante *e;
+        AsistenciaOnline *a;
+        while(i->hasCurrent())
         {
+            e = (Estudiante *) i->getCurrent();
             a = e->getAsistenciaOn(idC);
             t = a->TiempodeAsistencia() + t;
             n++;
+            i->next();
         }
-        i->next();
+        t = t /n;
+        return t;
     }
-    t = t /n;
-    return t;
+
 }
 
 void Sistema::ListadoDeClases()
@@ -1494,6 +1559,8 @@ void Sistema::ListadoDeClases()
             }
             i->next();
         }
+        delete asig;
+        delete cl;
     }
     catch(std::out_of_range &e)
     {
@@ -1520,6 +1587,7 @@ Docente *Sistema::DocenteDeClase(int idC, int idA)
             i->next();
         }
     }
+    delete doc;
     return d;
 }
 
@@ -1561,6 +1629,7 @@ void Sistema::EnvioDeMensaje()
             }
             aO=(AsistenciaOnline* ) as->find(k);
             c = SeleccionClase(id, aO->getIdAsig());
+            //delete as;*/
         }
         else
         {
@@ -1612,14 +1681,14 @@ void Sistema::EnvioDeMensaje()
                 Mensaje *m2;
                 m2 = SeleccionMensaje(c, id);
                 std::cout << "\nIngrese mensaje: ";
-                std::cin >> msj;
+                std::getline(std::cin >> std::ws, msj);
                 m = c->crearRespuesta(msj, m2, this->fecha);
                 break;
             }
             case 2:
             {
                 std::cout << "\nIngrese mensaje: ";
-                std::cin >> msj;
+                std::getline(std::cin >> std::ws, msj);
                 m = c->crearMensaje(msj, this->fecha);
                 break;
             }
@@ -1649,6 +1718,7 @@ void Sistema::EnvioDeMensaje()
                 throw std::invalid_argument("\e[0;31mLa opcion ingresada no es correcta.\e[0m");
                 break;
         }
+        std::cout << "miau";
     }
     catch(std::out_of_range &e)
     {
@@ -1662,16 +1732,16 @@ void Sistema::ListarMensajes(Clase *c)
     msj = c->getMensajes();
     IIterator *i = msj->getIterator();
     Mensaje *m;
+    std::cout << "Mensaje      Id" << std::endl;
     while(i->hasCurrent())
     {
         m = (Mensaje*) i->getCurrent();
-        std::cout << m->getContenido() << std::endl;
-
+        std::cout << m->getContenido() <<"          " << m->getId() << std::endl;
         if(m->getRespuesta()!= NULL)
         {
             std::cout << "Respuesta a: " << m->getRespuesta()->getContenido() << std::endl;
         }
-        std::cout << "\n";
+        std::cout << "----------------------" << std::endl;
         i->next();
     }
 }
