@@ -35,11 +35,7 @@
 #include "./Practico.h"
 #include "./Teorico.h"
 
-#include "./../../datatypes/headers/DtClase.h"
 #include "./../../datatypes/headers/DtFecha.h"
-#include "./../../datatypes/headers/DtMonitoreo.h"
-#include "./../../datatypes/headers/DtPractico.h"
-#include "./../../datatypes/headers/DtTeorico.h"
 
 class ISistema
 {
@@ -55,43 +51,43 @@ public:
 	virtual void imprimirMenuAdministrador() = 0;
 	virtual void imprimirMenuDocente() = 0;
 	virtual void imprimirMenuEstudiante() = 0;
+	virtual void InicioSesion(std::string email, std::string contrasenia, int i) = 0;
 
 	virtual void AltaDeUsuario() = 0;
 	virtual void AltaDeAsignatura() = 0;
+	virtual void AsignacionDeDocentesAUnaAsignatura() = 0;
+    virtual void InicioDeClase() = 0;
+    virtual void InscripcionALasAsignaturas() = 0;
+    virtual void ReproduccionEnDiferido() = 0;
+    virtual void FinalizacionDeClase() = 0;
+    virtual void EliminacionDeAsignatura() = 0;
+    virtual void TiempoDeDictadoDeClases() = 0;
+    virtual void AsistenciaAClaseEnVivo() = 0;
+    virtual void FinalizarAsistencia() = 0;
+    virtual void TiempoDeAsistenciaAClase() = 0;
+    virtual void ListadoDeClases() = 0;
+    virtual void EnvioDeMensaje() = 0;
+    virtual void ModificarFechaSistema() = 0;
+    virtual void ConsultarFechaSistema() = 0;
+
 	virtual void AltaEstudiante(int ci, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
 	virtual void AltaDocente(std::string instituto, std::string nombre, std::string email, std::string contrasenia, std::string url) = 0;
-
-	/*virtual void AsignacionDeDocentesAUnaAsignatura() = 0;
-	virtual void EliminacionDeAsignatura() = 0;
-	virtual void TiempoDeDictadoDeClases() = 0;
-	virtual void ConfiguracionRelojInterno() = 0;
-	virtual void InicioDeClase() = 0;
-	virtual void FinalizacionDeClase() = 0;
-	virtual void TiempoDeAsistenciaAClase() = 0;
-	virtual void ListadoDeClases() = 0;
-	virtual void EnvioDeMensaje() = 0;
-	virtual void InscripcionALasAsignaturas() = 0;
-	virtual void AsistenciaAClaseEnVivo() = 0;
-	virtual void ReproduccionEnDiferido() = 0;
-
-
 	virtual void ListarAsignaturas() = 0;
-	virtual void ListarClasesVivo(std::string email) = 0;
-	virtual void ListarDocentesNoAsignados() = 0;
-	virtual void ListarEstudiantesInscriptos() = 0;
-	virtual void ListarMensajes(std::string idClase) = 0;
-	virtual void SeleccionAsignatura(int id) = 0;
-	virtual void SeleccionDocente(std::string email) = 0;
-	virtual void SeleccionClase(int id) = 0;
-	virtual void SeleccionEstudiante(int ci) = 0;
-	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo) = 0;
-	virtual void CreaClase(std::string nombre, DtFecha fechaComienzo, List estudiantes) = 0;
-	virtual void CrearMensaje(std::string texto, int idRespuesta) = 0;
-	virtual void CrearMensaje(std::string texto) = 0;
-	virtual void MostrarDatos() = 0;
-	virtual void MostrarTiempoAsistenciaClase() = 0;
-	virtual void ObtenerClase() = 0;
-	virtual void AgregarAsistenciaDif(DtFecha fechaCom, DtFecha fechaFin) = 0;*/
+	virtual ICollection *ListarAsignaturasNoInscriptas() = 0;
+	virtual ICollection *ListarAsignaturasInscriptas() = 0;
+	virtual ICollection *ListarAsignaturasAsignadas(Docente *d) = 0;
+	virtual ICollection *ListarEstudiantesInscriptos(int id) = 0;
+	virtual ICollection *ListarDocentesNoAsignados(int id) = 0;
+	virtual ICollection *ListarDocentesAsignados(int id) = 0;
+	virtual ICollection *ListarClasesPorAsig(Asignatura *a) = 0;
+	virtual int PromedioAsistenciaClase(int idC, int idA) = 0;
+	virtual Docente *SeleccionDocente(std::string email) = 0;
+	virtual Asignatura *SeleccionAsignatura(int id) = 0;
+	virtual Clase *SeleccionClase(int idC, int idA) = 0;
+	virtual Docente *DocenteDeClase(int idC, int idA) = 0;
+	virtual void ListarMensajes(Clase *c) = 0;
+	virtual Mensaje *SeleccionMensaje(Clase *c, int id) = 0;
+	virtual ICollection *ListarAsistentes(int idC) = 0;
 
 	virtual ~ISistema();
 };

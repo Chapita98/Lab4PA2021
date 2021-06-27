@@ -55,7 +55,6 @@ public:
 	Docente *SeleccionDocente(std::string email);
 	Asignatura *SeleccionAsignatura(int id);
 	Clase *SeleccionClase(int idC, int idA);
-	Clase *CreaClase(std::string nombre, DtFecha fechaComienzo, Asignatura *a, Tipo tipo);
 	Docente *DocenteDeClase(int idC, int idA);
 	void ListarMensajes(Clase *c);
 	Mensaje *SeleccionMensaje(Clase *c, int id);

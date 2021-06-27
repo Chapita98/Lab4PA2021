@@ -4,8 +4,6 @@
 #include "./../../datatypes/headers/DtFecha.h"
 #include "./Mensaje.h"
 #include "./../../ICollection/interfaces/ICollectible.h"
-//#include "./../../ICollection/interfaces/ICollection.h"
-//#include "./../../ICollection/interfaces/IDictionary.h"
 #include "./../../ICollection/collections/List.h"
 #include "./../../ICollection/collections/OrderedDictionary.h"
 #include "./../../ICollection/Integer.h"
