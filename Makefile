@@ -1,6 +1,6 @@
 OBJETOS = Asignacion.o Asignatura.o AsistenciaDiferida.o AsistenciaOnline.o Clase.o \
 Usuario.o Docente.o Estudiante.o Monitoreo.o Practico.o Sistema.o Teorico.o Mensaje.o ISistema.o \
-DtClase.o DtFecha.o DtMonitoreo.o DtPractico.o DtTeorico.o main.o \
+DtFecha.o main.o \
 List.o ListIterator.o ListNode.o OrderedDictionary.o OrderedKey.o OrderedDictionaryEntry.o \
 ICollectible.o ICollection.o IDictionary.o IIterator.o IKey.o Integer.o String.o 
 
@@ -59,20 +59,8 @@ AsistenciaDiferida.o: ./classes/headers/AsistenciaDiferida.h ./classes/sources/A
 AsistenciaOnline.o: ./classes/headers/AsistenciaOnline.h ./classes/sources/AsistenciaOnline.cpp
 	$(CC) $(OPCIONES) ./classes/sources/AsistenciaOnline.cpp
 
-DtClase.o: ./datatypes/headers/DtClase.h ./datatypes/sources/DtClase.cpp
-	$(CC) $(OPCIONES) ./datatypes/sources/DtClase.cpp
-
 DtFecha.o: ./datatypes/headers/DtFecha.h ./datatypes/sources/DtFecha.cpp
 	$(CC) $(OPCIONES) ./datatypes/sources/DtFecha.cpp
-
-DtMonitoreo.o: ./datatypes/headers/DtMonitoreo.h ./datatypes/sources/DtMonitoreo.cpp
-	$(CC) $(OPCIONES) ./datatypes/sources/DtMonitoreo.cpp
-	
-DtPractico.o: ./datatypes/headers/DtPractico.h ./datatypes/sources/DtPractico.cpp
-	$(CC) $(OPCIONES) ./datatypes/sources/DtPractico.cpp
-
-DtTeorico.o: ./datatypes/headers/DtTeorico.h ./datatypes/sources/DtTeorico.cpp
-	$(CC) $(OPCIONES) ./datatypes/sources/DtTeorico.cpp
 
 List.o: ./ICollection/collections/List.h ./ICollection/collections/List.cpp
 	$(CC) $(OPCIONES) ./ICollection/collections/List.cpp

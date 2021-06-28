@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="labo" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/labo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/labo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../ICollection/Integer.cpp" />
+		<Unit filename="../ICollection/Integer.h" />
+		<Unit filename="../ICollection/String.cpp" />
+		<Unit filename="../ICollection/String.h" />
+		<Unit filename="../ICollection/collections/List.cpp" />
+		<Unit filename="../ICollection/collections/List.h" />
+		<Unit filename="../ICollection/collections/ListIterator.cpp" />
+		<Unit filename="../ICollection/collections/ListIterator.h" />
+		<Unit filename="../ICollection/collections/ListNode.cpp" />
+		<Unit filename="../ICollection/collections/ListNode.h" />
+		<Unit filename="../ICollection/collections/OrderedDictionary.cpp" />
+		<Unit filename="../ICollection/collections/OrderedDictionary.h" />
+		<Unit filename="../ICollection/collections/OrderedDictionaryEntry.cpp" />
+		<Unit filename="../ICollection/collections/OrderedDictionaryEntry.h" />
+		<Unit filename="../ICollection/interfaces/ICollectible.cpp" />
+		<Unit filename="../ICollection/interfaces/ICollectible.h" />
+		<Unit filename="../ICollection/interfaces/ICollection.cpp" />
+		<Unit filename="../ICollection/interfaces/ICollection.h" />
+		<Unit filename="../ICollection/interfaces/IDictionary.cpp" />
+		<Unit filename="../ICollection/interfaces/IDictionary.h" />
+		<Unit filename="../ICollection/interfaces/IIterator.cpp" />
+		<Unit filename="../ICollection/interfaces/IIterator.h" />
+		<Unit filename="../ICollection/interfaces/IKey.cpp" />
+		<Unit filename="../ICollection/interfaces/IKey.h" />
+		<Unit filename="../ICollection/interfaces/OrderedKey.cpp" />
+		<Unit filename="../ICollection/interfaces/OrderedKey.h" />
+		<Unit filename="../classes/headers/Asignacion.h" />
+		<Unit filename="../classes/headers/Asignatura.h" />
+		<Unit filename="../classes/headers/AsistenciaDiferida.h" />
+		<Unit filename="../classes/headers/AsistenciaOnline.h" />
+		<Unit filename="../classes/headers/Clase.h" />
+		<Unit filename="../classes/headers/Docente.h" />
+		<Unit filename="../classes/headers/Estudiante.h" />
+		<Unit filename="../classes/headers/Fabrica.h" />
+		<Unit filename="../classes/headers/ISistema.h" />
+		<Unit filename="../classes/headers/Mensaje.h" />
+		<Unit filename="../classes/headers/Monitoreo.h" />
+		<Unit filename="../classes/headers/Practico.h" />
+		<Unit filename="../classes/headers/Sistema.h" />
+		<Unit filename="../classes/headers/Teorico.h" />
+		<Unit filename="../classes/headers/Tipo.h" />
+		<Unit filename="../classes/headers/Usuario.h" />
+		<Unit filename="../classes/sources/Asignacion.cpp" />
+		<Unit filename="../classes/sources/Asignatura.cpp" />
+		<Unit filename="../classes/sources/AsistenciaDiferida.cpp" />
+		<Unit filename="../classes/sources/AsistenciaOnline.cpp" />
+		<Unit filename="../classes/sources/Clase.cpp" />
+		<Unit filename="../classes/sources/Docente.cpp" />
+		<Unit filename="../classes/sources/Estudiante.cpp" />
+		<Unit filename="../classes/sources/ISistema.cpp" />
+		<Unit filename="../classes/sources/Mensaje.cpp" />
+		<Unit filename="../classes/sources/Monitoreo.cpp" />
+		<Unit filename="../classes/sources/Practico.cpp" />
+		<Unit filename="../classes/sources/Sistema.cpp" />
+		<Unit filename="../classes/sources/Teorico.cpp" />
+		<Unit filename="../classes/sources/Usuario.cpp" />
+		<Unit filename="../datatypes/headers/DtFecha.h" />
+		<Unit filename="../datatypes/sources/DtFecha.cpp" />
+		<Unit filename="../main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
