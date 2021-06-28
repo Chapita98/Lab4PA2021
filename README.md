@@ -1,47 +1,15 @@
-- Lab0PA
-- Primero lo clonas en una carpeta designada por ti
-`git clone https://github.com/Chapita98/Lab4PA2021.git`
+Eugenio Perdomo 
+    eugenio.perdomo@estudiantes.utec.edu.uy
+Lucia Bentancur
+    lucia.bentancur@estudiantes.utec.edu.uy
+Virginia Diaz
+    virginia.diaz.a@estudiantes.utec.edu.uy
+Diego Cardinal
+    dierodiero@gmail.com / diego.cardinal@utec.edu.uy
 
-- Muevete a ese directorio con el comando cd
 
-- Luego te fijas si tienes una inicializacion de git
-`git remote -v`
+Con respecto a las contrasenias para docentes y estudiantes, todas son el numero 1
 
-- Si no la tienes haz:
-`1. git init`
-
-`2. git remote add origin https://github.com/Chapita98/Lab4PA2021`
-
-- Para ver los cambios que hiciste:
-`git status`
-
-- Para añadir a un paquete esos cambios
-`git add .`
-
-- Para hacer COMMIT
-`git commit -m "Breve mensaje diciendo que hiciste"`
-
-- Para hacer PUSH
-`git push origin master // Si master no es tu rama entonces cambialo a tu rama`
-
-- Crear una nueva rama
-`git branch eugenio`
-
-- Ver lista de ramas
-`git branch`
-
-- Cambiar a una rama
-`git checkout eugenio`
-
-- Para Hacer PULL
-`1. git fetch --all`
-
-`2. git pull origin master`
-
-- Si quieres empezar todo desde 0
-`1. git fetch --all`
-
-`2. git reset --hard origin/master`
 
 -Instrucciones para uso de archivo Makefile
 
